@@ -5,110 +5,126 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HemoPulse - Blood Donation</title>
   <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    
-<div id="authModal" class="auth-overlay">
-  <div class="auth-modal-card">
-    <button class="modal-close" onclick="closeAuthModal()">&times;</button>
-    
-    <div class="modal-art-side">
-      <img src="images/hero-group.png" alt="Blood donation" onerror="this.src='images/logo.png'">
-    </div>
-
-    <div class="modal-form-side">
+  <!-- AUTH MODAL OVERLAY -->
+  <div id="authModal" class="auth-overlay">
+    <div class="auth-modal-card">
+      <button type="button" class="modal-close" onclick="closeAuthModal()">&times;</button>
       
-      <div class="auth-toggle-pill">
-        <button type="button" id="tabLoginBtn" class="toggle-btn active" onclick="switchAuthTab('login')">Login</button>
-        <button type="button" id="tabRegisterBtn" class="toggle-btn" onclick="switchAuthTab('register')">Register</button>
+      <div class="modal-art-side">
+        <img src="images/modal-art.png" alt="Blood donation" onerror="this.src='images/logo.png'">
       </div>
 
-      
-      <form id="loginForm" class="auth-form" onsubmit="handleLoginSubmit(event)">
-        <h2 class="auth-title">Welcome Back!</h2>
-        <div class="field-group">
-          <label>Email:</label>
-          <input type="email" required placeholder="name@example.com">
+      <div class="modal-form-side">
+        <div class="auth-toggle-pill">
+          <button type="button" id="tabLoginBtn" class="toggle-btn active" onclick="switchAuthTab('login')">Login</button>
+          <button type="button" id="tabRegisterBtn" class="toggle-btn" onclick="switchAuthTab('register')">Register</button>
         </div>
-        <div class="field-group">
-          <label>Password:</label>
-          <input type="password" required placeholder="••••••••">
-        </div>
-        <button type="submit" class="btn-modal-yellow">Login</button>
-        <a href="#" class="forgot-link">Forgot Password?</a>
-      </form>
 
-      
-      <form id="registerForm" class="auth-form hide" onsubmit="handleRegisterSubmit(event)">
-        <h2 class="auth-title">Let’s Sign you up!</h2>
-        <div class="field-group">
-          <label>Email:</label>
-          <input type="email" required placeholder="name@example.com">
-        </div>
-        <div class="field-group">
-          <label>First Name:</label>
-          <input type="text" required>
-        </div>
-        <div class="field-group">
-          <label>Last Name:</label>
-          <input type="text" required>
-        </div>
-        <div class="field-group">
-          <label>Middle Name (Optional):</label>
-          <input type="text">
-        </div>
-        <div class="field-group">
-          <label>Password:</label>
-          <input type="password" required placeholder="••••••••">
-        </div>
-        <div class="terms-check">
-          <input type="checkbox" id="termsCheck" required>
-          <label for="termsCheck">I agree to the Terms and Conditions.</label>
-        </div>
-        <button type="submit" class="btn-modal-yellow">Sign up</button>
-      </form>
+        <!-- LOGIN FORM -->
+        <form id="loginForm" class="auth-form" onsubmit="handleLoginSubmit(event)">
+          <h2 class="auth-title">Welcome Back!</h2>
+          <div class="field-group">
+            <label>Email:</label>
+            <input type="email" required placeholder="name@example.com">
+          </div>
+          <div class="field-group">
+            <label>Password:</label>
+            <input type="password" required placeholder="••••••••">
+          </div>
+          <button type="submit" class="btn-modal-yellow">Login</button>
+          <a href="#" class="forgot-link">Forgot Password?</a>
+        </form>
 
-      
-      <div id="otpPopup" class="otp-card hide">
-        <h3>Code Sent to Email!</h3>
-        <p>Please enter 6-digit code</p>
-        <div class="otp-inputs">
-          <input type="text" maxlength="1" oninput="focusNextOtp(this, 1)">
-          <input type="text" maxlength="1" oninput="focusNextOtp(this, 2)">
-          <input type="text" maxlength="1" oninput="focusNextOtp(this, 3)">
-          <input type="text" maxlength="1" oninput="focusNextOtp(this, 4)">
-          <input type="text" maxlength="1" oninput="focusNextOtp(this, 5)">
-          <input type="text" maxlength="1" oninput="focusNextOtp(this, 6)">
+        <!-- REGISTER FORM -->
+        <form id="registerForm" class="auth-form hide" onsubmit="handleRegisterSubmit(event)">
+          <h2 class="auth-title">Let’s Sign you up!</h2>
+          <div class="field-group">
+            <label>Email:</label>
+            <input type="email" required placeholder="name@example.com">
+          </div>
+          <div class="field-group">
+            <label>First Name:</label>
+            <input type="text" required placeholder="John">
+          </div>
+          <div class="field-group">
+            <label>Last Name:</label>
+            <input type="text" required placeholder="Doe">
+          </div>
+          <div class="field-group">
+            <label>Middle Name (Optional):</label>
+            <input type="text">
+          </div>
+          <div class="field-group">
+            <label>Password:</label>
+            <input type="password" required placeholder="••••••••">
+          </div>
+          <div class="terms-check">
+            <input type="checkbox" id="termsCheck" required>
+            <label for="termsCheck">I agree to the Terms and Conditions.</label>
+          </div>
+          <button type="submit" class="btn-modal-yellow">Sign up</button>
+        </form>
+
+        <!-- 6-DIGIT EMAIL CODE POPUP -->
+        <div id="otpPopup" class="otp-card hide">
+          <h3>Code Sent to Email!</h3>
+          <p>Please enter 6-digit code</p>
+          <div class="otp-inputs">
+            <input type="text" maxlength="1" oninput="focusNextOtp(this, 1)">
+            <input type="text" maxlength="1" oninput="focusNextOtp(this, 2)">
+            <input type="text" maxlength="1" oninput="focusNextOtp(this, 3)">
+            <input type="text" maxlength="1" oninput="focusNextOtp(this, 4)">
+            <input type="text" maxlength="1" oninput="focusNextOtp(this, 5)">
+            <input type="text" maxlength="1" oninput="focusNextOtp(this, 6)">
+          </div>
+          <button type="button" class="btn-modal-yellow" onclick="verifyOtpAndRedirect()">Enter Code</button>
         </div>
-        <button type="button" class="btn-modal-yellow" onclick="verifyOtpAndRedirect()">Enter Code</button>
+
       </div>
-
     </div>
   </div>
-</div>
-  
+
+  <!-- HERO BANNER -->
   <div class="hero-banner">
     <header class="frame-nav">
-      <div class="nav-links"><a href="index.html" class="active">Home</a><a href="locations.html">Locations</a></div>
-      <div class="logo-badge"><a href="index.html"><img src="images/logo.png" alt="HemoPulse logo" onerror="this.src='images/logo.jpg'"></a></div>
-      <div class="nav-links"><a href="contact.html">Contact Us</a><a href="account.html">Account</a></div>
+      <div class="nav-links">
+        <a href="index.html" class="active">Home</a>
+        <a href="locations.html">Locations</a>
+      </div>
+      <div class="logo-badge">
+        <a href="index.html"><img src="images/logo.png" alt="HemoPulse logo" onerror="this.src='images/logo.jpg'"></a>
+      </div>
+      <div class="nav-links">
+        <a href="contact.html">Contact Us</a>
+        <div class="nav-dropdown">
+          <a href="account.html" class="dropdown-trigger">Account ▾</a>
+          <div class="dropdown-menu">
+            <a href="javascript:void(0)" onclick="openAuthModal('login')" class="dropdown-item">Login</a>
+            <a href="javascript:void(0)" onclick="openAuthModal('register')" class="dropdown-subitem">Register</a>
+            <a href="account.html#donate" class="dropdown-item">Donate</a>
+            <a href="account.html" class="dropdown-item">Help Desk</a>
+          </div>
+        </div>
+      </div>
     </header>
 
     <div class="hero-inner">
       <div class="hero-left">
         <h1 class="hero-title"><span class="title-underline">Where</span><br><span class="title-underline">compassion</span><br><span class="title-underline">meets the vein.</span></h1>
         <p class="hero-subtitle">Give someone a fighting chance today.</p>
-        <a href="account.html#donate" class="btn-yellow">Donate</a>
+        <a href="javascript:void(0)" onclick="openAuthModal('register')" class="btn-yellow">Donate</a>
       </div>
       <div class="hero-image-wrap">
         <img src="images/hero-group.png" alt="Where compassion meets the vein">
       </div>
     </div>
   </div>
-  
 
-  
+  <!-- MAIN CONTAINER -->
   <div class="container">
 
     <!-- DONATION TYPES -->
@@ -192,6 +208,8 @@
 
   </div>
 
+  <!-- SCRIPTS -->
   <script src="js/main.js"></script>
+  <script src="js/modal.js"></script>
 </body>
 </html>
