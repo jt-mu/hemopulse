@@ -817,3 +817,225 @@ a.help-category-card {
     height: 22px;
   }
 }
+
+
+.auth-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(25, 42, 77, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.auth-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.auth-modal-card {
+  position: relative;
+  background-color: #FFFFFF;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 760px;
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.16);
+  overflow: hidden;
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1.25rem;
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--navy);
+  cursor: pointer;
+  z-index: 10;
+}
+
+.modal-art-side {
+  background-color: #F6F9FD;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.modal-art-side img {
+  max-width: 100%;
+  max-height: 260px;
+  object-fit: contain;
+}
+
+.modal-form-side {
+  background-color: #D9E8F5;
+  padding: 2rem 2.2rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.auth-toggle-pill {
+  background-color: #192A4D;
+  border-radius: 999px;
+  padding: 4px;
+  display: flex;
+  width: fit-content;
+  margin: 0 auto 1.5rem;
+}
+
+.toggle-btn {
+  background: none;
+  border: none;
+  color: #FFFFFF;
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: 0.8rem;
+  padding: 0.4rem 1.4rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.toggle-btn.active {
+  background-color: #6C92D8;
+}
+
+.auth-title {
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 1rem;
+}
+
+.field-group {
+  margin-bottom: 0.75rem;
+}
+
+.field-group label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 0.25rem;
+}
+
+.field-group input {
+  width: 100%;
+  padding: 0.55rem 0.9rem;
+  border-radius: 8px;
+  border: 1px solid #C4D7EB;
+  background-color: #FFFFFF;
+  font-family: var(--font);
+  font-size: 0.82rem;
+  outline: none;
+}
+
+.terms-check {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin: 0.6rem 0 1rem;
+}
+
+.btn-modal-yellow {
+  width: 100%;
+  background-color: var(--accent-yellow);
+  color: var(--navy);
+  border: none;
+  font-family: var(--font);
+  font-weight: 800;
+  font-size: 0.85rem;
+  padding: 0.65rem;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.forgot-link {
+  display: block;
+  text-align: center;
+  margin-top: 0.6rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #4A608A;
+  text-decoration: none;
+}
+
+/* 6-Digit Email Code Popup */
+.otp-card {
+  position: absolute;
+  inset: 1.25rem;
+  background-color: #FEF7CC;
+  border-radius: 14px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  z-index: 5;
+}
+
+.otp-card h3 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--navy);
+}
+
+.otp-card p {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+}
+
+.otp-inputs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.otp-inputs input {
+  width: 38px;
+  height: 48px;
+  background: #FFFFFF;
+  border: 1px solid #E2D795;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--navy);
+  outline: none;
+}
+
+.hide {
+  display: none !important;
+}
+
+@media (max-width: 680px) {
+  .auth-modal-card {
+    grid-template-columns: 1fr;
+  }
+  .modal-art-side {
+    display: none;
+  }
+}

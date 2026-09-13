@@ -8,6 +8,85 @@
 </head>
 <body>
 
+    
+<div id="authModal" class="auth-overlay">
+  <div class="auth-modal-card">
+    <button class="modal-close" onclick="closeAuthModal()">&times;</button>
+    
+    <div class="modal-art-side">
+      <img src="images/hero-group.png" alt="Blood donation" onerror="this.src='images/logo.png'">
+    </div>
+
+    <div class="modal-form-side">
+      
+      <div class="auth-toggle-pill">
+        <button type="button" id="tabLoginBtn" class="toggle-btn active" onclick="switchAuthTab('login')">Login</button>
+        <button type="button" id="tabRegisterBtn" class="toggle-btn" onclick="switchAuthTab('register')">Register</button>
+      </div>
+
+      
+      <form id="loginForm" class="auth-form" onsubmit="handleLoginSubmit(event)">
+        <h2 class="auth-title">Welcome Back!</h2>
+        <div class="field-group">
+          <label>Email:</label>
+          <input type="email" required placeholder="name@example.com">
+        </div>
+        <div class="field-group">
+          <label>Password:</label>
+          <input type="password" required placeholder="••••••••">
+        </div>
+        <button type="submit" class="btn-modal-yellow">Login</button>
+        <a href="#" class="forgot-link">Forgot Password?</a>
+      </form>
+
+      
+      <form id="registerForm" class="auth-form hide" onsubmit="handleRegisterSubmit(event)">
+        <h2 class="auth-title">Let’s Sign you up!</h2>
+        <div class="field-group">
+          <label>Email:</label>
+          <input type="email" required placeholder="name@example.com">
+        </div>
+        <div class="field-group">
+          <label>First Name:</label>
+          <input type="text" required>
+        </div>
+        <div class="field-group">
+          <label>Last Name:</label>
+          <input type="text" required>
+        </div>
+        <div class="field-group">
+          <label>Middle Name (Optional):</label>
+          <input type="text">
+        </div>
+        <div class="field-group">
+          <label>Password:</label>
+          <input type="password" required placeholder="••••••••">
+        </div>
+        <div class="terms-check">
+          <input type="checkbox" id="termsCheck" required>
+          <label for="termsCheck">I agree to the Terms and Conditions.</label>
+        </div>
+        <button type="submit" class="btn-modal-yellow">Sign up</button>
+      </form>
+
+      
+      <div id="otpPopup" class="otp-card hide">
+        <h3>Code Sent to Email!</h3>
+        <p>Please enter 6-digit code</p>
+        <div class="otp-inputs">
+          <input type="text" maxlength="1" oninput="focusNextOtp(this, 1)">
+          <input type="text" maxlength="1" oninput="focusNextOtp(this, 2)">
+          <input type="text" maxlength="1" oninput="focusNextOtp(this, 3)">
+          <input type="text" maxlength="1" oninput="focusNextOtp(this, 4)">
+          <input type="text" maxlength="1" oninput="focusNextOtp(this, 5)">
+          <input type="text" maxlength="1" oninput="focusNextOtp(this, 6)">
+        </div>
+        <button type="button" class="btn-modal-yellow" onclick="verifyOtpAndRedirect()">Enter Code</button>
+      </div>
+
+    </div>
+  </div>
+</div>
   
   <div class="hero-banner">
     <header class="frame-nav">

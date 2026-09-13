@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HemoPulse - Account Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="dash-page-body">
+
+  <div class="dash-wrapper">
+    
+    <aside class="dash-sidebar">
+      <div class="dash-logo">
+        <a href="index.html">
+          <img src="images/logo.png" alt="HemoPulse" onerror="this.src='images/logo.jpg'">
+        </a>
+      </div>
+
+      <nav class="dash-nav">
+        <button type="button" class="nav-pill active" onclick="switchTab('profile', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="7" r="4"/><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/></svg>
+          Profile Settings
+        </button>
+        <button type="button" class="nav-pill" onclick="switchTab('eligibility', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          Eligibility
+        </button>
+        <button type="button" class="nav-pill" onclick="switchTab('donations', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/></svg>
+          My Donations
+        </button>
+      </nav>
+
+      <a href="index.html" class="nav-signout">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Sign out
+      </a>
+    </aside>
+
+   
+    <main class="dash-content">
+
+      <!-- TAB 1: PROFILE SETTINGS -->
+      <section id="view-profile" class="view-panel">
+        <div class="avatar-center">
+          <div class="avatar-circle">
+            <svg viewBox="0 0 24 24" fill="#192A4D"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+          </div>
+        </div>
+
+        <form onsubmit="event.preventDefault(); alert('Profile updated!');">
+          <h3 class="dash-title">Account Overview</h3>
+          <div class="dash-row">
+            <div class="dash-field">
+              <label>Account Reference ID</label>
+              <input type="text" placeholder="UR-001-XX" value="UR-001-XX" readonly class="input-grey">
+            </div>
+            <div class="dash-field">
+              <label>Registered Account Email</label>
+              <input type="email" placeholder="name@example.com" class="input-grey">
+            </div>
+          </div>
+
+          <h3 class="dash-title mt-lg">Verified Personal Details</h3>
+          <div class="guardrail-banner">
+            <span>🛡️ Identity Integrity Guardrail: Legal names and identity markers are locked following clinical intake registration parameters. If your information contains inaccuracies, please file an official request or contact our staff to update records. [Contact Us]</span>
+          </div>
+
+          <div class="dash-row">
+            <div class="dash-field">
+              <label>First Name</label>
+              <input type="text" placeholder="Enter first name" class="input-grey">
+            </div>
+            <div class="dash-field">
+              <label>Last Name</label>
+              <input type="text" placeholder="Enter last name" class="input-grey">
+            </div>
+          </div>
+
+          <label class="field-sublabel">Identity Audit Verification Status</label>
+          <div class="status-verified-box">
+            <span>✓ Fully Verified Profile</span>
+          </div>
+
+          <h3 class="dash-title mt-lg">Notification Preferences</h3>
+          <p class="dash-subtitle">The system utilizes your registered email address to dispatch automated status updates, laboratory screening reports, and schedules. Keeping your contact details current ensures you receive real-time clinical alerts.</p>
+
+          <div class="dash-row">
+            <div class="dash-field">
+              <label>Primary Email Address (System Alerts)</label>
+              <input type="email" placeholder="name@example.com" class="input-grey">
+            </div>
+            <div class="dash-field">
+              <label>Mobile Number (For Emergency Clinical Use Only)</label>
+              <input type="tel" placeholder="+63 676 676 6767" class="input-grey">
+            </div>
+          </div>
+
+          <div class="toggle-group">
+            <label class="toggle-row">
+              <input type="checkbox" checked>
+              <span class="toggle-dot"></span>
+              <span class="toggle-label">Enable Email Notifications for Lab Result Updates</span>
+            </label>
+            <label class="toggle-row">
+              <input type="checkbox" checked>
+              <span class="toggle-dot"></span>
+              <span class="toggle-label">Enable Email Notifications for Donation Updates</span>
+            </label>
+          </div>
+
+          <button type="button" class="btn-dash-yellow mt-md">Update Notification Settings</button>
+
+          <h3 class="dash-title mt-lg">Security Credentials</h3>
+          <div class="dash-row">
+            <div class="dash-field">
+              <label>New Account Password</label>
+              <input type="password" placeholder="Enter Secure new Password" class="input-grey">
+            </div>
+            <div class="dash-field">
+              <label>Confirm New Password</label>
+              <input type="password" placeholder="Re-type Secure New Password" class="input-grey">
+            </div>
+          </div>
+
+          <button type="submit" class="btn-dash-yellow mt-md">Update Password</button>
+        </form>
+      </section>
+
+      
+      <section id="view-eligibility" class="view-panel hide">
+        <h2 class="dash-headline">Check Your Blood Donation Eligibility</h2>
+        <p class="dash-subhead">Answer a few questions to see if you may be eligible to donate. Final eligibility will still be confirmed by medical personnel during the donation process.</p>
+
+        <form class="eligibility-flow" onsubmit="handleEligibility(event)">
+          <h4 class="flow-category-title">Verified Personal Details</h4>
+
+          <div class="question-block">
+            <label class="q-label">1. How old are you?</label>
+            <input type="number" min="1" max="120" placeholder="e.g. 21" required class="input-grey input-half">
+          </div>
+
+          <div class="question-block">
+            <label class="q-label">2. What is your current weight?</label>
+            <input type="number" min="1" placeholder="kg" required class="input-grey input-half">
+          </div>
+
+          <div class="question-block">
+            <label class="q-label">3. Are you currently feeling healthy?</label>
+            <input type="text" placeholder="Yes / No" class="input-grey input-half">
+          </div>
+
+          <div class="question-block">
+            <label class="q-label">4. Have you experienced fever, infection, or illness recently?</label>
+            <div class="radio-options">
+              <label><input type="radio" name="q4" value="yes"> Yes</label>
+              <label><input type="radio" name="q4" value="no" checked> No</label>
+            </div>
+          </div>
+
+          <div class="question-block">
+            <label class="q-label">5. Are you currently taking any medication?</label>
+            <div class="radio-options">
+              <label><input type="radio" name="q5" value="yes"> Yes</label>
+              <label><input type="radio" name="q5" value="no" checked> No</label>
+            </div>
+          </div>
+
+          <div class="question-block">
+            <label class="q-label">6. Have you donated blood before?</label>
+            <div class="radio-options">
+              <label><input type="radio" name="q6" value="yes" onchange="toggleField('q6-date', true)"> Yes</label>
+              <label><input type="radio" name="q6" value="no" onchange="toggleField('q6-date', false)" checked> No</label>
+            </div>
+            <div id="q6-date" class="conditional-box hide">
+              <label class="cond-label">If Yes:<br>Last Donation Date:</label>
+              <input type="text" placeholder="MM / DD / YYYY" class="input-grey input-half">
+            </div>
+          </div>
+
+          <div class="question-block">
+            <label class="q-label">7. Have you recently received tattoos or piercings?</label>
+            <div class="radio-options">
+              <label><input type="radio" name="q7" value="yes" onchange="toggleField('q7-date', true)"> Yes</label>
+              <label><input type="radio" name="q7" value="no" onchange="toggleField('q7-date', false)" checked> No</label>
+            </div>
+            <div id="q7-date" class="conditional-box hide">
+              <label class="cond-label">If Yes:<br>Date of Piercing or Tattoo:</label>
+              <input type="text" placeholder="MM / DD / YYYY" class="input-grey input-half">
+            </div>
+          </div>
+
+          <div class="question-block">
+            <label class="q-label">8. Have you recently traveled outside the country?</label>
+            <div class="radio-options">
+              <label><input type="radio" name="q8" value="yes" onchange="toggleField('q8-date', true)"> Yes</label>
+              <label><input type="radio" name="q8" value="no" onchange="toggleField('q8-date', false)" checked> No</label>
+            </div>
+            <div id="q8-date" class="conditional-box hide">
+              <label class="cond-label">If Yes:<br>Date of recent international travel:</label>
+              <input type="text" placeholder="MM / DD / YYYY" class="input-grey input-half">
+            </div>
+          </div>
+
+          <button type="submit" class="btn-dash-yellow mt-lg">Check Eligibility</button>
+        </form>
+      </section>
+
+      
+      <section id="view-donations" class="view-panel hide">
+        <h2 class="dash-headline">My Donations</h2>
+        <p class="dash-subhead">View your past donation records and scheduled appointments.</p>
+        <div class="guardrail-banner">
+          <span>No completed donations recorded yet. Check your eligibility or schedule a drive appointment.</span>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    function switchTab(viewId, btn) {
+      document.querySelectorAll('.view-panel').forEach(el => el.classList.add('hide'));
+      document.querySelectorAll('.nav-pill').forEach(el => el.classList.remove('active'));
+      document.getElementById('view-' + viewId).classList.remove('hide');
+      btn.classList.add('active');
+    }
+
+    function toggleField(elementId, show) {
+      const el = document.getElementById(elementId);
+      if (show) el.classList.remove('hide');
+      else el.classList.add('hide');
+    }
+
+    function handleEligibility(e) {
+      e.preventDefault();
+      alert('Your responses have been recorded! Based on pre-screening parameters, you appear to be an eligible donor candidate.');
+    }
+  </script>
+</body>
+</html>
