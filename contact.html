@@ -79,7 +79,7 @@
           <div class="left">
             <div class="form-grid">
               <input type="email" name="email" placeholder="Email" required>
-              <input type="tel" name="phone" placeholder="Phone No.">
+              <input type="tel" name="phone" placeholder="Phone No." inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
             </div>
             <div class="form-grid full"><input type="text" name="name" placeholder="Name" required></div>
             <textarea name="message" placeholder="Message"></textarea>

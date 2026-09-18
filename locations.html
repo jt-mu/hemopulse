@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donation Locations - HemoPulse</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/locations.css">
+</head>
+<body class="locations-canvas-body">
+
+  <!-- NAVBAR (from your landing page) -->
+  <header class="frame-nav locations-nav-bar">
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="locations.html" class="active">Locations</a>
+    </div>
+
+    <div class="logo-badge">
+      <a href="index.html">
+        <img src="images/logo.png" alt="HemoPulse" onerror="this.src='images/logo.jpg'">
+      </a>
+    </div>
+
+    <div class="nav-links">
+      <a href="contact.html">Contact Us</a>
+
+      <div class="nav-dropdown">
+        <a href="account.html" class="dropdown-trigger">Account ▾</a>
+        <div class="dropdown-menu">
+          <a href="javascript:void(0)" onclick="openAuthModal('login')" class="dropdown-item">Login</a>
+          <a href="javascript:void(0)" onclick="openAuthModal('register')" class="dropdown-subitem">Register</a>
+          <a href="account.html#donate" class="dropdown-item">Donate</a>
+          <a href="account.html" class="dropdown-item">Help Desk</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CANVAS CONTAINER -->
+  <main class="locations-main">
+
+    <!-- PAGE HERO HEADER -->
+    <div class="loc-head-wrap">
+      <h1 class="loc-title">Donation Locations</h1>
+      <p class="loc-sub">Find blood donation drives near you and be part of a healthier tomorrow.</p>
+    </div>
+
+    <!-- 1. URGENT DRIVES BLOCK -->
+    <section class="drives-block">
+      <h2 class="block-title">Urgent Drives</h2>
+      <div class="drives-row">
+
+        <!-- Card 1 -->
+        <div class="urgent-card">
+          <h3 class="urgent-card-title">Sample Drive</h3>
+          <div class="card-img-box">
+            <img src="images/hero-group.png" alt="Drive location" onerror="this.src='images/logo.png'">
+          </div>
+          <span class="card-brand">Hemopulse</span>
+          <div class="card-action">
+            <a href="account.html#donate" class="btn-figma-yellow">Register Now</a>
+          </div>
+        </div>
+
+        <!-- Card 2 (with bright blue active border) -->
+        <div class="urgent-card active-blue-border">
+          <h3 class="urgent-card-title">Sample Drive</h3>
+          <div class="card-img-box">
+            <img src="images/hero-group.png" alt="Drive location" onerror="this.src='images/logo.png'">
+          </div>
+          <span class="card-brand">Hemopulse</span>
+          <div class="card-action">
+            <a href="account.html#donate" class="btn-figma-yellow">Register Now</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 2. UPCOMING EVENTS BLOCK -->
+    <section class="drives-block">
+      <h2 class="block-title upcoming-title-bar">Upcoming Events</h2>
+      <div class="drives-row grid-2x2">
+
+        <!-- Event 1 -->
+        <div class="upcoming-card">
+          <span class="upcoming-card-title">Sample Drive</span>
+          <div class="card-img-box sm-img">
+            <img src="images/hero-group.png" alt="Drive location" onerror="this.src='images/logo.png'">
+          </div>
+          <div class="chip-date">October X, 2XXX</div>
+          <span class="card-brand">Hemopulse</span>
+          <div class="card-action">
+            <a href="account.html#donate" class="btn-figma-yellow btn-sm">Register Now</a>
+          </div>
+        </div>
+
+        <!-- Event 2 -->
+        <div class="upcoming-card">
+          <span class="upcoming-card-title">Sample Drive</span>
+          <div class="card-img-box sm-img">
+            <img src="images/hero-group.png" alt="Drive location" onerror="this.src='images/logo.png'">
+          </div>
+          <div class="chip-date">October X, 2XXX</div>
+          <span class="card-brand">Hemopulse</span>
+          <div class="card-action">
+            <a href="account.html#donate" class="btn-figma-yellow btn-sm">Register Now</a>
+          </div>
+        </div>
+
+        <!-- Event 3 -->
+        <div class="upcoming-card">
+          <span class="upcoming-card-title">Sample Drive</span>
+          <div class="card-img-box sm-img">
+            <img src="images/hero-group.png" alt="Drive location" onerror="this.src='images/logo.png'">
+          </div>
+          <div class="chip-date">October X, 2XXX</div>
+          <span class="card-brand">Hemopulse</span>
+          <div class="card-action">
+            <a href="account.html#donate" class="btn-figma-yellow btn-sm">Register Now</a>
+          </div>
+        </div>
+
+        <!-- Event 4 -->
+        <div class="upcoming-card">
+          <span class="upcoming-card-title">Sample Drive</span>
+          <div class="card-img-box sm-img">
+            <img src="images/hero-group.png" alt="Drive location" onerror="this.src='images/logo.png'">
+          </div>
+          <div class="chip-date">October X, 2XXX</div>
+          <span class="card-brand">Hemopulse</span>
+          <div class="card-action">
+            <a href="account.html#donate" class="btn-figma-yellow btn-sm">Register Now</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 3. EVENT SCHEDULE (replaces the grey placeholder box with the actual table component from the Figma note) -->
+    <section class="schedule-overview-wrapper">
+      <div class="schedule-white-box">
+        <div class="schedule-pill-heading">EVENT SCHEDULE OVERVIEW</div>
+        
+        <div class="table-scroll">
+          <table class="figma-table">
+            <thead>
+              <tr>
+                <th>Event Title</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Venue</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Salpakan Demolition Derby</td>
+                <td>Sept. 18, 2026</td>
+                <td>1:00 PM – 6:00 PM</td>
+                <td>BSU Gymnasium Arena</td>
+                <td>Open</td>
+              </tr>
+              <tr>
+                <td>Blackout Power Cell Workshop</td>
+                <td>Sept. 18, 2026</td>
+                <td>9:00 AM – 12:00 PM</td>
+                <td>Engineering Shed 4</td>
+                <td>Open</td>
+              </tr>
+              <tr>
+                <td>Torrential Rain Proofing Lab</td>
+                <td>Sept. 25, 2026</td>
+                <td>2:00 PM – 5:00 PM</td>
+                <td>Lab 101, Mech Bldg</td>
+                <td>Open</td>
+              </tr>
+              <tr>
+                <td>Brigada Eskwela Repair Drive</td>
+                <td>Oct. 03, 2026</td>
+                <td>8:00 AM – 4:00 PM</td>
+                <td>San Isidro Elementary</td>
+                <td>Open</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="js/modal.js"></script>
+</body>
+</html>

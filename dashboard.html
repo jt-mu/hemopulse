@@ -131,36 +131,50 @@
       </section>
 
       
+      <!-- TAB 2: ELIGIBILITY SCREENER -->
       <section id="view-eligibility" class="view-panel hide">
         <h2 class="dash-headline">Check Your Blood Donation Eligibility</h2>
         <p class="dash-subhead">Answer a few questions to see if you may be eligible to donate. Final eligibility will still be confirmed by medical personnel during the donation process.</p>
 
-        <form class="eligibility-flow" onsubmit="handleEligibility(event)">
+        <!-- QUESTIONNAIRE FORM -->
+        <form id="eligibilityForm" class="eligibility-flow" onsubmit="evaluateEligibility(event)">
           <h4 class="flow-category-title">Verified Personal Details</h4>
 
+          <!-- 1. Age -->
           <div class="question-block">
             <label class="q-label">1. How old are you?</label>
-            <input type="number" min="1" max="120" placeholder="e.g. 21" required class="input-grey input-half">
+            <input type="number" id="donorAge" placeholder="e.g. 21" required class="input-grey input-half">
           </div>
 
+          <!-- 2. Weight -->
           <div class="question-block">
-            <label class="q-label">2. What is your current weight?</label>
-            <input type="number" min="1" placeholder="kg" required class="input-grey input-half">
+            <label class="q-label">2. What is your current weight? (kg)</label>
+            <input type="number" id="donorWeight" placeholder="kg" required class="input-grey input-half">
           </div>
 
+          <!-- 3. Current Health -->
           <div class="question-block">
             <label class="q-label">3. Are you currently feeling healthy?</label>
-            <input type="text" placeholder="Yes / No" class="input-grey input-half">
-          </div>
-
-          <div class="question-block">
-            <label class="q-label">4. Have you experienced fever, infection, or illness recently?</label>
             <div class="radio-options">
-              <label><input type="radio" name="q4" value="yes"> Yes</label>
-              <label><input type="radio" name="q4" value="no" checked> No</label>
+              <label><input type="radio" name="q3" value="yes" checked> Yes</label>
+              <label><input type="radio" name="q3" value="no"> No</label>
             </div>
           </div>
 
+          <!-- 4. Recent Illness -->
+          <div class="question-block">
+            <label class="q-label">4. Have you experienced fever, infection, or illness recently?</label>
+            <div class="radio-options">
+              <label><input type="radio" name="q4" value="yes" onchange="toggleField('q4-date', true)"> Yes</label>
+              <label><input type="radio" name="q4" value="no" onchange="toggleField('q4-date', false)" checked> No</label>
+            </div>
+            <div id="q4-date" class="conditional-box hide">
+              <label class="cond-label">If Yes:<br>When was the last time you were sick:</label>
+              <input type="date" id="q4DateInput" class="input-grey input-half">
+            </div>
+          </div>
+
+          <!-- 5. Medication -->
           <div class="question-block">
             <label class="q-label">5. Are you currently taking any medication?</label>
             <div class="radio-options">
@@ -169,6 +183,7 @@
             </div>
           </div>
 
+          <!-- 6. Previous Donation -->
           <div class="question-block">
             <label class="q-label">6. Have you donated blood before?</label>
             <div class="radio-options">
@@ -177,10 +192,11 @@
             </div>
             <div id="q6-date" class="conditional-box hide">
               <label class="cond-label">If Yes:<br>Last Donation Date:</label>
-              <input type="text" placeholder="MM / DD / YYYY" class="input-grey input-half">
+              <input type="date" id="q6DateInput" class="input-grey input-half">
             </div>
           </div>
 
+          <!-- 7. Tattoos / Piercings -->
           <div class="question-block">
             <label class="q-label">7. Have you recently received tattoos or piercings?</label>
             <div class="radio-options">
@@ -189,10 +205,11 @@
             </div>
             <div id="q7-date" class="conditional-box hide">
               <label class="cond-label">If Yes:<br>Date of Piercing or Tattoo:</label>
-              <input type="text" placeholder="MM / DD / YYYY" class="input-grey input-half">
+              <input type="date" id="q7DateInput" class="input-grey input-half">
             </div>
           </div>
 
+          <!-- 8. International Travel -->
           <div class="question-block">
             <label class="q-label">8. Have you recently traveled outside the country?</label>
             <div class="radio-options">
@@ -201,12 +218,49 @@
             </div>
             <div id="q8-date" class="conditional-box hide">
               <label class="cond-label">If Yes:<br>Date of recent international travel:</label>
-              <input type="text" placeholder="MM / DD / YYYY" class="input-grey input-half">
+              <input type="date" id="q8DateInput" class="input-grey input-half">
             </div>
           </div>
 
           <button type="submit" class="btn-dash-yellow mt-lg">Check Eligibility</button>
         </form>
+
+        <!-- DYNAMIC RESULT CARDS CONTAINER -->
+        <div id="resultContainer" class="hide mt-lg">
+          
+          <!-- GREEN CARD: Eligible -->
+          <div id="resultEligible" class="screener-card card-green hide">
+            <h3>✓ You May Be Eligible</h3>
+            <p class="screener-body">Based on your answers, you meet the <strong>basic</strong> requirements for blood donation.</p>
+            <p class="screener-body">Please note that you will be further assessed at the venue. Find a donation campaign and schedule your appointment.</p>
+            <div class="card-action-row">
+              <a href="locations.html" class="btn-card-yellow">Find Campaign</a>
+            </div>
+          </div>
+
+          <!-- RED CARD: Denied -->
+          <div id="resultDenied" class="screener-card card-red hide">
+            <h3>✕ You Are Not Eligible</h3>
+            <p class="screener-body">Based on your answers, you do not meet the basic requirements for blood donation.</p>
+            <div class="reason-list-wrap">
+              <p class="reason-lead">This is due to:</p>
+              <ul id="denialReasonList" class="reasons-bullet"></ul>
+            </div>
+            <div class="card-action-row">
+              <button type="button" class="btn-card-yellow" onclick="resetScreener()">Back to Dashboard</button>
+            </div>
+          </div>
+
+          <!-- YELLOW CARD: Needs Review -->
+          <div id="resultReview" class="screener-card card-yellow hide">
+            <h3>! Additional Screening Required</h3>
+            <p class="screener-body">Based on your answers, you will need further screening to determine whether you meet the basic requirements for blood donation.</p>
+            <div class="card-action-row">
+              <a href="contact.html" class="btn-card-yellow">Learn More →</a>
+            </div>
+          </div>
+
+        </div>
       </section>
 
       
@@ -240,5 +294,122 @@
       alert('Your responses have been recorded! Based on pre-screening parameters, you appear to be an eligible donor candidate.');
     }
   </script>
+  <script>
+    function switchTab(viewId, btn) {
+      document.querySelectorAll('.view-panel').forEach(el => el.classList.add('hide'));
+      document.querySelectorAll('.nav-pill').forEach(el => el.classList.remove('active'));
+      document.getElementById('view-' + viewId).classList.remove('hide');
+      btn.classList.add('active');
+    }
+
+    function toggleField(elementId, show) {
+      const el = document.getElementById(elementId);
+      if (el) {
+        if (show) el.classList.remove('hide');
+        else el.classList.add('hide');
+      }
+    }
+
+    function evaluateEligibility(e) {
+      e.preventDefault();
+
+      const age = parseFloat(document.getElementById('donorAge').value) || 0;
+      const weight = parseFloat(document.getElementById('donorWeight').value) || 0;
+      const feelingHealthy = document.querySelector('input[name="q3"]:checked')?.value === 'yes';
+      const recentIllness = document.querySelector('input[name="q4"]:checked')?.value === 'yes';
+      const takingMeds = document.querySelector('input[name="q5"]:checked')?.value === 'yes';
+      const donatedBefore = document.querySelector('input[name="q6"]:checked')?.value === 'yes';
+      const recentTattoo = document.querySelector('input[name="q7"]:checked')?.value === 'yes';
+      const recentTravel = document.querySelector('input[name="q8"]:checked')?.value === 'yes';
+
+      const denials = [];
+      const reviews = [];
+
+      // 1. Age rule
+      if (age < 16 || age > 65) {
+        denials.push('Age requirement not met (Must be between 16 and 65).');
+      } else if (age >= 16 && age <= 17) {
+        reviews.push('Age 16–17 requires written parental/guardian consent.');
+      }
+
+      // 2. Weight rule
+      if (weight < 45) {
+        denials.push('Weight is below the absolute 45 kg clinical limit.');
+      } else if (weight >= 45 && weight < 50) {
+        reviews.push('Borderline weight (45–49 kg) requires on-site clinical evaluation.');
+      }
+
+      // 3. Current Health
+      if (!feelingHealthy) {
+        denials.push('Must feel healthy and symptom-free on donation day.');
+      }
+
+      // 4. Recent Illness
+      if (recentIllness) {
+        reviews.push('Recent illness requires verifying recovery period.');
+      }
+
+      // 5. Medication
+      if (takingMeds) {
+        reviews.push('Active medication requires clinical review against deferral lists.');
+      }
+
+      // 6. Previous Donation deferral check
+      if (donatedBefore) {
+        const lastDateVal = document.getElementById('q6DateInput').value;
+        if (lastDateVal) {
+          const daysSince = (new Date() - new Date(lastDateVal)) / (1000 * 60 * 60 * 24);
+          if (daysSince < 56) {
+            denials.push(`Last donation was ${Math.floor(daysSince)} days ago (56 days required).`);
+          }
+        } else {
+          reviews.push('Unverified date of previous donation.');
+        }
+      }
+
+      // 7. Tattoos / Piercings deferral check
+      if (recentTattoo) {
+        const tattooDateVal = document.getElementById('q7DateInput').value;
+        if (tattooDateVal) {
+          const daysSince = (new Date() - new Date(tattooDateVal)) / (1000 * 60 * 60 * 24);
+          if (daysSince < 180) {
+            denials.push('Tattoos or piercings received within the last 6 months.');
+          }
+        } else {
+          reviews.push('Recent tattoo/piercing requires verification of procedure date.');
+        }
+      }
+
+      // 8. Travel
+      if (recentTravel) {
+        reviews.push('International travel history requires endemic risk evaluation.');
+      }
+
+      // DISPLAY CARD ROUTING
+      document.getElementById('eligibilityForm').classList.add('hide');
+      document.getElementById('resultContainer').classList.remove('hide');
+      document.getElementById('resultEligible').classList.add('hide');
+      document.getElementById('resultDenied').classList.add('hide');
+      document.getElementById('resultReview').classList.add('hide');
+
+      if (denials.length > 0) {
+        const list = document.getElementById('denialReasonList');
+        list.innerHTML = denials.map(d => `<li>${d}</li>`).join('');
+        document.getElementById('resultDenied').classList.remove('hide');
+      } else if (reviews.length > 0) {
+        document.getElementById('resultReview').classList.remove('hide');
+      } else {
+        document.getElementById('resultEligible').classList.remove('hide');
+      }
+    }
+
+    function resetScreener() {
+      document.getElementById('resultContainer').classList.add('hide');
+      document.getElementById('eligibilityForm').classList.remove('hide');
+    }
+  </script>
 </body>
 </html>
+</body>
+</html>
+
