@@ -264,14 +264,1207 @@
       </section>
 
       
-      <section id="view-donations" class="view-panel hide">
-        <h2 class="dash-headline">My Donations</h2>
-        <p class="dash-subhead">View your past donation records and scheduled appointments.</p>
-        <div class="guardrail-banner">
-          <span>No completed donations recorded yet. Check your eligibility or schedule a drive appointment.</span>
+      <!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blood Donation Clinical Portal</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+      /* Custom subtle scrollbar for tables */
+      .custom-scrollbar::-webkit-scrollbar {
+        height: 6px;
+        width: 6px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: #f1f5f9;
+        border-radius: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-[#F4F7FB] text-slate-800 antialiased min-h-screen flex flex-col md:flex-row"
+  >
+    <!-- ==================== SIDEBAR ==================== -->
+    <aside
+      class="w-full md:w-64 bg-white border-r border-slate-200 flex flex-col justify-between shrink-0 shadow-sm min-h-screen"
+    >
+      <!-- TOP SECTION: Logo + Navigation grouped together -->
+      <div class="flex flex-col">
+        <!-- Brand / Logo Header -->
+        <div class="p-6 flex items-center gap-3 border-b border-slate-100">
+          <img
+            src="logo.jpeg"
+            alt="Blood Donation Portal Logo"
+            class="w-10 h-10 object-contain rounded-lg shrink-0"
+          />
+          <div>
+            <h1 class="font-bold text-slate-900 leading-tight">HemoPulse</h1>
+            <p class="text-xs text-slate-400">Clinical Portal</p>
+          </div>
+        </div>
+
+        <!-- Navigation Menu (Placed directly under the header) -->
+        <nav class="p-4 space-y-1">
+          <button
+            type="button"
+            onclick="switchTab('profile')"
+            id="nav-profile"
+            class="nav-link w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+          >
+            <i data-lucide="user-check" class="w-4 h-4"></i>
+            <span>Profile Settings</span>
+          </button>
+
+          <button
+            type="button"
+            onclick="switchTab('eligibility')"
+            id="nav-eligibility"
+            class="nav-link w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium transition text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+          >
+            <i data-lucide="clipboard-check" class="w-4 h-4"></i>
+            <span>Eligibility Screener</span>
+          </button>
+
+          <button
+            type="button"
+            onclick="switchTab('donations')"
+            id="nav-donations"
+            class="nav-link w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium transition bg-red-50 text-red-700 font-semibold"
+          >
+            <i data-lucide="activity" class="w-4 h-4"></i>
+            <span>My Donations</span>
+          </button>
+        </nav>
+      </div>
+
+      <!-- BOTTOM SECTION: Sign Out only -->
+      <div class="p-4 border-t border-slate-100">
+        <button
+          type="button"
+          onclick="alert('Session terminated.')"
+          class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium text-slate-500 hover:bg-red-50 hover:text-red-600 transition"
+        >
+          <i data-lucide="log-out" class="w-4 h-4"></i>
+          <span>Sign out</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- ==================== MAIN CONTENT AREA ==================== -->
+    <main class="flex-1 overflow-y-auto p-4 md:p-8 max-w-6xl mx-auto w-full">
+      <!-- ======================================================== -->
+      <!-- VIEW 1: PROFILE & VERIFICATION SETTINGS                  -->
+      <!-- ======================================================== -->
+      <section id="view-profile" class="hidden space-y-6">
+        <header class="mb-4">
+          <p
+            class="text-xs font-semibold uppercase tracking-wider text-slate-400"
+          >
+            Account → Track Application
+          </p>
+          <h2 class="text-2xl font-bold text-slate-900 mt-1">
+            Profile & Verification Settings
+          </h2>
+        </header>
+
+        <!-- Account Overview Card -->
+        <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+          <h3
+            class="text-base font-semibold text-slate-900 mb-4 flex items-center gap-2"
+          >
+            <i data-lucide="id-card" class="w-5 h-5 text-slate-500"></i>
+            Account Overview
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="p-3.5 bg-slate-50 border border-slate-200 rounded-lg">
+              <span class="text-xs text-slate-500 block"
+                >Account Reference ID</span
+              >
+              <span class="text-sm font-mono font-semibold text-slate-800"
+                >UR-001-XX</span
+              >
+            </div>
+            <div class="p-3.5 bg-slate-50 border border-slate-200 rounded-lg">
+              <span class="text-xs text-slate-500 block"
+                >Registered Account Email</span
+              >
+              <span class="text-sm font-semibold text-slate-800"
+                >name@example.com</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Identity Integrity Banner -->
+        <div
+          class="bg-amber-50 border border-amber-200 text-amber-900 rounded-xl p-4 text-xs flex items-start gap-3"
+        >
+          <span class="text-base leading-none">🛡️</span>
+          <div class="leading-relaxed">
+            <strong>Identity Integrity Guardrail:</strong> Legal names and
+            identity markers are locked following clinical intake registration
+            parameters. If your information contains inaccuracies, please file
+            an official request or contact clinical staff to update records.
+            <a
+              href="#"
+              class="font-semibold underline ml-1 text-amber-950 hover:text-black"
+              >Contact Us</a
+            >
+          </div>
+        </div>
+
+        <!-- Verified Personal Details Form -->
+        <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+          <h3 class="text-base font-semibold text-slate-900 mb-4">
+            Verified Personal Details
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div>
+              <label class="block text-xs font-medium text-slate-600 mb-1"
+                >First Name</label
+              >
+              <input
+                type="text"
+                value="Xyrelle"
+                readonly
+                class="w-full bg-slate-100 border border-slate-200 text-slate-700 text-sm rounded-lg px-3.5 py-2 cursor-not-allowed"
+              />
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-slate-600 mb-1"
+                >Last Name</label
+              >
+              <input
+                type="text"
+                value="Martinez"
+                readonly
+                class="w-full bg-slate-100 border border-slate-200 text-slate-700 text-sm rounded-lg px-3.5 py-2 cursor-not-allowed"
+              />
+            </div>
+          </div>
+
+          <div
+            class="p-3 bg-emerald-50 border border-emerald-200 rounded-lg flex items-center gap-2 text-emerald-800 text-xs font-medium"
+          >
+            <i data-lucide="check-circle" class="w-4 h-4 text-emerald-600"></i>
+            Identity Audit Verification Status:
+            <strong>✔ Fully Verified Profile</strong>
+          </div>
+        </div>
+
+        <!-- Notification Preferences -->
+        <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+          <h3 class="text-base font-semibold text-slate-900 mb-2">
+            Notification Preferences
+          </h3>
+          <p class="text-xs text-slate-500 mb-4 leading-relaxed">
+            The system utilizes your registered email address to dispatch
+            automated status updates, laboratory screening reports, and
+            schedules. Keeping your contact details current ensures you receive
+            real-time clinical alerts.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div>
+              <label class="block text-xs font-medium text-slate-600 mb-1"
+                >Primary Email Address (System Alerts)</label
+              >
+              <input
+                type="email"
+                value="name@example.com"
+                class="w-full border border-slate-200 text-slate-800 text-sm rounded-lg px-3.5 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none"
+              />
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-slate-600 mb-1"
+                >Mobile Number (For Emergency Clinical Use Only)</label
+              >
+              <input
+                type="tel"
+                value="+63 676 676 6767"
+                class="w-full border border-slate-200 text-slate-800 text-sm rounded-lg px-3.5 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none"
+              />
+            </div>
+          </div>
+
+          <div class="space-y-2 mb-4 text-xs text-slate-700">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                checked
+                class="rounded text-red-600 focus:ring-red-500 w-4 h-4"
+              />
+              <span>Enable Email Notifications for Lab Result Updates</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                checked
+                class="rounded text-red-600 focus:ring-red-500 w-4 h-4"
+              />
+              <span>Enable Email Notifications for Donation Updates</span>
+            </label>
+          </div>
+          <button
+            class="bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold px-4 py-2.5 rounded-lg transition"
+          >
+            Update Notification Settings
+          </button>
+        </div>
+
+        <!-- Security Credentials -->
+        <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+          <h3 class="text-base font-semibold text-slate-900 mb-4">
+            Security Credentials
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div>
+              <label class="block text-xs font-medium text-slate-600 mb-1"
+                >New Account Password</label
+              >
+              <input
+                type="password"
+                placeholder="Enter secure new password"
+                class="w-full border border-slate-200 text-slate-800 text-sm rounded-lg px-3.5 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none"
+              />
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-slate-600 mb-1"
+                >Confirm New Password</label
+              >
+              <input
+                type="password"
+                placeholder="Re-type secure new password"
+                class="w-full border border-slate-200 text-slate-800 text-sm rounded-lg px-3.5 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none"
+              />
+            </div>
+          </div>
+          <button
+            class="bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold px-4 py-2.5 rounded-lg transition"
+          >
+            Update Password
+          </button>
         </div>
       </section>
 
+      <!-- ======================================================== -->
+      <!-- VIEW 2: INTERACTIVE ELIGIBILITY SCREENER                 -->
+      <!-- ======================================================== -->
+      <section id="view-eligibility" class="hidden space-y-6">
+        <header class="mb-4">
+          <p
+            class="text-xs font-semibold uppercase tracking-wider text-slate-400"
+          >
+            Account → Eligibility
+          </p>
+          <h2 class="text-2xl font-bold text-slate-900 mt-1">
+            Check Your Blood Donation Eligibility
+          </h2>
+          <p class="text-xs text-slate-500 mt-1">
+            Answer a few questions to see if you may be eligible to donate.
+            Final eligibility will still be confirmed by medical personnel
+            during the donation process.
+          </p>
+        </header>
+
+        <!-- Screener Info Banner -->
+        <div
+          class="bg-blue-50 border border-blue-200 text-blue-950 p-4 rounded-xl text-xs space-y-1"
+        >
+          <strong class="font-semibold block text-sm"
+            >Interactive Eligibility Screener</strong
+          >
+          <p class="text-slate-600">
+            A 30-second pre-screening questionnaire covering key clinical
+            deal-breakers:
+          </p>
+          <ul
+            class="list-disc list-inside text-slate-600 space-y-0.5 ml-1 pt-1"
+          >
+            <li>Minimum age (18–65) and weight (≥50 kg) requirements</li>
+            <li>Current wellbeing and recovery status from infections/fever</li>
+            <li>Recent tattoos/piercings and international travel history</li>
+            <li>
+              Time interval since last donation (minimum 56 days for whole
+              blood)
+            </li>
+          </ul>
+        </div>
+
+        <!-- DYNAMIC RESULT BANNER SECTION (Appears post-submission) -->
+        <div id="result-container" class="hidden"></div>
+
+        <!-- Questionnaire Form -->
+        <form
+          id="eligibility-form"
+          onsubmit="evaluateEligibility(event)"
+          class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm space-y-6"
+        >
+          <!-- 1. Age -->
+          <div>
+            <label class="block text-sm font-semibold text-slate-800 mb-1"
+              >1. How old are you?</label
+            >
+            <input
+              type="number"
+              id="input-age"
+              required
+              min="10"
+              max="100"
+              placeholder="e.g. 24"
+              class="w-full md:w-64 border border-slate-200 text-sm rounded-lg px-3.5 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none"
+            />
+          </div>
+
+          <!-- 2. Weight -->
+          <div>
+            <label class="block text-sm font-semibold text-slate-800 mb-1"
+              >2. What is your current weight? (kg)</label
+            >
+            <input
+              type="number"
+              id="input-weight"
+              required
+              min="30"
+              max="250"
+              placeholder="e.g. 62"
+              class="w-full md:w-64 border border-slate-200 text-sm rounded-lg px-3.5 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none"
+            />
+          </div>
+
+          <!-- 3. Feeling Healthy -->
+          <div>
+            <label class="block text-sm font-semibold text-slate-800 mb-2"
+              >3. Are you currently feeling healthy and well?</label
+            >
+            <div class="flex gap-6 text-sm">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="radio"
+                  name="feeling_healthy"
+                  value="yes"
+                  checked
+                  class="text-red-600 focus:ring-red-500"
+                />
+                <span>Yes</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="radio"
+                  name="feeling_healthy"
+                  value="no"
+                  class="text-red-600 focus:ring-red-500"
+                />
+                <span>No</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- 4. Recent Illness -->
+          <div>
+            <label class="block text-sm font-semibold text-slate-800 mb-2"
+              >4. Have you experienced fever, infection, or illness
+              recently?</label
+            >
+            <div class="flex gap-6 text-sm mb-3">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="radio"
+                  name="recent_illness"
+                  value="no"
+                  checked
+                  onchange="toggleConditionField('field-illness-date', false)"
+                  class="text-red-600 focus:ring-red-500"
+                />
+                <span>No</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="radio"
+                  name="recent_illness"
+                  value="yes"
+                  onchange="toggleConditionField('field-illness-date', true)"
+                  class="text-red-600 focus:ring-red-500"
+                />
+                <span>Yes</span>
+              </label>
+            </div>
+            <div
+              id="field-illness-date"
+              class="hidden pl-4 border-l-2 border-slate-200 mt-2"
+            >
+              <label class="block text-xs font-medium text-slate-600 mb-1"
+                >If Yes: When was the last time you were sick?</label
+              >
+              <input
+                type="date"
+                id="input-illness-date"
+                class="border border-slate-200 text-xs rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-red-500 focus:outline-none"
+              />
+            </div>
+          </div>
+
+          <!-- 5. Medication Use -->
+          <div>
+            <label class="block text-sm font-semibold text-slate-800 mb-2"
+              >5. Are you currently taking any medication?</label
+            >
+            <div class="flex gap-6 text-sm">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="radio"
+                  name="medication"
+                  value="no"
+                  checked
+                  class="text-red-600 focus:ring-red-500"
+                />
+                <span>No</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="radio"
+                  name="medication"
+                  value="yes"
+                  class="text-red-600 focus:ring-red-500"
+                />
+                <span>Yes</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- 6. Donated Before -->
+          <div>
+            <label class="block text-sm font-semibold text-slate-800 mb-2"
+              >6. Have you donated blood before?</label
+            >
+            <div class="flex gap-6 text-sm mb-3">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="radio"
+                  name="donated_before"
+                  value="no"
+                  checked
+                  onchange="toggleConditionField('field-last-donation', false)"
+                  class="text-red-600 focus:ring-red-500"
+                />
+                <span>No</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="radio"
+                  name="donated_before"
+                  value="yes"
+                  onchange="toggleConditionField('field-last-donation', true)"
+                  class="text-red-600 focus:ring-red-500"
+                />
+                <span>Yes</span>
+              </label>
+            </div>
+            <div
+              id="field-last-donation"
+              class="hidden pl-4 border-l-2 border-slate-200 mt-2"
+            >
+              <label class="block text-xs font-medium text-slate-600 mb-1"
+                >If Yes: Last Donation Date</label
+              >
+              <input
+                type="date"
+                id="input-last-donation"
+                class="border border-slate-200 text-xs rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-red-500 focus:outline-none"
+              />
+            </div>
+          </div>
+
+          <!-- 7. Tattoos / Piercings -->
+          <div>
+            <label class="block text-sm font-semibold text-slate-800 mb-2"
+              >7. Have you recently received tattoos or piercings?</label
+            >
+            <div class="flex gap-6 text-sm mb-3">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="radio"
+                  name="tattoo_piercing"
+                  value="no"
+                  checked
+                  onchange="toggleConditionField('field-tattoo-date', false)"
+                  class="text-red-600 focus:ring-red-500"
+                />
+                <span>No</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="radio"
+                  name="tattoo_piercing"
+                  value="yes"
+                  onchange="toggleConditionField('field-tattoo-date', true)"
+                  class="text-red-600 focus:ring-red-500"
+                />
+                <span>Yes</span>
+              </label>
+            </div>
+            <div
+              id="field-tattoo-date"
+              class="hidden pl-4 border-l-2 border-slate-200 mt-2"
+            >
+              <label class="block text-xs font-medium text-slate-600 mb-1"
+                >If Yes: Date of Piercing or Tattoo</label
+              >
+              <input
+                type="date"
+                id="input-tattoo-date"
+                class="border border-slate-200 text-xs rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-red-500 focus:outline-none"
+              />
+            </div>
+          </div>
+
+          <!-- 8. International Travel -->
+          <div>
+            <label class="block text-sm font-semibold text-slate-800 mb-2"
+              >8. Have you recently traveled outside the country?</label
+            >
+            <div class="flex gap-6 text-sm mb-3">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="radio"
+                  name="intl_travel"
+                  value="no"
+                  checked
+                  onchange="toggleConditionField('field-travel-date', false)"
+                  class="text-red-600 focus:ring-red-500"
+                />
+                <span>No</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="radio"
+                  name="intl_travel"
+                  value="yes"
+                  onchange="toggleConditionField('field-travel-date', true)"
+                  class="text-red-600 focus:ring-red-500"
+                />
+                <span>Yes</span>
+              </label>
+            </div>
+            <div
+              id="field-travel-date"
+              class="hidden pl-4 border-l-2 border-slate-200 mt-2"
+            >
+              <label class="block text-xs font-medium text-slate-600 mb-1"
+                >If Yes: Date of recent international travel</label
+              >
+              <input
+                type="date"
+                id="input-travel-date"
+                class="border border-slate-200 text-xs rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-red-500 focus:outline-none"
+              />
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-slate-100 flex items-center gap-3">
+            <button
+              type="submit"
+              class="bg-red-600 hover:bg-red-700 text-white text-sm font-semibold px-6 py-2.5 rounded-lg shadow-sm transition"
+            >
+              Check Eligibility
+            </button>
+            <button
+              type="reset"
+              onclick="
+                document
+                  .getElementById('result-container')
+                  .classList.add('hidden')
+              "
+              class="text-slate-500 text-sm hover:underline px-3 py-2"
+            >
+              Reset Form
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- ======================================================== -->
+      <!-- VIEW 3: ACCOUNT DASHBOARD (MY DONATIONS & LEDGER)         -->
+      <!-- ======================================================== -->
+      <section id="view-donations" class="space-y-6">
+        <header
+          class="mb-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4"
+        >
+          <div>
+            <p
+              class="text-xs font-semibold uppercase tracking-wider text-slate-400"
+            >
+              Account Dashboard
+            </p>
+            <h2 class="text-2xl font-bold text-slate-900 mt-1">My Donations</h2>
+          </div>
+          <!-- State Simulator Dropdown (to test Figma variants) -->
+          <div class="flex items-center gap-2">
+            <label class="text-xs text-slate-500 font-medium"
+              >Dashboard State:</label
+            >
+            <select
+              id="state-simulator"
+              onchange="applyDashboardState(this.value)"
+              class="text-xs border border-slate-300 rounded-lg p-2 bg-white font-medium text-slate-700 focus:ring-1 focus:ring-red-500"
+            >
+              <option value="cleared">1. Cleared Active (Green)</option>
+              <option value="pending">2. Verification Pending (Yellow)</option>
+              <option value="deferred">
+                3. Clinical Clearance Expired (Red)
+              </option>
+              <option value="waiting">4. Waiting Period Active</option>
+            </select>
+          </div>
+        </header>
+
+        <!-- 4-Stage Clinical Progress Stepper -->
+        <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 relative">
+            <!-- Step 1 -->
+            <div class="flex flex-col items-center text-center">
+              <div
+                id="step-1-icon"
+                class="w-10 h-10 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold text-sm mb-2 shadow-sm"
+              >
+                <i data-lucide="check" class="w-5 h-5"></i>
+              </div>
+              <span class="text-xs font-semibold text-slate-800"
+                >Profile Settings</span
+              >
+              <span class="text-[10px] text-emerald-600 font-medium"
+                >Verified</span
+              >
+            </div>
+
+            <!-- Step 2 -->
+            <div class="flex flex-col items-center text-center">
+              <div
+                id="step-2-icon"
+                class="w-10 h-10 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold text-sm mb-2 shadow-sm"
+              >
+                <i data-lucide="check" class="w-5 h-5"></i>
+              </div>
+              <span class="text-xs font-semibold text-slate-800"
+                >Pre-Screen Form</span
+              >
+              <span
+                id="step-2-status"
+                class="text-[10px] text-emerald-600 font-medium"
+                >Cleared</span
+              >
+            </div>
+
+            <!-- Step 3 -->
+            <div class="flex flex-col items-center text-center">
+              <div
+                id="step-3-icon"
+                class="w-10 h-10 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold text-sm mb-2 shadow-sm"
+              >
+                <i data-lucide="check" class="w-5 h-5"></i>
+              </div>
+              <span class="text-xs font-semibold text-slate-800"
+                >Approved Contributor</span
+              >
+              <span
+                id="step-3-status"
+                class="text-[10px] text-emerald-600 font-medium"
+                >Active</span
+              >
+            </div>
+
+            <!-- Step 4 -->
+            <div class="flex flex-col items-center text-center">
+              <div
+                id="step-4-icon"
+                class="w-10 h-10 rounded-full bg-slate-100 text-slate-400 border border-slate-300 flex items-center justify-center font-bold text-sm mb-2"
+              >
+                4
+              </div>
+              <span class="text-xs font-semibold text-slate-800"
+                >Appointment Booked</span
+              >
+              <span
+                id="step-4-status"
+                class="text-[10px] text-slate-400 font-medium"
+                >Standby</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- DYNAMIC STATUS CALLOUT BANNER -->
+        <div
+          id="dashboard-status-banner"
+          class="bg-emerald-50 border border-emerald-200 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-all"
+        >
+          <div class="flex items-start gap-3">
+            <i
+              id="banner-icon"
+              data-lucide="check-circle"
+              class="w-5 h-5 text-emerald-600 shrink-0 mt-0.5"
+            ></i>
+            <div>
+              <h4 id="banner-title" class="text-sm font-bold text-emerald-900">
+                ✓ Your profile is certified active. You are cleared to submit
+                new donations.
+              </h4>
+              <p id="banner-desc" class="text-xs text-emerald-700 mt-0.5">
+                All identity markers and health questionnaires are up to date.
+                You can register for donation drives.
+              </p>
+            </div>
+          </div>
+          <button
+            id="banner-action"
+            onclick="alert('Redirecting to appointment schedule page...')"
+            class="bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-semibold px-4 py-2 rounded-lg shrink-0 transition"
+          >
+            Submit New Donation
+          </button>
+        </div>
+
+        <!-- DONATION INTERVAL REFERENCE (from Figma screen bottom-left) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div
+            class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm"
+          >
+            <div class="flex items-center justify-between">
+              <h5 class="text-xs font-bold text-slate-800">Whole Blood</h5>
+              <span
+                class="text-[11px] bg-red-100 text-red-700 font-semibold px-2 py-0.5 rounded"
+                >56 Days</span
+              >
+            </div>
+            <p class="text-[11px] text-slate-500 mt-2">
+              Standard interval (8 weeks). Capped at 24 times/yr across standard
+              jurisdictional thresholds.
+            </p>
+          </div>
+          <div
+            class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm"
+          >
+            <div class="flex items-center justify-between">
+              <h5 class="text-xs font-bold text-slate-800">
+                Platelets (Apheresis)
+              </h5>
+              <span
+                class="text-[11px] bg-blue-100 text-blue-700 font-semibold px-2 py-0.5 rounded"
+                >7 to 14 Days</span
+              >
+            </div>
+            <p class="text-[11px] text-slate-500 mt-2">
+              Replenishes in days. Maximum 24 donations allowed in a rolling
+              12-month period.
+            </p>
+          </div>
+          <div
+            class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm"
+          >
+            <div class="flex items-center justify-between">
+              <h5 class="text-xs font-bold text-slate-800">
+                Plasma / Double Red Cells
+              </h5>
+              <span
+                class="text-[11px] bg-amber-100 text-amber-700 font-semibold px-2 py-0.5 rounded"
+                >28–112 Days</span
+              >
+            </div>
+            <p class="text-[11px] text-slate-500 mt-2">
+              28 days for plasma antibodies; 112 days (16 weeks) due to loss of
+              two red blood units at once.
+            </p>
+          </div>
+        </div>
+
+        <!-- Traceability Ledger Table (Scrollable container as annotated in Figma) -->
+        <div
+          class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden"
+        >
+          <div
+            class="p-5 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+          >
+            <div>
+              <h3 class="font-bold text-slate-900 text-base">
+                Donation Log & Traceability Ledger
+              </h3>
+              <p class="text-xs text-slate-400">
+                Complete historical custody chain & lab clearance logs
+              </p>
+            </div>
+            <span
+              class="text-xs text-slate-500 bg-slate-100 px-3 py-1 rounded-full font-medium self-start sm:self-auto"
+            >
+              Scrollable Table View
+            </span>
+          </div>
+
+          <div class="overflow-x-auto custom-scrollbar">
+            <table class="w-full text-left border-collapse text-xs">
+              <thead>
+                <tr
+                  class="bg-slate-50 text-slate-600 font-semibold border-b border-slate-200 uppercase tracking-wider text-[11px]"
+                >
+                  <th class="py-3.5 px-4">Batch ID</th>
+                  <th class="py-3.5 px-4">Collection Date</th>
+                  <th class="py-3.5 px-4">Volume (ml)</th>
+                  <th class="py-3.5 px-4">Drive / Chapter</th>
+                  <th class="py-3.5 px-4">Status</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 text-slate-700">
+                <tr class="hover:bg-slate-50/80 transition">
+                  <td class="py-3 px-4 font-mono font-medium text-slate-900">
+                    #BCH-9941
+                  </td>
+                  <td class="py-3 px-4">04/10/2026</td>
+                  <td class="py-3 px-4 font-semibold">450 mL</td>
+                  <td class="py-3 px-4">Red Cross Makati Chapter</td>
+                  <td class="py-3 px-4">
+                    <span
+                      class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-100 text-emerald-800"
+                    >
+                      Completed
+                    </span>
+                  </td>
+                </tr>
+                <tr class="hover:bg-slate-50/80 transition">
+                  <td class="py-3 px-4 font-mono font-medium text-slate-900">
+                    #BCH-8820
+                  </td>
+                  <td class="py-3 px-4">02/12/2026</td>
+                  <td class="py-3 px-4 font-semibold">450 mL</td>
+                  <td class="py-3 px-4">St. Luke's Medical Drive</td>
+                  <td class="py-3 px-4">
+                    <span
+                      class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-blue-100 text-blue-800"
+                    >
+                      Dispatched
+                    </span>
+                  </td>
+                </tr>
+                <tr class="hover:bg-slate-50/80 transition">
+                  <td class="py-3 px-4 font-mono font-medium text-slate-900">
+                    #BCH-7742
+                  </td>
+                  <td class="py-3 px-4">12/05/2025</td>
+                  <td class="py-3 px-4 font-semibold">450 mL</td>
+                  <td class="py-3 px-4">Taguig City Hall Drive</td>
+                  <td class="py-3 px-4">
+                    <span
+                      class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-amber-100 text-amber-800"
+                    >
+                      In Testing
+                    </span>
+                  </td>
+                </tr>
+                <tr class="hover:bg-slate-50/80 transition">
+                  <td class="py-3 px-4 font-mono font-medium text-slate-900">
+                    #BCH-6619
+                  </td>
+                  <td class="py-3 px-4">09/14/2025</td>
+                  <td class="py-3 px-4 font-semibold">250 mL</td>
+                  <td class="py-3 px-4">Pasig Community Center</td>
+                  <td class="py-3 px-4">
+                    <span
+                      class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-red-100 text-red-800"
+                    >
+                      Deferred / Incomplete
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ==================== JAVASCRIPT LOGIC ==================== -->
+    <script>
+      // Initialize Lucide Icons
+      lucide.createIcons();
+
+      // Tab Navigation Switcher
+      function switchTab(tabId) {
+        ["profile", "eligibility", "donations"].forEach((id) => {
+          const view = document.getElementById("view-" + id);
+          const nav = document.getElementById("nav-" + id);
+          if (id === tabId) {
+            view.classList.remove("hidden");
+            nav.classList.add("bg-red-50", "text-red-700", "font-semibold");
+            nav.classList.remove("text-slate-600");
+          } else {
+            view.classList.add("hidden");
+            nav.classList.remove("bg-red-50", "text-red-700", "font-semibold");
+            nav.classList.add("text-slate-600");
+          }
+        });
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      // Toggle Conditional Form Fields
+      function toggleConditionField(elementId, show) {
+        const el = document.getElementById(elementId);
+        if (show) {
+          el.classList.remove("hidden");
+        } else {
+          el.classList.add("hidden");
+        }
+      }
+
+      // 8-Rule Clinical Evaluation Engine
+      function evaluateEligibility(e) {
+        e.preventDefault();
+
+        const age = parseInt(document.getElementById("input-age").value, 10);
+        const weight = parseFloat(
+          document.getElementById("input-weight").value,
+        );
+        const feelingHealthy =
+          document.querySelector('input[name="feeling_healthy"]:checked')
+            .value === "yes";
+        const recentIllness =
+          document.querySelector('input[name="recent_illness"]:checked')
+            .value === "yes";
+        const medication =
+          document.querySelector('input[name="medication"]:checked').value ===
+          "yes";
+        const donatedBefore =
+          document.querySelector('input[name="donated_before"]:checked')
+            .value === "yes";
+        const lastDonationVal = document.getElementById(
+          "input-last-donation",
+        ).value;
+        const tattoo =
+          document.querySelector('input[name="tattoo_piercing"]:checked')
+            .value === "yes";
+        const travel =
+          document.querySelector('input[name="intl_travel"]:checked').value ===
+          "yes";
+
+        const denyReasons = [];
+        const reviewReasons = [];
+
+        // 1. Age Rule
+        if (age < 16 || age > 65) {
+          denyReasons.push(
+            "Age is below 16 or above 65 (Outside permissible blood donor limits).",
+          );
+        } else if (age >= 16 && age <= 17) {
+          reviewReasons.push(
+            "Age 16–17 requires parental/guardian clinical consent.",
+          );
+        }
+
+        // 2. Weight Rule
+        if (weight < 45) {
+          denyReasons.push(
+            "Weight is below minimum safety threshold (<45 kg).",
+          );
+        } else if (weight >= 45 && weight < 50) {
+          reviewReasons.push(
+            "Borderline weight (45–49 kg) requires on-site clinical verification.",
+          );
+        }
+
+        // 3. Current Health
+        if (!feelingHealthy) {
+          denyReasons.push(
+            "Currently feeling unwell, having symptoms of fever, or active infection.",
+          );
+        }
+
+        // 4. Recent Illness
+        if (recentIllness) {
+          reviewReasons.push(
+            "Recent recovery from fever or illness requires medical verification at the venue.",
+          );
+        }
+
+        // 5. Medication Use
+        if (medication) {
+          reviewReasons.push(
+            "Currently taking medications that must be cleared by attending blood bank physicians.",
+          );
+        }
+
+        // 6. Previous Donation Interval (56 days whole blood)
+        if (donatedBefore && lastDonationVal) {
+          const lastDate = new Date(lastDonationVal);
+          const today = new Date();
+          const diffDays = Math.floor(
+            (today - lastDate) / (1000 * 60 * 60 * 24),
+          );
+          if (diffDays < 56) {
+            denyReasons.push(
+              Last donation was ${diffDays} days ago (Minimum 56 days required for whole blood).,
+            );
+          }
+        } else if (donatedBefore && !lastDonationVal) {
+          reviewReasons.push(
+            "Previous donation date is unrecorded and must be checked against central registry.",
+          );
+        }
+
+        // 7. Tattoos / Piercings
+        if (tattoo) {
+          reviewReasons.push(
+            "Tattoo or body piercing procedure requires date & sanitary clearance inspection.",
+          );
+        }
+
+        // 8. International Travel
+        if (travel) {
+          reviewReasons.push(
+            "Recent international travel requires endemic zone deferral review.",
+          );
+        }
+
+        // Render Result Card
+        const container = document.getElementById("result-container");
+        container.classList.remove("hidden");
+
+        if (denyReasons.length > 0) {
+          // Red Not Eligible Banner
+          container.innerHTML = `
+          <div class="bg-rose-50 border border-rose-300 rounded-xl p-6 text-rose-900 shadow-sm animate-fade-in">
+            <div class="flex items-center gap-2 mb-2 font-bold text-lg text-rose-700">
+              <i data-lucide="x-circle" class="w-6 h-6"></i>
+              ✘ You Are Not Eligible
+            </div>
+            <p class="text-sm font-medium mb-3">Based on your answers, you do not meet the basic requirements for blood donation at this time.</p>
+            <div class="text-xs space-y-1 bg-white/80 p-3 rounded-lg border border-rose-200">
+              <strong class="font-semibold text-rose-950 block">This is due to:</strong>
+              <ul class="list-disc list-inside text-rose-800 space-y-0.5">
+                ${denyReasons.map((r) => <li>${r}</li>).join("")}
+              </ul>
+            </div>
+            <div class="mt-4 flex gap-3">
+              <button onclick="switchTab('donations')" class="bg-rose-700 hover:bg-rose-800 text-white text-xs font-semibold px-4 py-2 rounded-lg transition">
+                Back to Dashboard
+              </button>
+            </div>
+          </div>
+        `;
+        } else if (reviewReasons.length > 0) {
+          // Orange Additional Screening Banner
+          container.innerHTML = `
+          <div class="bg-amber-50 border border-amber-300 rounded-xl p-6 text-amber-900 shadow-sm animate-fade-in">
+            <div class="flex items-center gap-2 mb-2 font-bold text-lg text-amber-700">
+              <i data-lucide="alert-triangle" class="w-6 h-6"></i>
+              ! Additional Screening Required
+            </div>
+            <p class="text-sm font-medium mb-3">Based on your answers, you will need further screening to determine whether you meet the basic requirements for blood donation.</p>
+            <div class="text-xs space-y-1 bg-white/80 p-3 rounded-lg border border-amber-200">
+              <strong class="font-semibold text-amber-950 block">Notes for review:</strong>
+              <ul class="list-disc list-inside text-amber-800 space-y-0.5">
+                ${reviewReasons.map((r) => <li>${r}</li>).join("")}
+              </ul>
+            </div>
+            <div class="mt-4 flex gap-3">
+              <button onclick="switchTab('donations')" class="bg-amber-600 hover:bg-amber-700 text-white text-xs font-semibold px-4 py-2 rounded-lg transition">
+                Learn More →
+              </button>
+            </div>
+          </div>
+        `;
+        } else {
+          // Green Eligible Banner
+          container.innerHTML = `
+          <div class="bg-emerald-50 border border-emerald-300 rounded-xl p-6 text-emerald-900 shadow-sm animate-fade-in">
+            <div class="flex items-center gap-2 mb-2 font-bold text-lg text-emerald-700">
+              <i data-lucide="check-circle" class="w-6 h-6"></i>
+              ✓ You May Be Eligible
+            </div>
+            <p class="text-sm font-medium mb-2">Based on your answers, you meet the basic requirements for blood donation.</p>
+            <p class="text-xs text-emerald-700 mb-4">Please note that you will be further assessed at the venue. Find a donation campaign and schedule your appointment.</p>
+            <div class="flex gap-3">
+              <button onclick="switchTab('donations')" class="bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-semibold px-4 py-2 rounded-lg transition">
+                Find Campaign
+              </button>
+              <button onclick="switchTab('donations')" class="border border-emerald-300 hover:bg-emerald-100 text-emerald-800 text-xs font-semibold px-4 py-2 rounded-lg transition">
+                Back to Dashboard
+              </button>
+            </div>
+          </div>
+        `;
+        }
+        lucide.createIcons();
+        container.scrollIntoView({ behavior: "smooth" });
+      }
+
+      // Interactive Dashboard State Simulator (For the 4 Figma mock states)
+      function applyDashboardState(state) {
+        const banner = document.getElementById("dashboard-status-banner");
+        const title = document.getElementById("banner-title");
+        const desc = document.getElementById("banner-desc");
+        const btn = document.getElementById("banner-action");
+
+        if (state === "cleared") {
+          banner.className =
+            "bg-emerald-50 border border-emerald-200 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-all";
+          title.className = "text-sm font-bold text-emerald-900";
+          title.textContent =
+            "✓ Your profile is certified active. You are cleared to submit new donations.";
+          desc.className = "text-xs text-emerald-700 mt-0.5";
+          desc.textContent =
+            "All identity markers and health questionnaires are up to date. You can register for donation drives.";
+          btn.className =
+            "bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-semibold px-4 py-2 rounded-lg shrink-0 transition";
+          btn.textContent = "Submit New Donation";
+        } else if (state === "pending") {
+          banner.className =
+            "bg-amber-50 border border-amber-200 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-all";
+          title.className = "text-sm font-bold text-amber-900";
+          title.textContent = "Status: Verification Pending";
+          desc.className = "text-xs text-amber-700 mt-0.5";
+          desc.textContent =
+            "Please wait for status approval. Your clinical intake submission is under desk review.";
+          btn.className =
+            "bg-amber-600 hover:bg-amber-700 text-white text-xs font-semibold px-4 py-2 rounded-lg shrink-0 transition";
+          btn.textContent = "Continue to Pre-screening";
+        } else if (state === "deferred") {
+          banner.className =
+            "bg-rose-50 border border-rose-200 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-all";
+          title.className = "text-sm font-bold text-rose-900";
+          title.textContent =
+            "⚠️ Action Required: Clinical Clearance Expired (6-Month Rule)";
+          desc.className = "text-xs text-rose-700 mt-0.5";
+          desc.textContent =
+            "Your previous clearance has lapsed. Try again in 1 month or request re-evaluation.";
+          btn.className =
+            "bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold px-4 py-2 rounded-lg shrink-0 transition";
+          btn.textContent = "Re-evaluate Profile";
+        } else if (state === "waiting") {
+          banner.className =
+            "bg-amber-50 border border-amber-200 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-all";
+          title.className = "text-sm font-bold text-amber-900";
+          title.textContent =
+            "✓ Your profile is certified active. Please wait 4 weeks for your next donation.";
+          desc.className = "text-xs text-amber-700 mt-0.5";
+          desc.textContent =
+            "Whole blood interval limit active (56-day safeguard).";
+          btn.className =
+            "bg-slate-700 hover:bg-slate-800 text-white text-xs font-semibold px-4 py-2 rounded-lg shrink-0 transition";
+          btn.textContent = "View Guidelines";
+        }
+        lucide.createIcons();
+      }
+    </script>
+  </body>
+</html>
     </main>
   </div>
 
@@ -412,4 +1605,3 @@
 </html>
 </body>
 </html>
-

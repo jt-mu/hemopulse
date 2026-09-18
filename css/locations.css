@@ -251,3 +251,30 @@ body.locations-canvas-body {
     padding: 1.5rem 1rem 4rem;
   }
 }
+
+/* SEARCH BAR */
+.search-wrap {
+  margin-top: 1.25rem;
+  display: flex;
+  justify-content: center;
+}
+
+#searchCampaign {
+  width: 100%;
+  max-width: 440px;
+  padding: 0.7rem 1.4rem;
+  border-radius: 999px;
+  border: 1.5px solid #CBDCEE;
+  background-color: #FFFFFF;
+  font-family: inherit;
+  font-size: 0.85rem;
+  color: #192A4D;
+  outline: none;
+  box-shadow: 0 2px 8px rgba(25, 42, 77, 0.06);
+  transition: all 0.2s ease;
+}
+
+#searchCampaign:focus {
+  border-color: #1877F2;
+  box-shadow: 0 3px 12px rgba(24, 119, 242, 0.15);
+}

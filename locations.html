@@ -12,7 +12,7 @@
 </head>
 <body class="locations-canvas-body">
 
-  <!-- NAVBAR (from your landing page) -->
+  <!-- NAVBAR -->
   <header class="frame-nav locations-nav-bar">
     <div class="nav-links">
       <a href="index.html">Home</a>
@@ -47,6 +47,16 @@
     <div class="loc-head-wrap">
       <h1 class="loc-title">Donation Locations</h1>
       <p class="loc-sub">Find blood donation drives near you and be part of a healthier tomorrow.</p>
+      
+      <!-- SEARCH INPUT FOR search.js -->
+      <div class="search-wrap">
+        <input 
+          type="text" 
+          id="searchCampaign" 
+          placeholder="Search donation drives or locations..." 
+          oninput="searchCampaign()"
+        />
+      </div>
     </div>
 
     <!-- 1. URGENT DRIVES BLOCK -->
@@ -55,7 +65,7 @@
       <div class="drives-row">
 
         <!-- Card 1 -->
-        <div class="urgent-card">
+        <div class="urgent-card campaign-card">
           <h3 class="urgent-card-title">Sample Drive</h3>
           <div class="card-img-box">
             <img src="images/hero-group.png" alt="Drive location" onerror="this.src='images/logo.png'">
@@ -66,8 +76,8 @@
           </div>
         </div>
 
-        <!-- Card 2 (with bright blue active border) -->
-        <div class="urgent-card active-blue-border">
+        <!-- Card 2 -->
+        <div class="urgent-card campaign-card active-blue-border">
           <h3 class="urgent-card-title">Sample Drive</h3>
           <div class="card-img-box">
             <img src="images/hero-group.png" alt="Drive location" onerror="this.src='images/logo.png'">
@@ -87,7 +97,7 @@
       <div class="drives-row grid-2x2">
 
         <!-- Event 1 -->
-        <div class="upcoming-card">
+        <div class="upcoming-card campaign-card">
           <span class="upcoming-card-title">Sample Drive</span>
           <div class="card-img-box sm-img">
             <img src="images/hero-group.png" alt="Drive location" onerror="this.src='images/logo.png'">
@@ -100,7 +110,7 @@
         </div>
 
         <!-- Event 2 -->
-        <div class="upcoming-card">
+        <div class="upcoming-card campaign-card">
           <span class="upcoming-card-title">Sample Drive</span>
           <div class="card-img-box sm-img">
             <img src="images/hero-group.png" alt="Drive location" onerror="this.src='images/logo.png'">
@@ -113,7 +123,7 @@
         </div>
 
         <!-- Event 3 -->
-        <div class="upcoming-card">
+        <div class="upcoming-card campaign-card">
           <span class="upcoming-card-title">Sample Drive</span>
           <div class="card-img-box sm-img">
             <img src="images/hero-group.png" alt="Drive location" onerror="this.src='images/logo.png'">
@@ -126,7 +136,7 @@
         </div>
 
         <!-- Event 4 -->
-        <div class="upcoming-card">
+        <div class="upcoming-card campaign-card">
           <span class="upcoming-card-title">Sample Drive</span>
           <div class="card-img-box sm-img">
             <img src="images/hero-group.png" alt="Drive location" onerror="this.src='images/logo.png'">
@@ -141,7 +151,7 @@
       </div>
     </section>
 
-    <!-- 3. EVENT SCHEDULE (replaces the grey placeholder box with the actual table component from the Figma note) -->
+    <!-- 3. EVENT SCHEDULE OVERVIEW TABLE -->
     <section class="schedule-overview-wrapper">
       <div class="schedule-white-box">
         <div class="schedule-pill-heading">EVENT SCHEDULE OVERVIEW</div>
@@ -195,5 +205,6 @@
   </main>
 
   <script src="js/modal.js"></script>
+  <script src="js/search.js"></script>
 </body>
 </html>
