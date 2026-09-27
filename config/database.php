@@ -2,7 +2,8 @@
 define('DB_HOST', getenv('HEMOPULSE_DB_HOST') ?: 'localhost');
 define('DB_USER', getenv('HEMOPULSE_DB_USER') ?: 'root');
 define('DB_PASS', getenv('HEMOPULSE_DB_PASS') ?: '');
-define('DB_NAME', getenv('HEMOPULSE_DB_NAME') ?: 'Hemopulse_db');
+define('DB_NAME', getenv('HEMOPULSE_DB_NAME') ?: 'hemopulse_db');
+
 function getDBConnection(): PDO {
     static $pdo = null;
     if ($pdo === null) {
