@@ -92,10 +92,62 @@
     <span class="hp-hint">Use a password of at least 12 characters.</span>
   </div>
 
-  <div class="hp-terms">
-    <input type="checkbox" id="termsCheck" name="terms" class="hp-checkbox" required>
-    <label for="termsCheck">I agree to the Terms and Conditions. <span class="hp-req">*</span></label>
+ <div class="hp-terms">
+  <input type="checkbox" id="termsCheck" name="terms" class="hp-checkbox" required>
+  <label for="termsCheck">
+    I agree to the 
+    <a href="javascript:void(0)" class="hp-terms-link" onclick="openTermsModal()">Terms of Service</a> 
+    and 
+    <a href="javascript:void(0)" class="hp-terms-link" onclick="openPrivacyModal()">Clinical Privacy Policy</a>. 
+    <span class="hp-req">*</span>
+  </label>
+  <!-- ACCESSIBLE TERMS & PRIVACY READER MODAL -->
+<div id="termsReaderModal" class="hp-terms-overlay hide" style="display: none;">
+  <div class="hp-terms-dialog">
+    <div class="hp-terms-header">
+      <h3 id="termsDialogTitle" class="hp-terms-title">Terms of Service & Clinical Agreement</h3>
+      <button type="button" class="hp-terms-close" onclick="closeTermsModal()" aria-label="Close dialog">&times;</button>
+    </div>
+    
+    <div id="termsDialogBody" class="hp-terms-content">
+      <p class="hp-terms-lead">By creating an account on <strong>HemoPulse Blood Information System</strong>, you acknowledge and agree to the following protocols:</p>
+
+      <h4>1. Voluntary Participation & Accurate Information</h4>
+      <p>You confirm that all personal, contact, and medical screening information submitted during registration and pre-donation interviews is accurate, truthful, and provided voluntarily.</p>
+
+      <h4>2. Blood Testing & Clinical Screening</h4>
+      <p>In compliance with international transfusion safety standards and Republic Act No. 7719 (National Blood Services Act), donated blood will undergo mandatory laboratory screening for transfusion-transmissible infections (TTIs) including HIV, Hepatitis B, Hepatitis C, Syphilis, and Malaria.</p>
+
+      <h4>3. Health Data Privacy & Confidentiality</h4>
+      <p>Your records are encrypted and maintained in strict confidence under international data security practices and the Data Privacy Act of 2012. Your health metrics are only accessible by authorized medical technologists, phlebotomists, and licensed hospital blood bank coordinators.</p>
+
+      <h4>4. Emergency Alerts & Communications</h4>
+      <p>By opting in, you authorize HemoPulse to transmit verification codes, scheduled blood drive reminders, and critical emergency blood shortage notifications to your verified email or mobile contact.</p>
+    </div>
+
+    <div class="hp-terms-footer">
+      <button type="button" class="hp-btn-yellow" onclick="acceptTermsAndClose()">I Understand & Accept</button>
+    </div>
+   <!-- ACCESSIBLE TERMS & PRIVACY READER MODAL -->
+<div id="termsReaderModal" class="hp-terms-overlay hide" style="display: none;">
+  <div class="hp-terms-dialog">
+    <div class="hp-terms-header">
+      <h3 id="termsDialogTitle" class="hp-terms-title">Terms of Service & Clinical Agreement</h3>
+      <button type="button" class="hp-terms-close" onclick="closeTermsModal()" aria-label="Close dialog">&times;</button>
+    </div>
+    
+    <div id="termsDialogBody" class="hp-terms-content">
+      <!-- Injected dynamically by openDocModal() -->
+    </div>
+
+    <div class="hp-terms-footer">
+      <button type="button" class="hp-btn-yellow" onclick="acceptTermsAndClose()">I Understand & Accept</button>
+    </div>
   </div>
+</div> 
+  </div>
+</div>
+</div>
 
   <button type="submit" class="hp-btn-yellow">Sign up</button>
 </form>
@@ -482,6 +534,76 @@
   font-weight: 700;
   color: #1877F2;
   text-decoration: underline;
+}
+/* TERMS & PRIVACY VIEWER OVERLAY */
+.hp-terms-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(4px);
+  z-index: 1050;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.hp-terms-dialog {
+  background: #FFFFFF;
+  border-radius: 14px;
+  width: 100%;
+  max-width: 500px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+.hp-terms-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #E2E8F0;
+  background-color: #F8FAFC;
+}
+.hp-terms-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1E293B;
+}
+.hp-terms-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: #64748B;
+  cursor: pointer;
+}
+.hp-terms-content {
+  padding: 1.25rem;
+  overflow-y: auto;
+  font-size: 0.85rem;
+  color: #334155;
+  line-height: 1.6;
+}
+.hp-terms-content h4 {
+  margin-top: 1rem;
+  margin-bottom: 0.25rem;
+  color: #0F172A;
+  font-size: 0.9rem;
+}
+.hp-terms-footer {
+  padding: 0.75rem 1.25rem;
+  border-top: 1px solid #E2E8F0;
+  display: flex;
+  justify-content: flex-end;
+  background-color: #F8FAFC;
+}
+.hp-terms-link {
+  color: #1877F2;
+  text-decoration: underline;
+  font-weight: 600;
 }
 </style>
 

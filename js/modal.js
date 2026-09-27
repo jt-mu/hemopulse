@@ -314,6 +314,115 @@ async function handleLoginSubmit(e) {
   }
 }
 
+function openTermsModal() {
+  const modal = document.getElementById("termsReaderModal");
+  if (modal) {
+    modal.classList.remove("hide");
+    modal.style.setProperty("display", "flex", "important");
+  }
+}
+
+function closeTermsModal() {
+  const modal = document.getElementById("termsReaderModal");
+  if (modal) {
+    modal.classList.add("hide");
+    modal.style.setProperty("display", "none", "important");
+  }
+}
+
+function acceptTermsAndClose() {
+  const check = document.getElementById("termsCheck");
+  if (check) check.checked = true;
+  closeTermsModal();
+}
+// --- CLINICAL LEGAL & PRIVACY POLICY CONTENT TEMPLATES ---
+const LEGAL_DOCS = {
+  terms: {
+    title: "Terms of Service & Clinical Agreement",
+    content: `
+      <p class="hp-terms-lead">By registering an account on the <strong>HemoPulse Blood Bank & Donor Management System</strong>, you agree to comply with the following clinical and ethical standards:</p>
+      
+      <h4>1. Voluntary & Truthful Disclosure</h4>
+      <p>Blood donation is a humanitarian medical act. You attest that all personal background details, contact numbers, and medical history submitted during account registration and physical donor questionnaires are truthful, complete, and accurate.</p>
+
+      <h4>2. Mandatory Transfusion Safety Testing</h4>
+      <p>Under Republic Act No. 7719 (National Blood Services Act) and WHO Blood Safety Standards, all blood collected will undergo strict laboratory screening for Transfusion-Transmissible Infections (TTIs), including HIV 1 & 2, Hepatitis B, Hepatitis C, Syphilis, and Malaria. Confirmatory testing protocols will apply automatically to reactive units.</p>
+
+      <h4>3. Safe Donor Deferral Protocol</h4>
+      <p>HemoPulse and partner medical facilities reserve the right to temporarily or permanently defer blood donation based on screening metrics (e.g., hemoglobin levels, recent tattoos/piercings, medication use, foreign travel to endemic regions) to ensure both donor recovery and recipient safety.</p>
+
+      <h4>4. Emergency Alerts & System Communications</h4>
+      <p>You authorize HemoPulse to contact you via SMS, email, or system alerts regarding pre-donation reminders, blood availability alerts matching your blood group, or critical notifications regarding your test results.</p>
+    `,
+  },
+  privacy: {
+    title: "Clinical Data Privacy Policy",
+    content: `
+      <p class="hp-terms-lead">HemoPulse operates in strict compliance with <strong>Republic Act No. 10173 (Philippine Data Privacy Act of 2012)</strong>, <strong>HIPAA Security Safeguards</strong>, and international health data protection guidelines.</p>
+
+      <h4>1. Collection of Sensitive Personal Health Information</h4>
+      <p>We collect and process your name, contact channels, birth date, blood type, donation history, and clinical eligibility check results solely for the safe operation of blood bank inventory, recipient matching, and clinical intake verification.</p>
+
+      <h4>2. Strict Confidentiality & Medical Technologist Access</h4>
+      <p>Your screening data and laboratory test findings are classified as <strong>Strictly Confidential Medical Records</strong>. Only licensed phlebotomists, medical technologists, and attending blood bank medical directors are granted access to verify eligibility or log donation bags.</p>
+
+      <h4>3. Secure Storage & Non-Commercial Handling</h4>
+      <p>Personal and clinical records are encrypted in transit using SSL/TLS and safeguarded in structured database storage. <strong>Your personal, biometric, or health data will never be sold, rented, or repurposed for commercial advertising or third-party marketing under any circumstances.</strong></p>
+
+      <h4>4. Donor Data Rights</h4>
+      <p>As a data subject, you hold the legal right to inspect your historical donation records, request correction of erroneous contact information, or request account deactivation subject to statutory medical record retention requirements imposed by health regulatory authorities.</p>
+    `,
+  },
+};
+
+// Open Dialog dynamically with chosen document
+function openDocModal(docType) {
+  const modal = document.getElementById("termsReaderModal");
+  const titleElem = document.getElementById("termsDialogTitle");
+  const bodyElem = document.getElementById("termsDialogBody");
+
+  if (!modal || !titleElem || !bodyElem) return;
+
+  const doc = LEGAL_DOCS[docType] || LEGAL_DOCS.terms;
+  titleElem.textContent = doc.title;
+  bodyElem.innerHTML = doc.content;
+
+  modal.classList.remove("hide");
+  modal.style.setProperty("display", "flex", "important");
+}
+
+function openTermsModal() {
+  openDocModal("terms");
+}
+
+function openPrivacyModal() {
+  openDocModal("privacy");
+}
+
+function closeTermsModal() {
+  const modal = document.getElementById("termsReaderModal");
+  if (modal) {
+    modal.classList.add("hide");
+    modal.style.setProperty("display", "none", "important");
+  }
+}
+
+function acceptTermsAndClose() {
+  const check = document.getElementById("termsCheck");
+  if (check) check.checked = true;
+  closeTermsModal();
+}
+
+// Bind functions to window so inline onclick handlers always find them
+window.openTermsModal = openTermsModal;
+window.openPrivacyModal = openPrivacyModal;
+window.openDocModal = openDocModal;
+window.closeTermsModal = closeTermsModal;
+window.acceptTermsAndClose = acceptTermsAndClose;
+window.openTermsModal = openTermsModal;
+window.closeTermsModal = closeTermsModal;
+window.acceptTermsAndClose = acceptTermsAndClose;
+
 // Bind functions to window to avoid scope collisions
 window.openAuthModal = openAuthModal;
 window.closeAuthModal = closeAuthModal;
