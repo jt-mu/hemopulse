@@ -64,5 +64,21 @@
 
 
 <script src="js/donor-dashboard.js"></script><script src="js/eligibility.js"></script>
+
+<!-- Prevent viewing cached dashboard via browser back button after logout -->
+  <script>
+    window.addEventListener('pageshow', function (event) {
+      const isBackForward = event.persisted || 
+        (window.performance && window.performance.getEntriesByType && 
+         window.performance.getEntriesByType("navigation")[0]?.type === "back_forward");
+
+      if (isBackForward) {
+        window.location.replace("index.php");
+      }
+    });
+  </script>
+</body>
+</html>
+
 </body>
 </html>

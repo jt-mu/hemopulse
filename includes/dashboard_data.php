@@ -1,4 +1,19 @@
 <?php
+// Anti-Cache Headers: Prevents browser from caching authenticated screens
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Session Guard: If logged out, redirect immediately
+if (empty($_SESSION['user_id'])) {
+    header("Location: index.php");
+    exit();
+}
 require_once __DIR__ . '/bootstrap.php';
 require_once __DIR__ . '/campaigns.php';
 require_once __DIR__ . '/eligibility.php';
