@@ -1,0 +1,52 @@
+.app-status { padding: .65rem 1rem; background: #f5f8fc; color: #192a4d; font: 14px Poppins, sans-serif; }
+.app-status a { color: #192a4d; }
+.inline-form { display: inline; margin-left: 1rem; }
+.inline-form button { font: inherit; cursor: pointer; }
+.app-notice { padding: 1rem; border-radius: 8px; margin: .5rem 0; background: #fff3cd; color: #493b00; }
+.app-notice.error { background: #fff0ed; color: #8b2424; }
+.app-notice.success { background: #e7f5e9; color: #215b32; }
+.booking-form { display: grid; gap: .7rem; margin-top: 1rem; }
+.booking-form input { padding: .65rem; border: 1px solid #75829b; border-radius: 6px; font: inherit; width: 100%; box-sizing: border-box; }
+.record-card { padding: 1rem; margin: 1rem 0; background: #eef5fb; border-radius: 10px; overflow-wrap: anywhere; }
+button:disabled { opacity: .6; cursor: not-allowed; }
+:focus-visible { outline: 3px solid #2766a5; outline-offset: 3px; }
+.auth-modal-card { max-height: 90vh; overflow-y: auto; }
+.auth-form input { box-sizing: border-box; }
+.auth-overlay:not(.open) { visibility: hidden; }
+.dash-sidebar > form { margin-top: auto; }
+.nav-signout { border: 0; background: transparent; font-family: inherit; cursor: pointer; }
+@media (max-width: 600px) { .dash-row { flex-direction: column; } .record-card code { word-break: break-all; } }
+.app-status:empty { display: none; }
+.dropdown-trigger { border: 0; background: transparent; font-family: inherit; padding: 0; }
+.nav-dropdown.menu-open .dropdown-menu { display: flex; flex-direction: column; }
+.nav-dropdown:not(.menu-open) .dropdown-menu { display: none; }
+.nav-dropdown .dropdown-menu a, .dropdown-signout { display: block; padding: .65rem 1rem; font: 500 .85rem Poppins, sans-serif; color: #192a4d; text-decoration: none; text-align: left; border: 0; background: transparent; width: 100%; box-sizing: border-box; }
+.dropdown-signout { cursor: pointer; }
+.nav-dropdown .dropdown-menu a:hover, .dropdown-signout:hover { background: #eef5fb; }
+.dropdown-menu { min-width: 210px; max-width: min(320px, 90vw); overflow-wrap: anywhere; }
+.nav-pill { text-decoration: none; }
+.campaign-status { font-weight: 700; letter-spacing: .05em; }
+.status-open { color: #245b32; }
+.status-full, .status-closed { color: #565d66; }
+.btn-figma-yellow:disabled { background: #d4d7dc; color: #505662; box-shadow: none; opacity: 1; }
+.eligibility-tabs, .donation-actions { display: flex; gap: .7rem; flex-wrap: wrap; margin: 1rem 0 1.5rem; }
+.eligibility-tabs a { padding: .75rem 1rem; border-radius: 12px; color: #192a4d; background: #fff; text-decoration: none; border: 1px solid #b5c9db; }
+.eligibility-tabs a.active { background: #ffe05c; border-color: #ffe05c; font-weight: 700; }
+.campaign-select-form { display: grid; gap: .7rem; margin: 1rem 0; }
+.campaign-select-form select { padding: .8rem; max-width: 100%; font: inherit; border-radius: 8px; }
+.registration-form .dash-field { margin-bottom: 1rem; }
+.registration-agreement { display: flex; align-items: flex-start; gap: .7rem; }
+.registration-agreement input { margin-top: .25rem; }
+.eligibility-flow fieldset { border: 0; padding: 0; min-width: 0; }
+.eligibility-flow legend { margin-bottom: .7rem; }
+.contact-form-wrap label { display: block; margin: .5rem 0; font-size: .85rem; }
+.contact-form-wrap input { box-sizing: border-box; }
+.newsletter-box label { color: #192a4d; }
+.confirmation-page { max-width: 650px; margin: 4rem auto; padding: 1.5rem; }
+@media (max-width: 600px) { .eligibility-tabs { flex-direction: column; } .campaign-select-form select { width: 100%; } }
+.donor-filters,.campaign-extra-filters { display:flex;gap:.7rem;flex-wrap:wrap;align-items:end;margin:1rem 0; }
+.donor-filters label,.campaign-extra-filters label { display:grid;gap:.35rem;font-size:.85rem;flex:1 1 140px; }
+.donor-filters input,.donor-filters select,.campaign-extra-filters input,.campaign-extra-filters select { width:100%;box-sizing:border-box;padding:.65rem;border:1px solid #8ea4bd;border-radius:7px;font:inherit; }
+.donor-pagination { display:flex;justify-content:center;gap:1rem;align-items:center;margin-top:1rem; }
+.donor-pagination button,.record-card button { border:1px solid #192a4d;border-radius:7px;padding:.5rem .8rem;background:white;color:#192a4d;cursor:pointer; }
+.donor-metric { padding:.8rem;background:#d3e4f4;border-radius:8px;font-weight:700; }

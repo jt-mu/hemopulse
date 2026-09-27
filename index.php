@@ -1,0 +1,135 @@
+<?php require __DIR__ . '/includes/page_init.php'; ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HemoPulse - Blood Donation</title>
+  <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap-grid.min.css"><link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/app.css">
+<link rel="stylesheet" href="css/design.css?v=4"></head>
+<body>
+<?php include __DIR__ . '/includes/notices.php'; ?>
+
+<?php include __DIR__ . '/includes/auth_modal.php'; ?>
+  <!-- HERO BANNER -->
+  <div class="hero-banner">
+    <header class="frame-nav">
+      <div class="nav-links">
+        <a href="index.php" class="active">Home</a>
+        <a href="locations.php">Locations</a>
+      </div>
+      <div class="logo-badge">
+        <a href="index.php"><img src="images/logo.png" alt="HemoPulse logo" onerror="this.src='images/logo.jpg'"></a>
+      </div>
+      <div class="nav-links">
+        <a href="contact.php">Contact Us</a>
+        <?php include __DIR__ . '/includes/account_menu.php'; ?>
+      </div>
+    </header>
+
+    <div class="hero-inner">
+      <div class="hero-left">
+        <h1 class="hero-title"><span class="title-underline">Where</span><br><span class="title-underline">compassion</span><br><span class="title-underline">meets the vein.</span></h1>
+        <p class="hero-subtitle">Give someone a fighting chance today.</p>
+        <a href="<?= $user ? 'dashboard.php' : '#login' ?>" <?php if (!$user): ?>onclick="openAuthModal('login'); return false;"<?php endif; ?> class="btn-yellow">Donate</a>
+      </div>
+      <div class="hero-image-wrap">
+        <img src="images/hero-group.png" alt="Where compassion meets the vein">
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTAINER -->
+  <div class="container">
+
+    <!-- DONATION TYPES -->
+    <section id="donation-types">
+      <h2 class="section-heading">DONATION TYPES</h2>
+      <div class="donation-types-grid">
+        <div class="type-card">
+          <img class="type-card-img" src="images/donation-1.jpg" alt="Whole Blood">
+          <h3>Whole Blood</h3>
+          <p>The standard, most flexible donation takes about 45 to 60 minutes total, with the blood draw lasting just 8 to 10 minutes. A single pint collects red cells, platelets, and plasma to support trauma victims, surgeries, and severe anemia patients. It is open to all blood types—especially O-negative—and you can donate every 56 days.</p>
+        </div>
+
+        <div class="type-card">
+          <img class="type-card-img" src="images/donation-2.jpg" alt="Platelets">
+          <h3>Platelets</h3>
+          <p>Using an automated machine, this process draws blood, collects vital clotting cells, and returns your red cells and plasma. The visit lasts about two hours—ideal for streaming a movie or relaxing—and directly aids cancer patients undergoing chemotherapy and major surgery recipients. Particularly needed from positive blood types (A+, B+, AB+, O+), platelets can be donated every 7 days.</p>
+        </div>
+
+        <div class="type-card">
+          <img class="type-card-img" src="images/donation-3.jpg" alt="Power Red">
+          <h3>Power Red</h3>
+          <p>This targeted donation collects a concentrated, double dose of red blood cells while returning your platelets and plasma with hydrating fluids. Taking roughly 60 to 75 minutes, it is most effective for O, A-negative, and B-negative donors to treat newborn transfusions and emergency trauma. Because two units are collected, donations are spaced 112 days apart.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT HEMOPULSE -->
+    <section class="about-box">
+      <h2>About HemoPulse</h2>
+      <img src="images/about-img.jpg" alt="About HemoPulse">
+      <div>
+        <p>HemoPulse bridges the gap between willing donors and community blood drives. Our platform simplifies the entire giving journey: register in minutes, discover verified donation campaigns near you, and effortlessly monitor your personal donation history and eligibility milestones. By keeping track of live blood supply needs in your area, you always know when your specific blood type can make the greatest difference.</p>
+      </div>
+    </section>
+
+    <!-- FAQS ACCORDION -->
+    <section class="home-faq">
+      <h2 class="section-heading text-center">FAQs</h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Donating</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            Donating blood is safe and simple. The actual donation takes about 8-10 minutes, and the entire process from check-in to post-donation refreshments takes less than an hour.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Quality and Safety</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            Every donation uses sterile, single-use equipment that is immediately discarded. Donated units undergo rigorous testing for infectious diseases before being released.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>What to eat before my donation?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            Eat a healthy meal rich in iron and drink plenty of fluids (water or fruit juice) at least 2 to 3 hours prior to donating. Avoid fatty foods right before donating.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Post-donation Concerns</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            Keep hydrated and avoid strenuous lifting or intense exercise for the rest of the day. If you feel dizzy, sit or lie down until you feel better.
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- SCRIPTS -->
+  
+  <script src="js/main.js"></script>
+  <script src="js/modal.js"></script>
+<script src="js/navigation.js"></script>
+<?php include __DIR__ . '/includes/footer.php'; ?>
+</body>
+</html>

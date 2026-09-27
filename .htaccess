@@ -1,0 +1,8 @@
+Options -Indexes
+DirectoryIndex index.php
+<FilesMatch "(?i)\.(sql|md|env|log|eml)$">
+    Require all denied
+</FilesMatch>
+<Files "router.php">
+    Require all denied
+</Files>
