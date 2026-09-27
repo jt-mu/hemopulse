@@ -1,20 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
 :root {
-  --bg-cream: #FAF7EE;
-  --navy: #192A4D;
-  --navy-button: #2B3F6C;
-  --text-muted: #5D6B82;
-  --accent-yellow: #F7D046;
-  --accent-blue: #2470D8;
-  --card-blue: #D9E8F5;
-  --card-light: #F0F5FA;
-  --white: #FFFFFF;
-  --border-light: #D4E0EE;
-  --font: 'Poppins', sans-serif;
+  --bg-cream: #faf7ee;
+  --navy: #192a4d;
+  --navy-button: #2b3f6c;
+  --text-muted: #5d6b82;
+  --accent-yellow: #f7d046;
+  --accent-blue: #2470d8;
+  --card-blue: #d9e8f5;
+  --card-light: #f0f5fa;
+  --white: #ffffff;
+  --border-light: #d4e0ee;
+  --font: "Poppins", sans-serif;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -140,7 +142,9 @@ img {
   border: none;
   cursor: pointer;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
-  transition: transform 0.15s ease, filter 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    filter 0.15s ease;
 }
 
 .btn-yellow:hover {
@@ -158,7 +162,9 @@ img {
   font-size: 0.85rem;
   cursor: pointer;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-  transition: transform 0.15s ease, filter 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    filter 0.15s ease;
 }
 
 .btn-yellow-submit:hover {
@@ -175,7 +181,9 @@ img {
   font-weight: 700;
   font-size: 0.85rem;
   cursor: pointer;
-  transition: transform 0.15s ease, opacity 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    opacity 0.15s ease;
 }
 
 .btn-navy:hover {
@@ -194,7 +202,9 @@ img {
   border-radius: 999px;
   text-decoration: none;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
-  transition: opacity 0.15s ease, transform 0.15s ease;
+  transition:
+    opacity 0.15s ease,
+    transform 0.15s ease;
 }
 
 .btn-navy-pill:hover {
@@ -374,7 +384,9 @@ img {
 .faq-answer {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.3s ease, padding 0.3s ease;
+  transition:
+    max-height 0.3s ease,
+    padding 0.3s ease;
   padding: 0 1.5rem;
   font-size: 0.9rem;
   color: var(--text-muted);
@@ -486,9 +498,13 @@ img {
 }
 
 .newsletter-box {
-  background-image: 
-    linear-gradient(135deg, rgba(198, 203, 245, 0.88), rgba(210, 225, 252, 0.85)),
-    url('../images/newsletter-bg.png');
+  background-image:
+    linear-gradient(
+      135deg,
+      rgba(198, 203, 245, 0.88),
+      rgba(210, 225, 252, 0.85)
+    ),
+    url("../images/newsletter-bg.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -600,7 +616,9 @@ a.help-category-card {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 .help-category-card:hover {
@@ -651,7 +669,7 @@ a.help-category-card {
 }
 
 .faq-scroll-container::-webkit-scrollbar-thumb {
-  background: #AEC6E0;
+  background: #aec6e0;
   border-radius: 999px;
 }
 
@@ -697,7 +715,7 @@ a.help-category-card {
 .faq-content {
   padding: 0 2rem 1.4rem;
   font-size: 0.92rem;
-  color: #4A5B79;
+  color: #4a5b79;
   line-height: 1.6;
 }
 
@@ -742,7 +760,8 @@ a.help-category-card {
     max-height: 260px;
   }
 
-  .header-nav, .frame-nav {
+  .header-nav,
+  .frame-nav {
     gap: 1.5rem;
   }
 
@@ -818,7 +837,6 @@ a.help-category-card {
   }
 }
 
-
 .auth-overlay {
   position: fixed;
   inset: 0;
@@ -842,7 +860,7 @@ a.help-category-card {
 
 .auth-modal-card {
   position: relative;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border-radius: 20px;
   width: 100%;
   max-width: 760px;
@@ -866,7 +884,7 @@ a.help-category-card {
 }
 
 .modal-art-side {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -883,7 +901,7 @@ a.help-category-card {
 }
 
 .modal-form-side {
-  background-color: #D9E8F5;
+  background-color: #d9e8f5;
   padding: 2rem 2.2rem;
   position: relative;
   display: flex;
@@ -892,7 +910,7 @@ a.help-category-card {
 }
 
 .auth-toggle-pill {
-  background-color: #192A4D;
+  background-color: #192a4d;
   border-radius: 999px;
   padding: 4px;
   display: flex;
@@ -903,7 +921,7 @@ a.help-category-card {
 .toggle-btn {
   background: none;
   border: none;
-  color: #FFFFFF;
+  color: #ffffff;
   font-family: var(--font);
   font-weight: 700;
   font-size: 0.8rem;
@@ -914,7 +932,7 @@ a.help-category-card {
 }
 
 .toggle-btn.active {
-  background-color: #6C92D8;
+  background-color: #6c92d8;
 }
 
 .auth-title {
@@ -941,8 +959,8 @@ a.help-category-card {
   width: 100%;
   padding: 0.55rem 0.9rem;
   border-radius: 8px;
-  border: 1px solid #C4D7EB;
-  background-color: #FFFFFF;
+  border: 1px solid #c4d7eb;
+  background-color: #ffffff;
   font-family: var(--font);
   font-size: 0.82rem;
   outline: none;
@@ -978,7 +996,7 @@ a.help-category-card {
   margin-top: 0.6rem;
   font-size: 0.72rem;
   font-weight: 700;
-  color: #4A608A;
+  color: #4a608a;
   text-decoration: none;
 }
 
@@ -986,7 +1004,7 @@ a.help-category-card {
 .otp-card {
   position: absolute;
   inset: 1.25rem;
-  background-color: #FEF7CC;
+  background-color: #fef7cc;
   border-radius: 14px;
   padding: 1.5rem;
   display: flex;
@@ -1026,8 +1044,8 @@ a.help-category-card {
 .otp-inputs input {
   width: 38px;
   height: 48px;
-  background: #FFFFFF;
-  border: 1px solid #E2D795;
+  background: #ffffff;
+  border: 1px solid #e2d795;
   border-radius: 6px;
   text-align: center;
   font-size: 1.2rem;
@@ -1048,7 +1066,6 @@ a.help-category-card {
     display: none;
   }
 }
-
 
 .frame-nav {
   display: flex;
@@ -1090,7 +1107,7 @@ a.help-category-card {
   top: 100%;
   right: 0;
   min-width: 170px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border-radius: 12px;
   box-shadow: 0 8px 24px rgba(25, 42, 77, 0.12);
   border: 1px solid var(--border-light);
@@ -1130,13 +1147,31 @@ a.help-category-card {
 }
 
 .slot-info {
-    margin-top: 10px;
-    font-size: 15px;
-    color: #172b55;
-    font-weight: 500;
+  margin-top: 10px;
+  font-size: 15px;
+  color: #172b55;
+  font-weight: 500;
 }
 
 .slot-info strong {
-    color: #b30000;
-    font-weight: 700;
+  color: #b30000;
+  font-weight: 700;
+}
+/* UNIVERSAL DISABLED / INCOMPLETE FORM BUTTON STYLING */
+button:disabled,
+input[type="submit"]:disabled,
+.btn-dash-yellow:disabled,
+.hp-btn-yellow:disabled {
+  background-color: #cbd5e1 !important;
+  color: #64748b !important;
+  border-color: #cbd5e1 !important;
+  cursor: not-allowed !important;
+  box-shadow: none !important;
+  transform: none !important;
+  pointer-events: none !important;
+  opacity: 0.65 !important;
+  transition:
+    background-color 0.2s ease,
+    opacity 0.2s ease,
+    color 0.2s ease;
 }

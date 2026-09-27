@@ -13,7 +13,7 @@
     <!-- RIGHT FORM SIDE -->
     <div class="hp-modal-right">
 
-      <!-- Dynamic Alert Banner -->
+      <!-- Dynamic Top Alert Banner -->
       <div id="authAlertBanner" class="hp-modal-alert hide">
         <span id="authAlertMsg">Invalid credentials.</span>
       </div>
@@ -25,132 +25,84 @@
       </div>
 
       <!-- 1. LOGIN FORM -->
-     <form id="loginForm" class="hp-modal-form" onsubmit="handleLoginSubmit(event)" novalidate>
-  <h2 class="hp-modal-title">Sign in to your account</h2>
+      <form id="loginForm" class="hp-modal-form" onsubmit="handleLoginSubmit(event)" novalidate>
+        <h2 class="hp-modal-title">Sign in to your account</h2>
 
-  <!-- Alert Banner for invalid password / account messages -->
-  <div id="authAlertBanner" class="hp-alert hp-alert-danger hide" style="display: none; margin-bottom: 12px; color: #be123c; font-size: 0.82rem; font-weight: 600;"></div>
+        <div class="hp-field">
+          <label for="loginEmail" class="hp-label">Email: <span class="hp-req">*</span></label>
+          <input type="email" id="loginEmail" name="email" class="hp-input" placeholder="name@example.com" required autocomplete="email">
+        </div>
 
-  <div class="hp-field">
-    <label for="loginEmail" class="hp-label">Email: <span class="hp-req">*</span></label>
-    <input type="email" id="loginEmail" name="email" class="hp-input" placeholder="name@example.com" required autocomplete="email">
-  </div>
+        <div class="hp-field">
+          <label for="loginPassword" class="hp-label">Password: <span class="hp-req">*</span></label>
+          <div class="hp-pw-wrap">
+            <input type="password" id="loginPassword" name="password" class="hp-input" placeholder="••••••••••••" required autocomplete="current-password">
+            <button type="button" class="hp-pw-eye" onclick="togglePasswordVisibility('loginPassword', this)">Show</button>
+          </div>
+        </div>
 
-  <div class="hp-field">
-    <label for="loginPassword" class="hp-label">Password: <span class="hp-req">*</span></label>
-    <div class="hp-pw-wrap">
-      <input type="password" id="loginPassword" name="password" class="hp-input" placeholder="••••••••••••" required autocomplete="current-password">
-      <button type="button" class="hp-pw-eye" onclick="togglePasswordVisibility('loginPassword', this)">Show</button>
-    </div>
-  </div>
-
-  <button type="submit" class="hp-btn-yellow">Sign in</button>
-</form>
+        <button type="submit" class="hp-btn-yellow">Sign in</button>
+      </form>
 
       <!-- 2. REGISTER FORM -->
-     <form id="registerForm" class="hp-modal-form" onsubmit="handleRegisterSubmit(event)" novalidate>
-  <h2 class="hp-modal-title">Create your donor account</h2>
+      <form id="registerForm" class="hp-modal-form" onsubmit="handleRegisterSubmit(event)" novalidate>
+        <h2 class="hp-modal-title">Create your donor account</h2>
 
-  <div class="hp-field">
-    <label for="regEmail" class="hp-label">Email: <span class="hp-req">*</span></label>
-    <input type="email" id="regEmail" name="email" class="hp-input" placeholder="name@example.com" required autocomplete="email">
-  </div>
+        <div class="hp-field">
+          <label for="regEmail" class="hp-label">Email: <span class="hp-req">*</span></label>
+          <input type="email" id="regEmail" name="email" class="hp-input" placeholder="name@example.com" required autocomplete="email">
+        </div>
 
-  <div class="hp-field">
-    <label for="regFirstName" class="hp-label">First Name: <span class="hp-req">*</span></label>
-    <input type="text" id="regFirstName" name="first_name" class="hp-input" placeholder="John" required autocomplete="given-name">
-  </div>
+        <div class="hp-field">
+          <label for="regFirstName" class="hp-label">First Name: <span class="hp-req">*</span></label>
+          <input type="text" id="regFirstName" name="first_name" class="hp-input" placeholder="John" required autocomplete="given-name">
+        </div>
 
-  <div class="hp-field">
-    <label for="regLastName" class="hp-label">Last Name: <span class="hp-req">*</span></label>
-    <input type="text" id="regLastName" name="last_name" class="hp-input" placeholder="Doe" required autocomplete="family-name">
-  </div>
+        <div class="hp-field">
+          <label for="regLastName" class="hp-label">Last Name: <span class="hp-req">*</span></label>
+          <input type="text" id="regLastName" name="last_name" class="hp-input" placeholder="Doe" required autocomplete="family-name">
+        </div>
 
-  <div class="hp-field">
-    <label for="regMiddleName" class="hp-label">Middle name (optional):</label>
-    <input type="text" id="regMiddleName" name="middle_name" class="hp-input" placeholder="" autocomplete="additional-name">
-  </div>
+        <div class="hp-field">
+          <label for="regMiddleName" class="hp-label">Middle name (optional):</label>
+          <input type="text" id="regMiddleName" name="middle_name" class="hp-input" placeholder="" autocomplete="additional-name">
+        </div>
 
-  <div class="hp-field">
-    <label for="regPassword" class="hp-label">Password: <span class="hp-req">*</span></label>
-    <div class="hp-pw-wrap">
-      <input type="password" id="regPassword" name="password" class="hp-input" placeholder="••••••••••••" required minlength="12" autocomplete="new-password" oninput="checkPasswordStrength(this.value)" onkeyup="checkPasswordStrength(this.value)">
-      <button type="button" class="hp-pw-eye" onclick="togglePasswordVisibility('regPassword', this)">Show</button>
-    </div>
+        <div class="hp-field">
+          <label for="regPassword" class="hp-label">Password: <span class="hp-req">*</span></label>
+          <div class="hp-pw-wrap">
+            <input type="password" id="regPassword" name="password" class="hp-input" placeholder="••••••••••••" required minlength="12" autocomplete="new-password" oninput="checkPasswordStrength(this.value)">
+            <button type="button" class="hp-pw-eye" onclick="togglePasswordVisibility('regPassword', this)">Show</button>
+          </div>
 
-    <!-- DYNAMIC PASSWORD STRENGTH METER -->
-    <div id="hpStrengthMeter" class="hp-strength-box" style="display: none; margin-top: 6px;">
-      <div class="hp-strength-track" style="width: 100%; height: 6px; background-color: rgba(255, 255, 255, 0.7); border-radius: 999px; overflow: hidden;">
-        <div id="hpMeterBarFill" style="height: 100%; width: 0%; border-radius: 999px; transition: width 0.25s ease, background-color 0.25s ease;"></div>
-      </div>
-      <div class="hp-strength-info" style="display: flex; justify-content: flex-end; align-items: center; gap: 5px; margin-top: 4px;">
-        <span class="hp-strength-text" style="font-size: 0.72rem; color: #4A5B79; font-weight: 600;">Strength:</span>
-        <span id="hpStrengthLabel" class="hp-strength-tag" style="font-size: 0.75rem; font-weight: 800;">Weak</span>
-      </div>
-    </div>
+          <!-- DYNAMIC PASSWORD STRENGTH METER -->
+          <div id="hpStrengthMeter" class="hp-strength-box" style="display: none; margin-top: 6px;">
+            <div class="hp-strength-track" style="width: 100%; height: 6px; background-color: rgba(255, 255, 255, 0.7); border-radius: 999px; overflow: hidden;">
+              <div id="hpMeterBarFill" style="height: 100%; width: 0%; border-radius: 999px; transition: width 0.25s ease, background-color 0.25s ease;"></div>
+            </div>
+            <div class="hp-strength-info" style="display: flex; justify-content: flex-end; align-items: center; gap: 5px; margin-top: 4px;">
+              <span class="hp-strength-text" style="font-size: 0.72rem; color: #4A5B79; font-weight: 600;">Strength:</span>
+              <span id="hpStrengthLabel" class="hp-strength-tag" style="font-size: 0.75rem; font-weight: 800;">Weak</span>
+            </div>
+          </div>
 
-    <span class="hp-hint">Use a password of at least 12 characters.</span>
-  </div>
+          <span class="hp-hint">Use a password of at least 12 characters.</span>
+        </div>
 
- <div class="hp-terms">
-  <input type="checkbox" id="termsCheck" name="terms" class="hp-checkbox" required>
-  <label for="termsCheck">
-    I agree to the 
-    <a href="javascript:void(0)" class="hp-terms-link" onclick="openTermsModal()">Terms of Service</a> 
-    and 
-    <a href="javascript:void(0)" class="hp-terms-link" onclick="openPrivacyModal()">Clinical Privacy Policy</a>. 
-    <span class="hp-req">*</span>
-  </label>
-  <!-- ACCESSIBLE TERMS & PRIVACY READER MODAL -->
-<div id="termsReaderModal" class="hp-terms-overlay hide" style="display: none;">
-  <div class="hp-terms-dialog">
-    <div class="hp-terms-header">
-      <h3 id="termsDialogTitle" class="hp-terms-title">Terms of Service & Clinical Agreement</h3>
-      <button type="button" class="hp-terms-close" onclick="closeTermsModal()" aria-label="Close dialog">&times;</button>
-    </div>
-    
-    <div id="termsDialogBody" class="hp-terms-content">
-      <p class="hp-terms-lead">By creating an account on <strong>HemoPulse Blood Information System</strong>, you acknowledge and agree to the following protocols:</p>
+        <div class="hp-terms">
+          <input type="checkbox" id="termsCheck" name="terms" class="hp-checkbox" required>
+          <label for="termsCheck">
+            I agree to the 
+            <a href="javascript:void(0)" class="hp-terms-link" onclick="openTermsModal()">Terms of Service</a> 
+            and 
+            <a href="javascript:void(0)" class="hp-terms-link" onclick="openPrivacyModal()">Clinical Privacy Policy</a>. 
+            <span class="hp-req">*</span>
+          </label>
+        </div>
 
-      <h4>1. Voluntary Participation & Accurate Information</h4>
-      <p>You confirm that all personal, contact, and medical screening information submitted during registration and pre-donation interviews is accurate, truthful, and provided voluntarily.</p>
-
-      <h4>2. Blood Testing & Clinical Screening</h4>
-      <p>In compliance with international transfusion safety standards and Republic Act No. 7719 (National Blood Services Act), donated blood will undergo mandatory laboratory screening for transfusion-transmissible infections (TTIs) including HIV, Hepatitis B, Hepatitis C, Syphilis, and Malaria.</p>
-
-      <h4>3. Health Data Privacy & Confidentiality</h4>
-      <p>Your records are encrypted and maintained in strict confidence under international data security practices and the Data Privacy Act of 2012. Your health metrics are only accessible by authorized medical technologists, phlebotomists, and licensed hospital blood bank coordinators.</p>
-
-      <h4>4. Emergency Alerts & Communications</h4>
-      <p>By opting in, you authorize HemoPulse to transmit verification codes, scheduled blood drive reminders, and critical emergency blood shortage notifications to your verified email or mobile contact.</p>
-    </div>
-
-    <div class="hp-terms-footer">
-      <button type="button" class="hp-btn-yellow" onclick="acceptTermsAndClose()">I Understand & Accept</button>
-    </div>
-   <!-- ACCESSIBLE TERMS & PRIVACY READER MODAL -->
-<div id="termsReaderModal" class="hp-terms-overlay hide" style="display: none;">
-  <div class="hp-terms-dialog">
-    <div class="hp-terms-header">
-      <h3 id="termsDialogTitle" class="hp-terms-title">Terms of Service & Clinical Agreement</h3>
-      <button type="button" class="hp-terms-close" onclick="closeTermsModal()" aria-label="Close dialog">&times;</button>
-    </div>
-    
-    <div id="termsDialogBody" class="hp-terms-content">
-      <!-- Injected dynamically by openDocModal() -->
-    </div>
-
-    <div class="hp-terms-footer">
-      <button type="button" class="hp-btn-yellow" onclick="acceptTermsAndClose()">I Understand & Accept</button>
-    </div>
-  </div>
-</div> 
-  </div>
-</div>
-</div>
-
-  <button type="submit" class="hp-btn-yellow">Sign up</button>
-</form>
+        <!-- SINGLE SUBMIT BUTTON -->
+        <button type="submit" id="regSubmitBtn" class="hp-btn-yellow" disabled>Sign up</button>
+      </form>
 
       <!-- 3. 6-DIGIT EMAIL CODE POPUP (Yellow Card) -->
       <div id="otpPopup" class="hp-otp-popup hide">
@@ -178,6 +130,25 @@
 
     </div>
   </div>
+
+  <!-- 4. ACCESSIBLE TERMS & PRIVACY READER MODAL (AT ROOT DIALOG LEVEL) -->
+  <div id="termsReaderModal" class="hp-terms-overlay hide" style="display: none;">
+    <div class="hp-terms-dialog">
+      <div class="hp-terms-header">
+        <h3 id="termsDialogTitle" class="hp-terms-title">Terms of Service & Clinical Agreement</h3>
+        <button type="button" class="hp-terms-close" onclick="closeTermsModal()" aria-label="Close dialog">&times;</button>
+      </div>
+      
+      <div id="termsDialogBody" class="hp-terms-content">
+        <!-- Dynamically injected via openDocModal() in modal.js -->
+      </div>
+
+      <div class="hp-terms-footer">
+        <button type="button" class="hp-btn-yellow" style="width: auto; padding: 0 1.5rem;" onclick="acceptTermsAndClose()">I Understand & Accept</button>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <style>
@@ -348,45 +319,6 @@
   user-select: none;
 }
 
-/* STRENGTH METER */
-.hp-strength-box {
-  margin-top: 5px;
-}
-.hp-strength-track {
-  width: 100%;
-  height: 5px;
-  background-color: rgba(255, 255, 255, 0.65);
-  border-radius: 999px;
-  overflow: hidden;
-}
-.hp-strength-bar {
-  height: 100%;
-  width: 0%;
-  border-radius: 999px;
-  transition: width 0.25s ease, background-color 0.25s ease;
-}
-.hp-strength-info {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 4px;
-  margin-top: 3px;
-}
-.hp-strength-text {
-  font-size: 0.68rem;
-  color: #4A5B79;
-  font-weight: 600;
-}
-.hp-strength-tag {
-  font-size: 0.72rem;
-  font-weight: 800;
-}
-
-/* Dynamic Strength Colors */
-.hp-str-weak { background-color: #e11d48 !important; color: #be123c !important; }
-.hp-str-med { background-color: #f59e0b !important; color: #b45309 !important; }
-.hp-str-strong { background-color: #10b981 !important; color: #047857 !important; }
-
 .hp-hint {
   display: block;
   font-size: 0.7rem;
@@ -415,6 +347,11 @@
   cursor: pointer;
   user-select: none;
 }
+.hp-terms-link {
+  color: #1877F2;
+  text-decoration: underline;
+  font-weight: 700;
+}
 
 /* YELLOW FIGMA PILL BUTTON */
 .hp-btn-yellow {
@@ -429,24 +366,25 @@
   font-weight: 800;
   cursor: pointer;
   box-shadow: 0 3px 8px rgba(25, 42, 77, 0.12);
-  transition: filter 0.15s ease, transform 0.1s ease;
+  transition: background-color 0.2s ease, opacity 0.2s ease, transform 0.1s ease;
 }
-.hp-btn-yellow:hover {
+.hp-btn-yellow:hover:not(:disabled) {
   filter: brightness(0.96);
   transform: translateY(-1px);
 }
 
-.hp-sub-actions {
-  text-align: center;
-  margin: 0.5rem 0 0.9rem;
+/* DISABLED / INCOMPLETE FORM STATE */
+.hp-btn-yellow:disabled,
+.hp-btn-yellow[disabled] {
+  background-color: #CBD5E1 !important;
+  color: #64748B !important;
+  border: 1px solid #CBD5E1 !important;
+  cursor: not-allowed !important;
+  box-shadow: none !important;
+  transform: none !important;
+  pointer-events: none !important;
+  opacity: 0.65;
 }
-.hp-forgot-link {
-  font-size: 0.74rem;
-  font-weight: 700;
-  color: #274C77;
-  text-decoration: none;
-}
-.hp-forgot-link:hover { text-decoration: underline; }
 
 /* OTP POPUP CARD */
 .hp-otp-popup {
@@ -495,10 +433,6 @@
 }
 .hp-modal-alert.hide { display: none !important; }
 
-@media (max-width: 720px) {
-  .hp-modal-card { grid-template-columns: 1fr; }
-  .hp-modal-left { display: none; }
-}
 /* DEMO & MOBILE TAP-TO-FILL BADGE */
 .hp-demo-otp-badge {
   display: inline-flex;
@@ -535,6 +469,7 @@
   color: #1877F2;
   text-decoration: underline;
 }
+
 /* TERMS & PRIVACY VIEWER OVERLAY */
 .hp-terms-overlay {
   position: absolute;
@@ -600,70 +535,9 @@
   justify-content: flex-end;
   background-color: #F8FAFC;
 }
-.hp-terms-link {
-  color: #1877F2;
-  text-decoration: underline;
-  font-weight: 600;
+
+@media (max-width: 720px) {
+  .hp-modal-card { grid-template-columns: 1fr; }
+  .hp-modal-left { display: none; }
 }
 </style>
-
-<script>
-// --- SELF-CONTAINED AUTH MODAL FUNCTIONS ---
-
-function togglePasswordVisibility(fieldId, btnElement) {
-  var input = document.getElementById(fieldId);
-  var btn = btnElement || (window.event ? window.event.currentTarget : null);
-  if (!input) return;
-
-  if (input.type === 'password') {
-    input.type = 'text';
-    if (btn) btn.textContent = 'Hide';
-  } else {
-    input.type = 'password';
-    if (btn) btn.textContent = 'Show';
-  }
-}
-
-function checkPasswordStrength(password) {
-  var meterWrap = document.getElementById('hpStrengthMeter');
-  var barFill = document.getElementById('hpMeterBarFill');
-  var label = document.getElementById('hpStrengthLabel');
-
-  if (!meterWrap || !barFill || !label) return;
-
-  if (!password || password.length === 0) {
-    meterWrap.style.setProperty('display', 'none', 'important');
-    return;
-  }
-
-  meterWrap.style.setProperty('display', 'block', 'important');
-
-  var score = 0;
-  if (password.length >= 8) score += 1;
-  if (password.length >= 12) score += 1;
-  if (/[a-z]/.test(password) && /[A-Z]/.test(password)) score += 1;
-  if (/\d/.test(password)) score += 1;
-  if (/[^a-zA-Z0-9]/.test(password)) score += 1;
-
-  if (score <= 2) {
-    barFill.style.width = '33%';
-    barFill.style.setProperty('background-color', '#e11d48', 'important'); // Red
-    label.style.setProperty('color', '#be123c', 'important');
-    label.textContent = 'Weak';
-  } else if (score === 3 || score === 4) {
-    barFill.style.width = '66%';
-    barFill.style.setProperty('background-color', '#f59e0b', 'important'); // Amber / Orange
-    label.style.setProperty('color', '#b45309', 'important');
-    label.textContent = 'Medium';
-  } else {
-    barFill.style.width = '100%';
-    barFill.style.setProperty('background-color', '#10b981', 'important'); // Green
-    label.style.setProperty('color', '#047857', 'important');
-    label.textContent = 'Strong';
-  }
-}
-
-// Make sure functions are attached to window globally
-window.togglePasswordVisibility = togglePasswordVisibility;
-window.checkPasswordStrength = checkPasswordStrength;
-</script>

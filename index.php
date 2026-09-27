@@ -126,10 +126,12 @@
   </div>
 
   <!-- SCRIPTS -->
-  
+  <script src="js/form-guard.js?v=<?= time(); ?>"></script>
+<script src="js/modal.js?v=<?= time(); ?>"></script>
   <script src="js/main.js"></script>
   <script src="js/modal.js"></script>
 <script src="js/navigation.js"></script>
+
 <?php include __DIR__ . '/includes/footer.php'; ?>
 </body>
 </html>

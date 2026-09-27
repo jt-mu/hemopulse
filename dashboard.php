@@ -5,15 +5,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HemoPulse - Account Dashboard</title>
-  <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap-grid.min.css"><link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap-grid.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css?v=<?= time(); ?>">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/app.css">
-<link rel="stylesheet" href="css/design.css?v=4"></head>
+  <link rel="stylesheet" href="css/design.css?v=4">
+</head>
 <body class="dash-page-body">
 
   <div class="dash-wrapper">
     
+    <!-- LEFT SIDEBAR -->
     <aside class="dash-sidebar">
       <div class="dash-logo">
         <a href="index.php">
@@ -35,37 +38,56 @@
           My Donations
         </a>
       </nav>
-
-      <form method="post" action="backend/auth_handler.php"><input type="hidden" name="csrf" value="<?= h(csrfToken()) ?>"><input type="hidden" name="action" value="logout"><button type="submit" class="nav-signout">Sign out</button></form>
+      
+      <!-- LOGOUT BUTTON PINNED TO SIDEBAR BOTTOM -->
+      <form method="post" action="backend/auth_handler.php" class="nav-signout-form">
+        <input type="hidden" name="csrf" value="<?= h(csrfToken()) ?>">
+        <input type="hidden" name="action" value="logout">
+        <button type="submit" class="nav-signout">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          Sign out
+        </button>
+      </form>
     </aside>
 
-   
-    <main class="dash-content"><?php showFlash(); ?>
+    <!-- RIGHT MAIN CONTENT -->
+    <main class="dash-content">
+      <?php showFlash(); ?>
 
       <!-- TAB 1: PROFILE SETTINGS -->
       <section id="view-profile" class="view-panel <?= $view !== 'profile' ? 'hide' : '' ?>">
         <div class="avatar-center">
           <div class="avatar-circle">
-<?php if (!empty($user['profile_image'])): ?><img class="profile-avatar" src="profile_photo.php" alt="Your profile picture"><?php else: ?>
-            <svg viewBox="0 0 24 24" fill="#192A4D"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg><?php endif; ?>
+            <?php if (!empty($user['profile_image'])): ?>
+              <img class="profile-avatar" src="profile_photo.php" alt="Your profile picture">
+            <?php else: ?>
+              <svg viewBox="0 0 24 24" fill="#192A4D"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+            <?php endif; ?>
           </div>
         </div>
 
         <?php include __DIR__ . '/includes/account_overview.php'; ?>
       </section>
-
       
       <!-- TAB 2: ELIGIBILITY SCREENER -->
-      <section id="view-eligibility" class="view-panel <?= $view !== 'eligibility' ? 'hide' : '' ?>"><?php include __DIR__ . '/includes/eligibility_panel.php'; ?></section>
-<section id="view-donations" class="view-panel <?= $view !== 'donations' ? 'hide' : '' ?>"><?php include __DIR__ . '/includes/donation_history.php'; ?></section>
+      <section id="view-eligibility" class="view-panel <?= $view !== 'eligibility' ? 'hide' : '' ?>">
+        <?php include __DIR__ . '/includes/eligibility_panel.php'; ?>
+      </section>
+
+      <!-- TAB 3: DONATION HISTORY -->
+      <section id="view-donations" class="view-panel <?= $view !== 'donations' ? 'hide' : '' ?>">
+        <?php include __DIR__ . '/includes/donation_history.php'; ?>
+      </section>
 
     </main>
   </div>
+<script src="js/form-guard.js?v=<?= time(); ?>"></script>
+<script src="js/donor-dashboard.js"></script>
+<script src="js/eligibility.js"></script>
+  <script src="js/donor-dashboard.js"></script>
+  <script src="js/eligibility.js"></script>
 
-
-<script src="js/donor-dashboard.js"></script><script src="js/eligibility.js"></script>
-
-<!-- Prevent viewing cached dashboard via browser back button after logout -->
+  <!-- Prevent viewing cached dashboard via browser back button after logout -->
   <script>
     window.addEventListener('pageshow', function (event) {
       const isBackForward = event.persisted || 
@@ -77,8 +99,5 @@
       }
     });
   </script>
-</body>
-</html>
-
 </body>
 </html>

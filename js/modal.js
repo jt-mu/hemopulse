@@ -12,6 +12,9 @@ function openAuthModal(tab = "register") {
   modal.style.setProperty("display", "flex", "important");
 
   switchAuthTab(tab);
+
+  // Immediately evaluate button state on open
+  setTimeout(validateRegistrationForm, 50);
 }
 
 function closeAuthModal() {
@@ -68,6 +71,9 @@ function switchAuthTab(tab) {
     }
     if (tabLogin) tabLogin.classList.remove("active");
     if (tabReg) tabReg.classList.add("active");
+
+    // Evaluate registration button state on tab switch
+    setTimeout(validateRegistrationForm, 50);
   }
 }
 
@@ -99,41 +105,44 @@ function checkPasswordStrength(password) {
     return;
   }
 
-  // Force show the strength container
   meterWrap.style.setProperty("display", "block", "important");
 
   let score = 0;
 
-  // Criteria
   if (password.length >= 8) score += 1;
   if (password.length >= 12) score += 1;
-  if (/[a-z]/.test(password) && /[A-Z]/.test(password)) score += 1; // Mixed case
-  if (/\d/.test(password)) score += 1; // Digits
-  if (/[^a-zA-Z0-9]/.test(password)) score += 1; // Special characters
+  if (/[a-z]/.test(password) && /[A-Z]/.test(password)) score += 1;
+  if (/\d/.test(password)) score += 1;
+  if (/[^a-zA-Z0-9]/.test(password)) score += 1;
 
   if (score <= 2) {
     barFill.style.width = "33%";
-    barFill.style.setProperty("background-color", "#e11d48", "important"); // Red
+    barFill.style.setProperty("background-color", "#e11d48", "important");
     label.style.setProperty("color", "#be123c", "important");
     label.textContent = "Weak";
   } else if (score === 3 || score === 4) {
     barFill.style.width = "66%";
-    barFill.style.setProperty("background-color", "#f59e0b", "important"); // Amber / Orange
+    barFill.style.setProperty("background-color", "#f59e0b", "important");
     label.style.setProperty("color", "#b45309", "important");
     label.textContent = "Medium";
   } else {
     barFill.style.width = "100%";
-    barFill.style.setProperty("background-color", "#10b981", "important"); // Green
+    barFill.style.setProperty("background-color", "#10b981", "important");
     label.style.setProperty("color", "#047857", "important");
     label.textContent = "Strong";
   }
+
+  // Also trigger validation whenever password changes
+  validateRegistrationForm();
 }
 
 // Registration Dispatch to Backend (Generates & Sends Real OTP)
 async function handleRegisterSubmit(e) {
   e.preventDefault();
   const form = e.target;
-  const submitBtn = form.querySelector('button[type="submit"]');
+  const submitBtn =
+    document.getElementById("regSubmitBtn") ||
+    form.querySelector('button[type="submit"]');
 
   const terms = form.querySelector('input[name="terms"]');
   if (terms && !terms.checked) {
@@ -164,7 +173,6 @@ async function handleRegisterSubmit(e) {
     const result = await response.json();
 
     if (result.status === "success") {
-      // Store OTP and populate the presentation badge
       if (result.demo_otp) {
         currentGeneratedOtp = String(result.demo_otp);
         const demoVal = document.getElementById("demoOtpValue");
@@ -191,13 +199,13 @@ async function handleRegisterSubmit(e) {
     alert("Server error dispatching verification code.");
   } finally {
     if (submitBtn) {
-      submitBtn.disabled = false;
       submitBtn.textContent = "Sign up";
+      validateRegistrationForm();
     }
   }
 }
 
-// Auto-advance cursor through the 6 OTP input boxes
+// Auto-advance cursor through OTP boxes
 function focusNextOtp(current, index) {
   const inputs = document.querySelectorAll(".hp-otp-boxes input");
   if (current.value.length === 1 && inputs[index]) {
@@ -205,7 +213,7 @@ function focusNextOtp(current, index) {
   }
 }
 
-// Tap-To-Fill Helper for Mobile and Defense Demonstrations
+// Presentation Tap-To-Fill Helper
 function autoFillOtp() {
   if (!currentGeneratedOtp || currentGeneratedOtp.length !== 6) return;
   const inputs = document.querySelectorAll(".hp-otp-boxes input");
@@ -216,7 +224,7 @@ function autoFillOtp() {
   if (verifyBtn) verifyBtn.focus();
 }
 
-// Verifies OTP with backend, saves account to DB, and authenticates session
+// OTP Verification & Redirect
 async function verifyOtpAndRedirect() {
   const inputs = document.querySelectorAll(".hp-otp-boxes input");
   let fullCode = "";
@@ -266,6 +274,7 @@ async function verifyOtpAndRedirect() {
   }
 }
 
+// Login Handler
 async function handleLoginSubmit(e) {
   e.preventDefault();
   const form = e.target;
@@ -314,27 +323,6 @@ async function handleLoginSubmit(e) {
   }
 }
 
-function openTermsModal() {
-  const modal = document.getElementById("termsReaderModal");
-  if (modal) {
-    modal.classList.remove("hide");
-    modal.style.setProperty("display", "flex", "important");
-  }
-}
-
-function closeTermsModal() {
-  const modal = document.getElementById("termsReaderModal");
-  if (modal) {
-    modal.classList.add("hide");
-    modal.style.setProperty("display", "none", "important");
-  }
-}
-
-function acceptTermsAndClose() {
-  const check = document.getElementById("termsCheck");
-  if (check) check.checked = true;
-  closeTermsModal();
-}
 // --- CLINICAL LEGAL & PRIVACY POLICY CONTENT TEMPLATES ---
 const LEGAL_DOCS = {
   terms: {
@@ -375,7 +363,6 @@ const LEGAL_DOCS = {
   },
 };
 
-// Open Dialog dynamically with chosen document
 function openDocModal(docType) {
   const modal = document.getElementById("termsReaderModal");
   const titleElem = document.getElementById("termsDialogTitle");
@@ -409,21 +396,81 @@ function closeTermsModal() {
 
 function acceptTermsAndClose() {
   const check = document.getElementById("termsCheck");
-  if (check) check.checked = true;
+  if (check) {
+    check.checked = true;
+  }
   closeTermsModal();
+  validateRegistrationForm();
 }
 
-// Bind functions to window so inline onclick handlers always find them
-window.openTermsModal = openTermsModal;
-window.openPrivacyModal = openPrivacyModal;
-window.openDocModal = openDocModal;
-window.closeTermsModal = closeTermsModal;
-window.acceptTermsAndClose = acceptTermsAndClose;
-window.openTermsModal = openTermsModal;
-window.closeTermsModal = closeTermsModal;
-window.acceptTermsAndClose = acceptTermsAndClose;
+// REAL-TIME REGISTRATION FORM VALIDATOR (REACTIVE UI STATE)
+function validateRegistrationForm() {
+  const form = document.getElementById("registerForm");
+  if (!form) return;
 
-// Bind functions to window to avoid scope collisions
+  const submitBtn =
+    document.getElementById("regSubmitBtn") ||
+    form.querySelector('button[type="submit"]');
+  if (!submitBtn) return;
+
+  const firstName = (
+    form.querySelector('input[name="first_name"]')?.value || ""
+  ).trim();
+  const lastName = (
+    form.querySelector('input[name="last_name"]')?.value || ""
+  ).trim();
+  const email = (form.querySelector('input[name="email"]')?.value || "").trim();
+  const password = form.querySelector('input[name="password"]')?.value || "";
+  const terms = Boolean(form.querySelector('input[name="terms"]')?.checked);
+
+  // Email format check
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const isValid =
+    firstName.length > 0 &&
+    lastName.length > 0 &&
+    emailRegex.test(email) &&
+    password.length >= 12 &&
+    terms === true;
+
+  if (isValid) {
+    submitBtn.removeAttribute("disabled");
+    submitBtn.disabled = false;
+    submitBtn.style.setProperty("background-color", "#FAC710", "important");
+    submitBtn.style.setProperty("color", "#192a4d", "important");
+    submitBtn.style.setProperty("border-color", "#FAC710", "important");
+    submitBtn.style.setProperty("cursor", "pointer", "important");
+    submitBtn.style.setProperty("opacity", "1", "important");
+    submitBtn.style.setProperty("pointer-events", "auto", "important");
+  } else {
+    submitBtn.setAttribute("disabled", "true");
+    submitBtn.disabled = true;
+    submitBtn.style.setProperty("background-color", "#CBD5E1", "important");
+    submitBtn.style.setProperty("color", "#64748B", "important");
+    submitBtn.style.setProperty("border-color", "#CBD5E1", "important");
+    submitBtn.style.setProperty("cursor", "not-allowed", "important");
+    submitBtn.style.setProperty("opacity", "0.65", "important");
+    submitBtn.style.setProperty("pointer-events", "none", "important");
+  }
+}
+
+// Attach listener on input/change events
+function initRegistrationValidation() {
+  const regForm = document.getElementById("registerForm");
+  if (!regForm) return;
+
+  regForm.removeEventListener("input", validateRegistrationForm);
+  regForm.removeEventListener("change", validateRegistrationForm);
+
+  regForm.addEventListener("input", validateRegistrationForm);
+  regForm.addEventListener("change", validateRegistrationForm);
+
+  validateRegistrationForm();
+}
+
+document.addEventListener("DOMContentLoaded", initRegistrationValidation);
+
+// Expose handlers globally to window
 window.openAuthModal = openAuthModal;
 window.closeAuthModal = closeAuthModal;
 window.switchAuthTab = switchAuthTab;
@@ -434,3 +481,10 @@ window.focusNextOtp = focusNextOtp;
 window.autoFillOtp = autoFillOtp;
 window.verifyOtpAndRedirect = verifyOtpAndRedirect;
 window.handleLoginSubmit = handleLoginSubmit;
+window.openDocModal = openDocModal;
+window.openTermsModal = openTermsModal;
+window.openPrivacyModal = openPrivacyModal;
+window.closeTermsModal = closeTermsModal;
+window.acceptTermsAndClose = acceptTermsAndClose;
+window.validateRegistrationForm = validateRegistrationForm;
+window.initRegistrationValidation = initRegistrationValidation;
