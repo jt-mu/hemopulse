@@ -1,4 +1,7 @@
-// js/modal.js - Modal controller and Password Strength Evaluator
+// js/modal.js - Modal controller, Password Strength Evaluator, & Mobile OTP Handler
+
+// Client-side cache for generated demo OTP
+let currentGeneratedOtp = "";
 
 function openAuthModal(tab = "register") {
   const modal = document.getElementById("authModal");
@@ -68,7 +71,7 @@ function switchAuthTab(tab) {
   }
 }
 
-// Bulletproof Password Show / Hide Toggle
+// Password Show / Hide Toggle
 function togglePasswordVisibility(fieldId, btnElement) {
   const input = document.getElementById(fieldId);
   const btn = btnElement || (window.event ? window.event.currentTarget : null);
@@ -83,7 +86,7 @@ function togglePasswordVisibility(fieldId, btnElement) {
   }
 }
 
-// Bulletproof Real-Time Password Strength Evaluator
+// Real-Time Password Strength Evaluator
 function checkPasswordStrength(password) {
   const meterWrap = document.getElementById("hpStrengthMeter");
   const barFill = document.getElementById("hpMeterBarFill");
@@ -92,12 +95,12 @@ function checkPasswordStrength(password) {
   if (!meterWrap || !barFill || !label) return;
 
   if (!password || password.length === 0) {
-    meterWrap.style.display = "none";
+    meterWrap.style.setProperty("display", "none", "important");
     return;
   }
 
   // Force show the strength container
-  meterWrap.style.display = "block";
+  meterWrap.style.setProperty("display", "block", "important");
 
   let score = 0;
 
@@ -110,23 +113,23 @@ function checkPasswordStrength(password) {
 
   if (score <= 2) {
     barFill.style.width = "33%";
-    barFill.style.backgroundColor = "#e11d48"; // Red
-    label.style.color = "#be123c";
+    barFill.style.setProperty("background-color", "#e11d48", "important"); // Red
+    label.style.setProperty("color", "#be123c", "important");
     label.textContent = "Weak";
   } else if (score === 3 || score === 4) {
     barFill.style.width = "66%";
-    barFill.style.backgroundColor = "#f59e0b"; // Amber / Orange
-    label.style.color = "#b45309";
+    barFill.style.setProperty("background-color", "#f59e0b", "important"); // Amber / Orange
+    label.style.setProperty("color", "#b45309", "important");
     label.textContent = "Medium";
   } else {
     barFill.style.width = "100%";
-    barFill.style.backgroundColor = "#10b981"; // Green
-    label.style.color = "#047857";
+    barFill.style.setProperty("background-color", "#10b981", "important"); // Green
+    label.style.setProperty("color", "#047857", "important");
     label.textContent = "Strong";
   }
 }
 
-// REAL BACKEND REGISTRATION DISPATCH
+// Registration Dispatch to Backend (Generates & Sends Real OTP)
 async function handleRegisterSubmit(e) {
   e.preventDefault();
   const form = e.target;
@@ -161,8 +164,11 @@ async function handleRegisterSubmit(e) {
     const result = await response.json();
 
     if (result.status === "success") {
-      // Demo safety: logs code in console so you're never locked out
+      // Store OTP and populate the presentation badge
       if (result.demo_otp) {
+        currentGeneratedOtp = String(result.demo_otp);
+        const demoVal = document.getElementById("demoOtpValue");
+        if (demoVal) demoVal.textContent = currentGeneratedOtp;
         console.log(
           "%c[HemoPulse OTP Code]: " + result.demo_otp,
           "color: #10b981; font-weight: bold; font-size: 15px;",
@@ -191,6 +197,7 @@ async function handleRegisterSubmit(e) {
   }
 }
 
+// Auto-advance cursor through the 6 OTP input boxes
 function focusNextOtp(current, index) {
   const inputs = document.querySelectorAll(".hp-otp-boxes input");
   if (current.value.length === 1 && inputs[index]) {
@@ -198,7 +205,18 @@ function focusNextOtp(current, index) {
   }
 }
 
-// REAL BACKEND OTP VERIFICATION
+// Tap-To-Fill Helper for Mobile and Defense Demonstrations
+function autoFillOtp() {
+  if (!currentGeneratedOtp || currentGeneratedOtp.length !== 6) return;
+  const inputs = document.querySelectorAll(".hp-otp-boxes input");
+  inputs.forEach((input, idx) => {
+    input.value = currentGeneratedOtp[idx] || "";
+  });
+  const verifyBtn = document.querySelector(".hp-btn-otp");
+  if (verifyBtn) verifyBtn.focus();
+}
+
+// Verifies OTP with backend, saves account to DB, and authenticates session
 async function verifyOtpAndRedirect() {
   const inputs = document.querySelectorAll(".hp-otp-boxes input");
   let fullCode = "";
@@ -250,5 +268,60 @@ async function verifyOtpAndRedirect() {
 
 async function handleLoginSubmit(e) {
   e.preventDefault();
-  window.location.href = "dashboard.php?view=donations";
+  const form = e.target;
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const alertBanner = document.getElementById("authAlertBanner");
+
+  if (alertBanner) {
+    alertBanner.classList.add("hide");
+    alertBanner.style.setProperty("display", "none", "important");
+  }
+
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Signing in...";
+  }
+
+  try {
+    const formData = new FormData(form);
+
+    const response = await fetch("backend/login_handler.php", {
+      method: "POST",
+      body: formData,
+    });
+
+    const result = await response.json();
+
+    if (result.status === "success") {
+      window.location.href = result.redirect || "dashboard.php?view=donations";
+    } else {
+      if (alertBanner) {
+        alertBanner.textContent = result.message || "Invalid credentials.";
+        alertBanner.classList.remove("hide");
+        alertBanner.style.setProperty("display", "block", "important");
+      } else {
+        alert(result.message || "Invalid credentials.");
+      }
+    }
+  } catch (err) {
+    console.error("Login request error:", err);
+    alert("Network or server error during sign in.");
+  } finally {
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Sign in";
+    }
+  }
 }
+
+// Bind functions to window to avoid scope collisions
+window.openAuthModal = openAuthModal;
+window.closeAuthModal = closeAuthModal;
+window.switchAuthTab = switchAuthTab;
+window.togglePasswordVisibility = togglePasswordVisibility;
+window.checkPasswordStrength = checkPasswordStrength;
+window.handleRegisterSubmit = handleRegisterSubmit;
+window.focusNextOtp = focusNextOtp;
+window.autoFillOtp = autoFillOtp;
+window.verifyOtpAndRedirect = verifyOtpAndRedirect;
+window.handleLoginSubmit = handleLoginSubmit;

@@ -25,28 +25,27 @@
       </div>
 
       <!-- 1. LOGIN FORM -->
-      <form id="loginForm" class="hp-modal-form hide" onsubmit="handleLoginSubmit(event)" novalidate>
-        <h2 class="hp-modal-title">Welcome Back!</h2>
+     <form id="loginForm" class="hp-modal-form" onsubmit="handleLoginSubmit(event)" novalidate>
+  <h2 class="hp-modal-title">Sign in to your account</h2>
 
-        <div class="hp-field">
-          <label for="loginEmail" class="hp-label">Email: <span class="hp-req">*</span></label>
-          <input type="email" id="loginEmail" name="email" class="hp-input" placeholder="name@example.com" required autocomplete="email">
-        </div>
+  <!-- Alert Banner for invalid password / account messages -->
+  <div id="authAlertBanner" class="hp-alert hp-alert-danger hide" style="display: none; margin-bottom: 12px; color: #be123c; font-size: 0.82rem; font-weight: 600;"></div>
 
-        <div class="hp-field">
-          <label for="loginPassword" class="hp-label">Password: <span class="hp-req">*</span></label>
-          <div class="hp-pw-wrap">
-            <input type="password" id="loginPassword" name="password" class="hp-input" placeholder="••••••••••••" required autocomplete="current-password">
-            <button type="button" class="hp-pw-eye" onclick="togglePasswordVisibility('loginPassword', this)">Show</button>
-          </div>
-        </div>
+  <div class="hp-field">
+    <label for="loginEmail" class="hp-label">Email: <span class="hp-req">*</span></label>
+    <input type="email" id="loginEmail" name="email" class="hp-input" placeholder="name@example.com" required autocomplete="email">
+  </div>
 
-        <div class="hp-sub-actions">
-          <a href="#forgot" class="hp-forgot-link" onclick="alert('Password reset instructions dispatched to your email.'); return false;">Forgot Password?</a>
-        </div>
+  <div class="hp-field">
+    <label for="loginPassword" class="hp-label">Password: <span class="hp-req">*</span></label>
+    <div class="hp-pw-wrap">
+      <input type="password" id="loginPassword" name="password" class="hp-input" placeholder="••••••••••••" required autocomplete="current-password">
+      <button type="button" class="hp-pw-eye" onclick="togglePasswordVisibility('loginPassword', this)">Show</button>
+    </div>
+  </div>
 
-        <button type="submit" class="hp-btn-yellow">Login</button>
-      </form>
+  <button type="submit" class="hp-btn-yellow">Sign in</button>
+</form>
 
       <!-- 2. REGISTER FORM -->
      <form id="registerForm" class="hp-modal-form" onsubmit="handleRegisterSubmit(event)" novalidate>
@@ -105,6 +104,14 @@
       <div id="otpPopup" class="hp-otp-popup hide">
         <h3 class="hp-otp-heading">Code Sent to Email!</h3>
         <p class="hp-otp-subheading">Please enter 6-digit code</p>
+
+        <!-- DEMO / MOBILE TAP-TO-FILL HELPER -->
+        <div id="demoOtpBadge" class="hp-demo-otp-badge" onclick="autoFillOtp()" title="Tap to auto-fill code">
+          <span class="hp-demo-label">Demo Code:</span>
+          <span id="demoOtpValue" class="hp-demo-code">------</span>
+          <span class="hp-demo-tap">(Tap to fill)</span>
+        </div>
+
         <div class="hp-otp-boxes">
           <input type="text" maxlength="1" oninput="focusNextOtp(this, 1)" inputmode="numeric">
           <input type="text" maxlength="1" oninput="focusNextOtp(this, 2)" inputmode="numeric">
@@ -113,6 +120,7 @@
           <input type="text" maxlength="1" oninput="focusNextOtp(this, 5)" inputmode="numeric">
           <input type="text" maxlength="1" oninput="focusNextOtp(this, 6)" inputmode="numeric">
         </div>
+
         <button type="button" class="hp-btn-yellow hp-btn-otp" onclick="verifyOtpAndRedirect()">Enter Code</button>
       </div>
 
@@ -438,6 +446,42 @@
 @media (max-width: 720px) {
   .hp-modal-card { grid-template-columns: 1fr; }
   .hp-modal-left { display: none; }
+}
+/* DEMO & MOBILE TAP-TO-FILL BADGE */
+.hp-demo-otp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #FFFFFF;
+  border: 1px dashed #274C77;
+  border-radius: 999px;
+  padding: 5px 14px;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  user-select: none;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+.hp-demo-otp-badge:active {
+  transform: scale(0.96);
+  background-color: #F0F4FA;
+}
+.hp-demo-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #4A5B79;
+}
+.hp-demo-code {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #192a4d;
+  letter-spacing: 0.08em;
+}
+.hp-demo-tap {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #1877F2;
+  text-decoration: underline;
 }
 </style>
 
