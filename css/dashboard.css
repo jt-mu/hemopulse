@@ -627,3 +627,37 @@
     gap: 1rem !important;
   }
 }
+/* Accessible screen-reader text utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Legend notice */
+.form-legend-note {
+  font-size: 0.8rem;
+  color: #4a5b79;
+  font-weight: 500;
+  margin-bottom: 1.25rem;
+}
+
+/* Red Asterisk */
+.req-star {
+  color: #e11d48 !important;
+  font-weight: 800;
+  margin-left: 2px;
+}
+
+/* Remove default fieldset border for questions */
+fieldset.question-block {
+  border: none;
+  padding: 0;
+  margin: 0 0 1.15rem 0;
+}
