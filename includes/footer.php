@@ -1,0 +1,1 @@
+<footer class="site-footer"><a href="index.php"><img src="images/logo.png" alt="HemoPulse home"><span>HemoPulse</span></a><p>Legazpi Village, Makati City<br>0900-000-0000<br>team@hemopulse.example</p></footer>

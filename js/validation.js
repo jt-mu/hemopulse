@@ -1,0 +1,2 @@
+window.validAccountPassword = p => {const n=new TextEncoder().encode(p).length;return n>=12&&n<=72&&/[A-Za-z]/.test(p)&&/[^A-Za-z]/.test(p)&&!/(.)\1{5}/.test(p)&&!['password1234','password123!','123456789012'].includes(p.toLowerCase());};
+document.addEventListener('input',event=>{const input=event.target;if(input.name==='password'&&input.autocomplete==='new-password')input.setCustomValidity(input.value&&!window.validAccountPassword(input.value)?'Use 12–72 bytes, a letter and a number or symbol; avoid common or repeated passwords.':'');});

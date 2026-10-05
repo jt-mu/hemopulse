@@ -1,0 +1,261 @@
+erDiagram
+    account_status_notices {
+        int notice_id PK
+        int user_id FK
+        int changed_by FK "nullable"
+        varchar old_status "nullable"
+        varchar new_status
+        varchar reason
+        varchar recipient_email
+        varchar delivery_status
+        datetime created_at
+    }
+    appointments {
+        int appointment_id PK
+        int donor_id FK
+        int campaign_id FK
+        time scheduled_time_slot
+        enum appointment_status
+        varchar qr_pass_token UK
+        varchar cancellation_reason "nullable"
+        timestamp booked_at
+        tinyint active_flag "nullable"
+        varchar public_reference UK "nullable"
+    }
+    audit_logs {
+        int log_id PK
+        int user_id FK "nullable"
+        varchar action_performed
+        varchar affected_table
+        int target_record_id "nullable"
+        text old_value "nullable"
+        text new_value "nullable"
+        timestamp log_timestamp
+        varchar client_ip_address "nullable"
+        text details_json "nullable"
+    }
+    blood_inventory {
+        int inventory_id PK
+        enum blood_type
+        int units_available
+        int volume_ml_per_unit
+        date collection_date
+        date expiration_date
+        enum inventory_status
+        varchar public_reference UK "nullable"
+    }
+    blood_requests {
+        int request_id PK
+        int requester_id FK
+        enum blood_type_requested
+        int units_requested
+        enum urgency_level
+        enum request_status
+        text clinical_justification "nullable"
+        timestamp requested_at
+    }
+    campaign_categories {
+        int category_id PK
+        varchar name UK
+        varchar description
+    }
+    campaign_registrations {
+        int registration_id PK
+        int appointment_id UK,FK
+        int eligibility_id FK
+        varchar full_name
+        date date_of_birth
+        varchar contact_number
+        varchar email
+        datetime requirements_agreed_at
+    }
+    campaigns {
+        int campaign_id PK
+        int created_by FK "nullable"
+        varchar title
+        text description "nullable"
+        varchar location_venue
+        date campaign_date
+        time start_time
+        time end_time
+        int total_slots
+        int available_slots
+        int walk_in_capacity
+        int target_units
+        enum campaign_status
+        timestamp created_at
+        datetime registration_closes_at "nullable"
+        int category_id FK "nullable"
+    }
+    contact_followups {
+        int followup_id PK
+        int message_id FK
+        text message_body
+        datetime received_at
+    }
+    contact_messages {
+        int message_id PK
+        varchar sender_name
+        varchar email
+        varchar subject
+        text message_body
+        enum message_status
+        datetime received_at
+        char thread_hash UK "nullable"
+        datetime thread_expires_at "nullable"
+    }
+    contact_replies {
+        int reply_id PK
+        int message_id FK
+        int replied_by FK
+        text reply_body
+        varchar delivery_status
+        datetime replied_at
+        char request_key UK "nullable"
+    }
+    donation_records {
+        int donation_id PK
+        int appointment_id UK,FK
+        int verified_by_staff_id FK "nullable"
+        date donation_date
+        enum blood_type_collected "nullable"
+        int volume_ml
+        enum clinical_outcome
+        text deferral_reason "nullable"
+        text medical_notes "nullable"
+    }
+    donor_campaign_selection {
+        int user_id PK,FK
+        int eligibility_id FK
+        int campaign_id FK
+    }
+    donor_profiles {
+        int donor_profile_id PK
+        int user_id UK,FK
+        enum blood_type "nullable"
+        date date_of_birth "nullable"
+        decimal weight_kg "nullable"
+        date last_donation_date "nullable"
+        date estimated_eligible_date "nullable"
+    }
+    eligibility_checks {
+        int eligibility_id PK
+        int user_id FK
+        enum outcome
+        text answers_json
+        text reasons_json
+        datetime completed_at
+        date deferred_until "nullable"
+        datetime reviewed_at "nullable"
+        int reviewed_by "nullable"
+        varchar review_notes "nullable"
+        date retry_after "nullable"
+    }
+    inventory_thresholds {
+        int threshold_id PK
+        enum blood_type UK
+        int minimum_units
+        int updated_by FK "nullable"
+        timestamp updated_at
+    }
+    inventory_transactions {
+        int transaction_id PK
+        int inventory_id FK "nullable"
+        int executed_by_staff_id FK "nullable"
+        enum transaction_type
+        int units_transacted
+        int donation_id FK "nullable"
+        int request_id FK "nullable"
+        timestamp transaction_timestamp
+        text transaction_notes "nullable"
+        varchar public_reference UK "nullable"
+    }
+    login_attempts {
+        bigint attempt_id PK
+        char identity_hash
+        datetime attempted_at
+    }
+    newsletter_subscriptions {
+        int subscription_id PK
+        varchar email UK
+        enum subscription_status
+        char token_hash UK "nullable"
+        datetime token_expires_at "nullable"
+        enum delivery_status
+        datetime requested_at
+        datetime confirmed_at "nullable"
+        char unsubscribe_hash "nullable"
+    }
+    notifications {
+        int notification_id PK
+        int user_id FK
+        enum notification_type
+        varchar subject
+        text message_body
+        tinyint is_read
+        timestamp sent_at
+    }
+    request_fulfillments {
+        int fulfillment_id PK
+        int request_id FK
+        int inventory_id FK "nullable"
+        int fulfilled_by_staff_id FK "nullable"
+        int units_allocated
+        timestamp fulfillment_date
+    }
+    request_limits {
+        char limit_key PK
+        bigint window_started
+        int attempts
+        bigint last_attempt
+    }
+    roles {
+        int role_id PK
+        enum role_name UK
+    }
+    users {
+        int user_id PK
+        int role_id FK "nullable"
+        varchar email UK
+        varchar password_hash
+        varchar first_name
+        varchar last_name
+        varchar contact_number "nullable"
+        enum account_status
+        timestamp created_at
+        varchar middle_name "nullable"
+        varchar profile_image "nullable"
+        varchar public_reference UK "nullable"
+        varchar status_reason "nullable"
+    }
+    users ||--o{ account_status_notices : user_id
+    users o|--o{ account_status_notices : changed_by
+    campaigns ||--o{ appointments : campaign_id
+    users ||--o{ appointments : donor_id
+    users o|--o{ audit_logs : user_id
+    users ||--o{ blood_requests : requester_id
+    appointments ||--o| campaign_registrations : appointment_id
+    eligibility_checks ||--o{ campaign_registrations : eligibility_id
+    campaign_categories o|--o{ campaigns : category_id
+    users o|--o{ campaigns : created_by
+    contact_messages ||--o{ contact_followups : message_id
+    contact_messages ||--o{ contact_replies : message_id
+    users ||--o{ contact_replies : replied_by
+    appointments ||--o| donation_records : appointment_id
+    users o|--o{ donation_records : verified_by_staff_id
+    users ||--o| donor_campaign_selection : user_id
+    eligibility_checks ||--o{ donor_campaign_selection : eligibility_id
+    campaigns ||--o{ donor_campaign_selection : campaign_id
+    users ||--o| donor_profiles : user_id
+    users ||--o{ eligibility_checks : user_id
+    users o|--o{ inventory_thresholds : updated_by
+    donation_records o|--o{ inventory_transactions : donation_id
+    blood_inventory o|--o{ inventory_transactions : inventory_id
+    blood_requests o|--o{ inventory_transactions : request_id
+    users o|--o{ inventory_transactions : executed_by_staff_id
+    users ||--o{ notifications : user_id
+    blood_inventory o|--o{ request_fulfillments : inventory_id
+    blood_requests ||--o{ request_fulfillments : request_id
+    users o|--o{ request_fulfillments : fulfilled_by_staff_id
+    roles o|--o{ users : role_id
+    users o|..o{ eligibility_checks : reviewed_by_application_only

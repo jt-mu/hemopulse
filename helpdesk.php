@@ -1,0 +1,113 @@
+<?php require __DIR__ . '/includes/page_init.php'; ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HemoPulse - Help Desk</title>
+  <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap-grid.min.css"><link rel="stylesheet" href="css/style.css?v=<?= filemtime(__DIR__ . '/css/style.css') ?>">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/app.css?v=<?= filemtime(__DIR__ . '/css/app.css') ?>">
+<link rel="stylesheet" href="css/design.css?v=<?= filemtime(__DIR__ . '/css/design.css') ?>"></head>
+<body class="account-page">
+<?php include __DIR__ . '/includes/notices.php'; ?>
+
+  <!-- Top Blue Header Strip -->
+  <header class="top-nav-strip">
+    <nav class="frame-nav">
+      <div class="nav-links">
+        <a href="index.php">Home</a>
+        <a href="locations.php">Locations</a>
+      </div>
+      <div class="logo-badge">
+        <a href="index.php"><img src="images/logo.png" alt="HemoPulse logo" onerror="this.src='images/logo.jpg'"></a>
+      </div>
+      <div class="nav-links">
+        <a href="contact.php">Contact Us</a>
+        <?php include __DIR__ . '/includes/account_menu.php'; ?>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="help-center-wrap">
+
+    <div class="help-hero">
+      <h1>How can we help you?</h1>
+      <p>Find answers about blood donation, requests, and donations.</p>
+    </div>
+
+    <!-- 4 Square Category Cards Linked -->
+    <div class="help-cards-grid">
+      <a href="index.php#donation-types" class="help-category-card">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M40 20c0 16-16 24-16 40a16 16 0 0032 0c0-16-16-24-16-40z" fill="#2B3F6C"/>
+            <path d="M66 46c0 9-9 13-9 22a9 9 0 0018 0c0-9-9-13-9-22z" fill="#2B3F6C"/>
+          </svg>
+        </div>
+        <span>About blood<br>donations</span>
+      </a>
+
+      <a href="locations.php" class="help-category-card">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <rect x="24" y="18" width="52" height="66" rx="6" fill="#2B3F6C"/>
+            <rect x="38" y="12" width="24" height="12" rx="4" fill="#FAF7EE"/>
+            <rect x="32" y="40" width="36" height="5" rx="2" fill="#FAF7EE"/>
+            <rect x="32" y="52" width="36" height="5" rx="2" fill="#FAF7EE"/>
+            <rect x="32" y="64" width="24" height="5" rx="2" fill="#FAF7EE"/>
+          </svg>
+        </div>
+        <span>Local blood<br>donation drives</span>
+      </a>
+
+      <a href="index.php#login" class="help-category-card">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M48 26c4-6 14-6 17-1 3 5 1 10-3 14l-14 13-14-13c-4-4-6-9-3-14 3-5 13-5 17 1z" fill="#2B3F6C"/>
+            <path d="M18 62c10-6 16-6 24-2l14 6c4 2 4 8-1 9l-16 3c-3 1-6 0-8-2l-13-8z" fill="#2B3F6C"/>
+            <rect x="14" y="58" width="12" height="24" rx="5" fill="#2B3F6C"/>
+          </svg>
+        </div>
+        <span>Becoming a donor</span>
+      </a>
+
+      <a href="#safety" class="help-category-card">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50 14l28 10v22c0 20-12 33-28 40-16-7-28-20-28-40V24z" fill="#2B3F6C"/>
+            <rect x="44" y="38" width="12" height="30" rx="2" fill="#FAF7EE"/>
+            <rect x="35" y="47" width="30" height="12" rx="2" fill="#FAF7EE"/>
+          </svg>
+        </div>
+        <span>Safety &amp; standards</span>
+      </a>
+    </div>
+
+    <!-- Scrollable System FAQs -->
+    <div class="system-faq-section">
+      <h2>SYSTEM FAQs</h2>
+      <div class="faq-scroll-container">
+        <?php include __DIR__.'/includes/system_faq.php'; ?>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Full-width Bottom Blue Callout Banner -->
+  <section class="bottom-support-banner">
+    <h3>Didn’t find the answers to your questions?</h3>
+    <p>Get in touch with us for details on additional services.</p>
+    <a href="contact.php" class="btn-navy-pill">CONTACT US</a>
+  </section>
+
+<?php include __DIR__ . '/includes/auth_modal.php'; ?>
+<script src="js/validation.js?v=<?= filemtime(__DIR__ . '/js/validation.js') ?>"></script>
+<script src="js/modal.js?v=<?= filemtime(__DIR__ . '/js/modal.js') ?>"></script>
+<script src="js/navigation.js?v=<?= filemtime(__DIR__ . '/js/navigation.js') ?>"></script><script src="js/main.js?v=<?= filemtime(__DIR__ . '/js/main.js') ?>"></script>
+<?php include __DIR__ . '/includes/footer.php'; ?>
+<script src="js/notices.js?v=<?= filemtime(__DIR__ . '/js/notices.js') ?>"></script>
+<script src="js/faq.js?v=<?= filemtime(__DIR__ . '/js/faq.js') ?>"></script>
+</body>
+</html>

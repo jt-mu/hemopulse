@@ -1,0 +1,98 @@
+<?php require __DIR__ . '/includes/page_init.php'; ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HemoPulse - Contact Us</title>
+<link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap-grid.min.css"><link rel="stylesheet" href="css/style.css?v=<?= filemtime(__DIR__ . '/css/style.css') ?>">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/app.css?v=<?= filemtime(__DIR__ . '/css/app.css') ?>">
+<link rel="stylesheet" href="css/design.css?v=<?= filemtime(__DIR__ . '/css/design.css') ?>"></head>
+<body class="contact-page">
+
+
+  <!-- TOP BLUE NAVBAR STRIP -->
+  <header class="top-nav-strip">
+    <nav class="frame-nav">
+      <div class="nav-links"><a href="index.php">Home</a><a href="locations.php">Locations</a></div>
+      <div class="logo-badge"><a href="index.php"><img src="images/logo.png" alt="HemoPulse logo" onerror="this.src='images/logo.jpg'"></a></div>
+      <div class="nav-links"><a href="contact.php" class="active">Contact Us</a><?php include __DIR__ . '/includes/account_menu.php'; ?></div>
+    </nav>
+  </header>
+
+  <!-- MAIN PAGE CONTENT -->
+    <div class="contact-hero">
+      <h1>CONTACT US</h1>
+      <p>Have any questions about HemoPulse? We're here to help.<br>Don't hesitate to reach out to us. We'd love to hear from you.</p>
+    </div>
+    
+  <div class="frame">
+    <div class="contact-cards">
+      <div class="contact-card">
+        <div class="ic">
+          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50 12c-15 0-27 11.5-27 27 0 19 27 49 27 49s27-30 27-49c0-15.5-12-27-27-27z" stroke="#364c84" stroke-width="6" stroke-linejoin="round"/>
+            <circle cx="50" cy="39" r="10" stroke="#364c84" stroke-width="6"/>
+          </svg>
+        </div>
+        <div class="ttl">LOCATION</div>
+        <div class="sub">Unit 1402, Tower 1, Ayala North Exchange, 6796 Ayala Avenue cor. Salcedo St., Legazpi Village, Makati City, 1229</div>
+      </div>
+
+      <div class="contact-card">
+        <div class="ic">
+          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="14" y="28" width="72" height="50" rx="6" stroke="#364c84" stroke-width="6" stroke-linejoin="round"/>
+            <path d="M16 30l34 26 34-26" stroke="#364c84" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="ttl">EMAIL</div>
+        <div class="sub">team@hemopulse.example</div>
+      </div>
+
+      <div class="contact-card">
+        <div class="ic">
+          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M27 22c3-3 8-3 10 0l7 9c2 3 2 6-1 9l-4 4c3 8 10 15 18 18l4-4c3-3 6-3 9-1l9 7c3 2 3 7 0 10l-6 6c-3 3-9 4-14 2-16-5-30-19-35-35-2-5-1-11 2-14z" fill="#364c84"/>
+            <path d="M65 30c6 2 11 7 13 13" stroke="#364c84" stroke-width="5" stroke-linecap="round" fill="none"/>
+            <path d="M70 18c11 3 20 12 23 23" stroke="#364c84" stroke-width="5" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        <div class="ttl">MOBILE/CONTACT NO</div>
+        <div class="sub">0900-000-0000</div>
+      </div>
+
+      <div class="contact-card">
+        <div class="ic">
+          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="36" stroke="#364c84" stroke-width="6"/>
+            <path d="M50 28v22l16 10" stroke="#364c84" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="ttl">OPERATING HOURS</div>
+        <div class="sub">Monday to Friday,<br>8:00 AM to 5:00 PM</div>
+      </div>
+    </div>
+
+<?php include __DIR__ . '/includes/contact_forms.php'; ?>
+    <div class="map-card">
+      <iframe title="Donation contact location map" 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.854636906801!2d121.0478794759039!3d14.550293778330767!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397c8ef4cb9f6a7%3A0x6a0c0ad5d40a02ef!2sSt.%20Luke&#39;s%20Medical%20Center%20Global%20City!5e0!3m2!1sen!2sph!4v1710000000000!5m2!1sen!2sph" 
+        width="100%" 
+        height="280" 
+        style="border:0; border-radius: 14px; display: block;" 
+        allowfullscreen="" 
+        loading="lazy">
+      </iframe>
+    </div>
+  </div>
+
+<?php include __DIR__ . '/includes/auth_modal.php'; ?>
+<script src="js/validation.js?v=<?= filemtime(__DIR__ . '/js/validation.js') ?>"></script>
+<script src="js/modal.js?v=<?= filemtime(__DIR__ . '/js/modal.js') ?>"></script>
+<script src="js/navigation.js?v=<?= filemtime(__DIR__ . '/js/navigation.js') ?>"></script>
+<?php include __DIR__ . '/includes/footer.php'; ?>
+<script src="js/notices.js?v=<?= filemtime(__DIR__ . '/js/notices.js') ?>"></script>
+</body>
+</html>

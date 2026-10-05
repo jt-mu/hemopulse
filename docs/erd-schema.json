@@ -1,0 +1,1556 @@
+{
+    "account_status_notices": {
+        "columns": [
+            {
+                "COLUMN_NAME": "notice_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "PRI"
+            },
+            {
+                "COLUMN_NAME": "user_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "MUL"
+            },
+            {
+                "COLUMN_NAME": "changed_by",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": "MUL"
+            },
+            {
+                "COLUMN_NAME": "old_status",
+                "DATA_TYPE": "varchar",
+                "COLUMN_TYPE": "varchar(20)",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "new_status",
+                "DATA_TYPE": "varchar",
+                "COLUMN_TYPE": "varchar(20)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "reason",
+                "DATA_TYPE": "varchar",
+                "COLUMN_TYPE": "varchar(1000)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "recipient_email",
+                "DATA_TYPE": "varchar",
+                "COLUMN_TYPE": "varchar(254)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "delivery_status",
+                "DATA_TYPE": "varchar",
+                "COLUMN_TYPE": "varchar(20)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "created_at",
+                "DATA_TYPE": "datetime",
+                "COLUMN_TYPE": "datetime",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            }
+        ],
+        "foreign_keys": [
+            {
+                "COLUMN_NAME": "user_id",
+                "REFERENCED_TABLE_NAME": "users",
+                "REFERENCED_COLUMN_NAME": "user_id"
+            },
+            {
+                "COLUMN_NAME": "changed_by",
+                "REFERENCED_TABLE_NAME": "users",
+                "REFERENCED_COLUMN_NAME": "user_id"
+            }
+        ]
+    },
+    "appointments": {
+        "columns": [
+            {
+                "COLUMN_NAME": "appointment_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "PRI"
+            },
+            {
+                "COLUMN_NAME": "donor_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "MUL"
+            },
+            {
+                "COLUMN_NAME": "campaign_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "MUL"
+            },
+            {
+                "COLUMN_NAME": "scheduled_time_slot",
+                "DATA_TYPE": "time",
+                "COLUMN_TYPE": "time",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "appointment_status",
+                "DATA_TYPE": "enum",
+                "COLUMN_TYPE": "enum('Pending','Confirmed','Checked-In','Completed','Deferred','Cancelled','No-Show')",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "qr_pass_token",
+                "DATA_TYPE": "varchar",
+                "COLUMN_TYPE": "varchar(64)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "UNI"
+            },
+            {
+                "COLUMN_NAME": "cancellation_reason",
+                "DATA_TYPE": "varchar",
+                "COLUMN_TYPE": "varchar(1000)",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "booked_at",
+                "DATA_TYPE": "timestamp",
+                "COLUMN_TYPE": "timestamp",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "active_flag",
+                "DATA_TYPE": "tinyint",
+                "COLUMN_TYPE": "tinyint(1)",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "public_reference",
+                "DATA_TYPE": "varchar",
+                "COLUMN_TYPE": "varchar(32)",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": "UNI"
+            }
+        ],
+        "foreign_keys": [
+            {
+                "COLUMN_NAME": "campaign_id",
+                "REFERENCED_TABLE_NAME": "campaigns",
+                "REFERENCED_COLUMN_NAME": "campaign_id"
+            },
+            {
+                "COLUMN_NAME": "donor_id",
+                "REFERENCED_TABLE_NAME": "users",
+                "REFERENCED_COLUMN_NAME": "user_id"
+            }
+        ]
+    },
+    "audit_logs": {
+        "columns": [
+            {
+                "COLUMN_NAME": "log_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "PRI"
+            },
+            {
+                "COLUMN_NAME": "user_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": "MUL"
+            },
+            {
+                "COLUMN_NAME": "action_performed",
+                "DATA_TYPE": "varchar",
+                "COLUMN_TYPE": "varchar(100)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "affected_table",
+                "DATA_TYPE": "varchar",
+                "COLUMN_TYPE": "varchar(50)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "target_record_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "old_value",
+                "DATA_TYPE": "text",
+                "COLUMN_TYPE": "text",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "new_value",
+                "DATA_TYPE": "text",
+                "COLUMN_TYPE": "text",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "log_timestamp",
+                "DATA_TYPE": "timestamp",
+                "COLUMN_TYPE": "timestamp",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "MUL"
+            },
+            {
+                "COLUMN_NAME": "client_ip_address",
+                "DATA_TYPE": "varchar",
+                "COLUMN_TYPE": "varchar(50)",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "details_json",
+                "DATA_TYPE": "text",
+                "COLUMN_TYPE": "text",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": ""
+            }
+        ],
+        "foreign_keys": [
+            {
+                "COLUMN_NAME": "user_id",
+                "REFERENCED_TABLE_NAME": "users",
+                "REFERENCED_COLUMN_NAME": "user_id"
+            }
+        ]
+    },
+    "blood_inventory": {
+        "columns": [
+            {
+                "COLUMN_NAME": "inventory_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "PRI"
+            },
+            {
+                "COLUMN_NAME": "blood_type",
+                "DATA_TYPE": "enum",
+                "COLUMN_TYPE": "enum('A+','A-','B+','B-','AB+','AB-','O+','O-')",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "MUL"
+            },
+            {
+                "COLUMN_NAME": "units_available",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "volume_ml_per_unit",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "collection_date",
+                "DATA_TYPE": "date",
+                "COLUMN_TYPE": "date",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "expiration_date",
+                "DATA_TYPE": "date",
+                "COLUMN_TYPE": "date",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "MUL"
+            },
+            {
+                "COLUMN_NAME": "inventory_status",
+                "DATA_TYPE": "enum",
+                "COLUMN_TYPE": "enum('Pending','Available','Reserved','Used','Expired','Discarded','Disposed')",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "public_reference",
+                "DATA_TYPE": "varchar",
+                "COLUMN_TYPE": "varchar(28)",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": "UNI"
+            }
+        ],
+        "foreign_keys": []
+    },
+    "blood_requests": {
+        "columns": [
+            {
+                "COLUMN_NAME": "request_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "PRI"
+            },
+            {
+                "COLUMN_NAME": "requester_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "MUL"
+            },
+            {
+                "COLUMN_NAME": "blood_type_requested",
+                "DATA_TYPE": "enum",
+                "COLUMN_TYPE": "enum('A+','A-','B+','B-','AB+','AB-','O+','O-')",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "units_requested",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "urgency_level",
+                "DATA_TYPE": "enum",
+                "COLUMN_TYPE": "enum('Routine','Urgent','Emergency')",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "request_status",
+                "DATA_TYPE": "enum",
+                "COLUMN_TYPE": "enum('Pending','Under Review','Approved','Rejected','Fulfilled')",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "MUL"
+            },
+            {
+                "COLUMN_NAME": "clinical_justification",
+                "DATA_TYPE": "text",
+                "COLUMN_TYPE": "text",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "requested_at",
+                "DATA_TYPE": "timestamp",
+                "COLUMN_TYPE": "timestamp",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            }
+        ],
+        "foreign_keys": [
+            {
+                "COLUMN_NAME": "requester_id",
+                "REFERENCED_TABLE_NAME": "users",
+                "REFERENCED_COLUMN_NAME": "user_id"
+            }
+        ]
+    },
+    "campaign_categories": {
+        "columns": [
+            {
+                "COLUMN_NAME": "category_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "PRI"
+            },
+            {
+                "COLUMN_NAME": "name",
+                "DATA_TYPE": "varchar",
+                "COLUMN_TYPE": "varchar(80)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "UNI"
+            },
+            {
+                "COLUMN_NAME": "description",
+                "DATA_TYPE": "varchar",
+                "COLUMN_TYPE": "varchar(255)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            }
+        ],
+        "foreign_keys": []
+    },
+    "campaign_registrations": {
+        "columns": [
+            {
+                "COLUMN_NAME": "registration_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "PRI"
+            },
+            {
+                "COLUMN_NAME": "appointment_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "UNI"
+            },
+            {
+                "COLUMN_NAME": "eligibility_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "MUL"
+            },
+            {
+                "COLUMN_NAME": "full_name",
+                "DATA_TYPE": "varchar",
+                "COLUMN_TYPE": "varchar(150)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "date_of_birth",
+                "DATA_TYPE": "date",
+                "COLUMN_TYPE": "date",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "contact_number",
+                "DATA_TYPE": "varchar",
+                "COLUMN_TYPE": "varchar(30)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "email",
+                "DATA_TYPE": "varchar",
+                "COLUMN_TYPE": "varchar(100)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "requirements_agreed_at",
+                "DATA_TYPE": "datetime",
+                "COLUMN_TYPE": "datetime",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            }
+        ],
+        "foreign_keys": [
+            {
+                "COLUMN_NAME": "appointment_id",
+                "REFERENCED_TABLE_NAME": "appointments",
+                "REFERENCED_COLUMN_NAME": "appointment_id"
+            },
+            {
+                "COLUMN_NAME": "eligibility_id",
+                "REFERENCED_TABLE_NAME": "eligibility_checks",
+                "REFERENCED_COLUMN_NAME": "eligibility_id"
+            }
+        ]
+    },
+    "campaigns": {
+        "columns": [
+            {
+                "COLUMN_NAME": "campaign_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "PRI"
+            },
+            {
+                "COLUMN_NAME": "created_by",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": "MUL"
+            },
+            {
+                "COLUMN_NAME": "title",
+                "DATA_TYPE": "varchar",
+                "COLUMN_TYPE": "varchar(100)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "description",
+                "DATA_TYPE": "text",
+                "COLUMN_TYPE": "text",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "location_venue",
+                "DATA_TYPE": "varchar",
+                "COLUMN_TYPE": "varchar(150)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "campaign_date",
+                "DATA_TYPE": "date",
+                "COLUMN_TYPE": "date",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "start_time",
+                "DATA_TYPE": "time",
+                "COLUMN_TYPE": "time",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "end_time",
+                "DATA_TYPE": "time",
+                "COLUMN_TYPE": "time",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "total_slots",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "available_slots",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "walk_in_capacity",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "target_units",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "campaign_status",
+                "DATA_TYPE": "enum",
+                "COLUMN_TYPE": "enum('Draft','Published','Active','Closed')",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "MUL"
+            },
+            {
+                "COLUMN_NAME": "created_at",
+                "DATA_TYPE": "timestamp",
+                "COLUMN_TYPE": "timestamp",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "registration_closes_at",
+                "DATA_TYPE": "datetime",
+                "COLUMN_TYPE": "datetime",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "category_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": "MUL"
+            }
+        ],
+        "foreign_keys": [
+            {
+                "COLUMN_NAME": "category_id",
+                "REFERENCED_TABLE_NAME": "campaign_categories",
+                "REFERENCED_COLUMN_NAME": "category_id"
+            },
+            {
+                "COLUMN_NAME": "created_by",
+                "REFERENCED_TABLE_NAME": "users",
+                "REFERENCED_COLUMN_NAME": "user_id"
+            }
+        ]
+    },
+    "contact_followups": {
+        "columns": [
+            {
+                "COLUMN_NAME": "followup_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "PRI"
+            },
+            {
+                "COLUMN_NAME": "message_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "MUL"
+            },
+            {
+                "COLUMN_NAME": "message_body",
+                "DATA_TYPE": "text",
+                "COLUMN_TYPE": "text",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "received_at",
+                "DATA_TYPE": "datetime",
+                "COLUMN_TYPE": "datetime",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            }
+        ],
+        "foreign_keys": [
+            {
+                "COLUMN_NAME": "message_id",
+                "REFERENCED_TABLE_NAME": "contact_messages",
+                "REFERENCED_COLUMN_NAME": "message_id"
+            }
+        ]
+    },
+    "contact_messages": {
+        "columns": [
+            {
+                "COLUMN_NAME": "message_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "PRI"
+            },
+            {
+                "COLUMN_NAME": "sender_name",
+                "DATA_TYPE": "varchar",
+                "COLUMN_TYPE": "varchar(100)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "email",
+                "DATA_TYPE": "varchar",
+                "COLUMN_TYPE": "varchar(254)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "subject",
+                "DATA_TYPE": "varchar",
+                "COLUMN_TYPE": "varchar(150)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "message_body",
+                "DATA_TYPE": "text",
+                "COLUMN_TYPE": "text",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "message_status",
+                "DATA_TYPE": "enum",
+                "COLUMN_TYPE": "enum('New','Read','Replied','Closed')",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "received_at",
+                "DATA_TYPE": "datetime",
+                "COLUMN_TYPE": "datetime",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "thread_hash",
+                "DATA_TYPE": "char",
+                "COLUMN_TYPE": "char(64)",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": "UNI"
+            },
+            {
+                "COLUMN_NAME": "thread_expires_at",
+                "DATA_TYPE": "datetime",
+                "COLUMN_TYPE": "datetime",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": ""
+            }
+        ],
+        "foreign_keys": []
+    },
+    "contact_replies": {
+        "columns": [
+            {
+                "COLUMN_NAME": "reply_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "PRI"
+            },
+            {
+                "COLUMN_NAME": "message_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "MUL"
+            },
+            {
+                "COLUMN_NAME": "replied_by",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "MUL"
+            },
+            {
+                "COLUMN_NAME": "reply_body",
+                "DATA_TYPE": "text",
+                "COLUMN_TYPE": "text",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "delivery_status",
+                "DATA_TYPE": "varchar",
+                "COLUMN_TYPE": "varchar(20)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "replied_at",
+                "DATA_TYPE": "datetime",
+                "COLUMN_TYPE": "datetime",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "request_key",
+                "DATA_TYPE": "char",
+                "COLUMN_TYPE": "char(64)",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": "UNI"
+            }
+        ],
+        "foreign_keys": [
+            {
+                "COLUMN_NAME": "message_id",
+                "REFERENCED_TABLE_NAME": "contact_messages",
+                "REFERENCED_COLUMN_NAME": "message_id"
+            },
+            {
+                "COLUMN_NAME": "replied_by",
+                "REFERENCED_TABLE_NAME": "users",
+                "REFERENCED_COLUMN_NAME": "user_id"
+            }
+        ]
+    },
+    "donation_records": {
+        "columns": [
+            {
+                "COLUMN_NAME": "donation_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "PRI"
+            },
+            {
+                "COLUMN_NAME": "appointment_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "UNI"
+            },
+            {
+                "COLUMN_NAME": "verified_by_staff_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": "MUL"
+            },
+            {
+                "COLUMN_NAME": "donation_date",
+                "DATA_TYPE": "date",
+                "COLUMN_TYPE": "date",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "MUL"
+            },
+            {
+                "COLUMN_NAME": "blood_type_collected",
+                "DATA_TYPE": "enum",
+                "COLUMN_TYPE": "enum('A+','A-','B+','B-','AB+','AB-','O+','O-')",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "volume_ml",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "clinical_outcome",
+                "DATA_TYPE": "enum",
+                "COLUMN_TYPE": "enum('Completed','Deferred')",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "deferral_reason",
+                "DATA_TYPE": "text",
+                "COLUMN_TYPE": "text",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "medical_notes",
+                "DATA_TYPE": "text",
+                "COLUMN_TYPE": "text",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": ""
+            }
+        ],
+        "foreign_keys": [
+            {
+                "COLUMN_NAME": "appointment_id",
+                "REFERENCED_TABLE_NAME": "appointments",
+                "REFERENCED_COLUMN_NAME": "appointment_id"
+            },
+            {
+                "COLUMN_NAME": "verified_by_staff_id",
+                "REFERENCED_TABLE_NAME": "users",
+                "REFERENCED_COLUMN_NAME": "user_id"
+            }
+        ]
+    },
+    "donor_campaign_selection": {
+        "columns": [
+            {
+                "COLUMN_NAME": "user_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "PRI"
+            },
+            {
+                "COLUMN_NAME": "eligibility_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "MUL"
+            },
+            {
+                "COLUMN_NAME": "campaign_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "MUL"
+            }
+        ],
+        "foreign_keys": [
+            {
+                "COLUMN_NAME": "user_id",
+                "REFERENCED_TABLE_NAME": "users",
+                "REFERENCED_COLUMN_NAME": "user_id"
+            },
+            {
+                "COLUMN_NAME": "eligibility_id",
+                "REFERENCED_TABLE_NAME": "eligibility_checks",
+                "REFERENCED_COLUMN_NAME": "eligibility_id"
+            },
+            {
+                "COLUMN_NAME": "campaign_id",
+                "REFERENCED_TABLE_NAME": "campaigns",
+                "REFERENCED_COLUMN_NAME": "campaign_id"
+            }
+        ]
+    },
+    "donor_profiles": {
+        "columns": [
+            {
+                "COLUMN_NAME": "donor_profile_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "PRI"
+            },
+            {
+                "COLUMN_NAME": "user_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "UNI"
+            },
+            {
+                "COLUMN_NAME": "blood_type",
+                "DATA_TYPE": "enum",
+                "COLUMN_TYPE": "enum('A+','A-','B+','B-','AB+','AB-','O+','O-')",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "date_of_birth",
+                "DATA_TYPE": "date",
+                "COLUMN_TYPE": "date",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "weight_kg",
+                "DATA_TYPE": "decimal",
+                "COLUMN_TYPE": "decimal(5,2)",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "last_donation_date",
+                "DATA_TYPE": "date",
+                "COLUMN_TYPE": "date",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "estimated_eligible_date",
+                "DATA_TYPE": "date",
+                "COLUMN_TYPE": "date",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": ""
+            }
+        ],
+        "foreign_keys": [
+            {
+                "COLUMN_NAME": "user_id",
+                "REFERENCED_TABLE_NAME": "users",
+                "REFERENCED_COLUMN_NAME": "user_id"
+            }
+        ]
+    },
+    "eligibility_checks": {
+        "columns": [
+            {
+                "COLUMN_NAME": "eligibility_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "PRI"
+            },
+            {
+                "COLUMN_NAME": "user_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "MUL"
+            },
+            {
+                "COLUMN_NAME": "outcome",
+                "DATA_TYPE": "enum",
+                "COLUMN_TYPE": "enum('Eligible','Not Eligible','Needs Review','Temporarily Deferred','Reviewed')",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "answers_json",
+                "DATA_TYPE": "text",
+                "COLUMN_TYPE": "text",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "reasons_json",
+                "DATA_TYPE": "text",
+                "COLUMN_TYPE": "text",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "completed_at",
+                "DATA_TYPE": "datetime",
+                "COLUMN_TYPE": "datetime",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "deferred_until",
+                "DATA_TYPE": "date",
+                "COLUMN_TYPE": "date",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "reviewed_at",
+                "DATA_TYPE": "datetime",
+                "COLUMN_TYPE": "datetime",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "reviewed_by",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "review_notes",
+                "DATA_TYPE": "varchar",
+                "COLUMN_TYPE": "varchar(2000)",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "retry_after",
+                "DATA_TYPE": "date",
+                "COLUMN_TYPE": "date",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": ""
+            }
+        ],
+        "foreign_keys": [
+            {
+                "COLUMN_NAME": "user_id",
+                "REFERENCED_TABLE_NAME": "users",
+                "REFERENCED_COLUMN_NAME": "user_id"
+            }
+        ]
+    },
+    "inventory_thresholds": {
+        "columns": [
+            {
+                "COLUMN_NAME": "threshold_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "PRI"
+            },
+            {
+                "COLUMN_NAME": "blood_type",
+                "DATA_TYPE": "enum",
+                "COLUMN_TYPE": "enum('A+','A-','B+','B-','AB+','AB-','O+','O-')",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "UNI"
+            },
+            {
+                "COLUMN_NAME": "minimum_units",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "updated_by",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": "MUL"
+            },
+            {
+                "COLUMN_NAME": "updated_at",
+                "DATA_TYPE": "timestamp",
+                "COLUMN_TYPE": "timestamp",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            }
+        ],
+        "foreign_keys": [
+            {
+                "COLUMN_NAME": "updated_by",
+                "REFERENCED_TABLE_NAME": "users",
+                "REFERENCED_COLUMN_NAME": "user_id"
+            }
+        ]
+    },
+    "inventory_transactions": {
+        "columns": [
+            {
+                "COLUMN_NAME": "transaction_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "PRI"
+            },
+            {
+                "COLUMN_NAME": "inventory_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": "MUL"
+            },
+            {
+                "COLUMN_NAME": "executed_by_staff_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": "MUL"
+            },
+            {
+                "COLUMN_NAME": "transaction_type",
+                "DATA_TYPE": "enum",
+                "COLUMN_TYPE": "enum('Addition','Deduction','Expiration','Disposal','Adjustment')",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "units_transacted",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "donation_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": "MUL"
+            },
+            {
+                "COLUMN_NAME": "request_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": "MUL"
+            },
+            {
+                "COLUMN_NAME": "transaction_timestamp",
+                "DATA_TYPE": "timestamp",
+                "COLUMN_TYPE": "timestamp",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "transaction_notes",
+                "DATA_TYPE": "text",
+                "COLUMN_TYPE": "text",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "public_reference",
+                "DATA_TYPE": "varchar",
+                "COLUMN_TYPE": "varchar(28)",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": "UNI"
+            }
+        ],
+        "foreign_keys": [
+            {
+                "COLUMN_NAME": "donation_id",
+                "REFERENCED_TABLE_NAME": "donation_records",
+                "REFERENCED_COLUMN_NAME": "donation_id"
+            },
+            {
+                "COLUMN_NAME": "inventory_id",
+                "REFERENCED_TABLE_NAME": "blood_inventory",
+                "REFERENCED_COLUMN_NAME": "inventory_id"
+            },
+            {
+                "COLUMN_NAME": "request_id",
+                "REFERENCED_TABLE_NAME": "blood_requests",
+                "REFERENCED_COLUMN_NAME": "request_id"
+            },
+            {
+                "COLUMN_NAME": "executed_by_staff_id",
+                "REFERENCED_TABLE_NAME": "users",
+                "REFERENCED_COLUMN_NAME": "user_id"
+            }
+        ]
+    },
+    "login_attempts": {
+        "columns": [
+            {
+                "COLUMN_NAME": "attempt_id",
+                "DATA_TYPE": "bigint",
+                "COLUMN_TYPE": "bigint(20)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "PRI"
+            },
+            {
+                "COLUMN_NAME": "identity_hash",
+                "DATA_TYPE": "char",
+                "COLUMN_TYPE": "char(64)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "MUL"
+            },
+            {
+                "COLUMN_NAME": "attempted_at",
+                "DATA_TYPE": "datetime",
+                "COLUMN_TYPE": "datetime",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            }
+        ],
+        "foreign_keys": []
+    },
+    "newsletter_subscriptions": {
+        "columns": [
+            {
+                "COLUMN_NAME": "subscription_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "PRI"
+            },
+            {
+                "COLUMN_NAME": "email",
+                "DATA_TYPE": "varchar",
+                "COLUMN_TYPE": "varchar(254)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "UNI"
+            },
+            {
+                "COLUMN_NAME": "subscription_status",
+                "DATA_TYPE": "enum",
+                "COLUMN_TYPE": "enum('Pending','Subscribed','Unsubscribed')",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "token_hash",
+                "DATA_TYPE": "char",
+                "COLUMN_TYPE": "char(64)",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": "UNI"
+            },
+            {
+                "COLUMN_NAME": "token_expires_at",
+                "DATA_TYPE": "datetime",
+                "COLUMN_TYPE": "datetime",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "delivery_status",
+                "DATA_TYPE": "enum",
+                "COLUMN_TYPE": "enum('Pending','Preview','Accepted','Failed')",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "requested_at",
+                "DATA_TYPE": "datetime",
+                "COLUMN_TYPE": "datetime",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "confirmed_at",
+                "DATA_TYPE": "datetime",
+                "COLUMN_TYPE": "datetime",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "unsubscribe_hash",
+                "DATA_TYPE": "char",
+                "COLUMN_TYPE": "char(64)",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": ""
+            }
+        ],
+        "foreign_keys": []
+    },
+    "notifications": {
+        "columns": [
+            {
+                "COLUMN_NAME": "notification_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "PRI"
+            },
+            {
+                "COLUMN_NAME": "user_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "MUL"
+            },
+            {
+                "COLUMN_NAME": "notification_type",
+                "DATA_TYPE": "enum",
+                "COLUMN_TYPE": "enum('Appointment','Eligibility','Inventory_Alert','Request_Update')",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "subject",
+                "DATA_TYPE": "varchar",
+                "COLUMN_TYPE": "varchar(100)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "message_body",
+                "DATA_TYPE": "text",
+                "COLUMN_TYPE": "text",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "is_read",
+                "DATA_TYPE": "tinyint",
+                "COLUMN_TYPE": "tinyint(1)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "sent_at",
+                "DATA_TYPE": "timestamp",
+                "COLUMN_TYPE": "timestamp",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            }
+        ],
+        "foreign_keys": [
+            {
+                "COLUMN_NAME": "user_id",
+                "REFERENCED_TABLE_NAME": "users",
+                "REFERENCED_COLUMN_NAME": "user_id"
+            }
+        ]
+    },
+    "request_fulfillments": {
+        "columns": [
+            {
+                "COLUMN_NAME": "fulfillment_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "PRI"
+            },
+            {
+                "COLUMN_NAME": "request_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "MUL"
+            },
+            {
+                "COLUMN_NAME": "inventory_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": "MUL"
+            },
+            {
+                "COLUMN_NAME": "fulfilled_by_staff_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": "MUL"
+            },
+            {
+                "COLUMN_NAME": "units_allocated",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "fulfillment_date",
+                "DATA_TYPE": "timestamp",
+                "COLUMN_TYPE": "timestamp",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            }
+        ],
+        "foreign_keys": [
+            {
+                "COLUMN_NAME": "inventory_id",
+                "REFERENCED_TABLE_NAME": "blood_inventory",
+                "REFERENCED_COLUMN_NAME": "inventory_id"
+            },
+            {
+                "COLUMN_NAME": "request_id",
+                "REFERENCED_TABLE_NAME": "blood_requests",
+                "REFERENCED_COLUMN_NAME": "request_id"
+            },
+            {
+                "COLUMN_NAME": "fulfilled_by_staff_id",
+                "REFERENCED_TABLE_NAME": "users",
+                "REFERENCED_COLUMN_NAME": "user_id"
+            }
+        ]
+    },
+    "request_limits": {
+        "columns": [
+            {
+                "COLUMN_NAME": "limit_key",
+                "DATA_TYPE": "char",
+                "COLUMN_TYPE": "char(64)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "PRI"
+            },
+            {
+                "COLUMN_NAME": "window_started",
+                "DATA_TYPE": "bigint",
+                "COLUMN_TYPE": "bigint(20)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "attempts",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "last_attempt",
+                "DATA_TYPE": "bigint",
+                "COLUMN_TYPE": "bigint(20)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            }
+        ],
+        "foreign_keys": []
+    },
+    "roles": {
+        "columns": [
+            {
+                "COLUMN_NAME": "role_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "PRI"
+            },
+            {
+                "COLUMN_NAME": "role_name",
+                "DATA_TYPE": "enum",
+                "COLUMN_TYPE": "enum('Admin','Staff','Donor','Recipient')",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "UNI"
+            }
+        ],
+        "foreign_keys": []
+    },
+    "users": {
+        "columns": [
+            {
+                "COLUMN_NAME": "user_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "PRI"
+            },
+            {
+                "COLUMN_NAME": "role_id",
+                "DATA_TYPE": "int",
+                "COLUMN_TYPE": "int(11)",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": "MUL"
+            },
+            {
+                "COLUMN_NAME": "email",
+                "DATA_TYPE": "varchar",
+                "COLUMN_TYPE": "varchar(100)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": "UNI"
+            },
+            {
+                "COLUMN_NAME": "password_hash",
+                "DATA_TYPE": "varchar",
+                "COLUMN_TYPE": "varchar(255)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "first_name",
+                "DATA_TYPE": "varchar",
+                "COLUMN_TYPE": "varchar(50)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "last_name",
+                "DATA_TYPE": "varchar",
+                "COLUMN_TYPE": "varchar(50)",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "contact_number",
+                "DATA_TYPE": "varchar",
+                "COLUMN_TYPE": "varchar(20)",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "account_status",
+                "DATA_TYPE": "enum",
+                "COLUMN_TYPE": "enum('Active','Suspended','Deactivated','Pending')",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "created_at",
+                "DATA_TYPE": "timestamp",
+                "COLUMN_TYPE": "timestamp",
+                "IS_NULLABLE": "NO",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "middle_name",
+                "DATA_TYPE": "varchar",
+                "COLUMN_TYPE": "varchar(50)",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "profile_image",
+                "DATA_TYPE": "varchar",
+                "COLUMN_TYPE": "varchar(80)",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": ""
+            },
+            {
+                "COLUMN_NAME": "public_reference",
+                "DATA_TYPE": "varchar",
+                "COLUMN_TYPE": "varchar(28)",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": "UNI"
+            },
+            {
+                "COLUMN_NAME": "status_reason",
+                "DATA_TYPE": "varchar",
+                "COLUMN_TYPE": "varchar(1000)",
+                "IS_NULLABLE": "YES",
+                "COLUMN_KEY": ""
+            }
+        ],
+        "foreign_keys": [
+            {
+                "COLUMN_NAME": "role_id",
+                "REFERENCED_TABLE_NAME": "roles",
+                "REFERENCED_COLUMN_NAME": "role_id"
+            }
+        ]
+    }
+}
