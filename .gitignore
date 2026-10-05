@@ -1,0 +1,14 @@
+# Local runtime data and credentials must not be published.
+.env
+.env.*
+!.env.example
+storage/*
+!storage/.htaccess
+tmp/
+*.log
+*.eml
+*.pem
+*.key
+deployment/*.zip
+.codex/
+.agents/
